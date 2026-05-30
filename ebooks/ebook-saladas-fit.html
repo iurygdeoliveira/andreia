@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saladas Fit — Método Andreia 360º</title>
+    <meta name="description" content="10 receitas frescas, proteicas e funcionais de saladas para o seu emagrecimento inteligente. Exclusivo do Método Andreia 360º.">
+    <meta name="theme-color" content="#010d26">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-navy': '#010d26',
+                        'brand-deep': '#021f3b',
+                        'brand-medium': '#023059',
+                        'brand-light': '#F0F4F8',
+                        'accent-gold': '#D4A843',
+                        'accent-goldhover': '#b58e33',
+                    },
+                    fontFamily: {
+                        heading: ['Outfit', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        blob: 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #010d26;
+            background-image: radial-gradient(circle at 50% 0%, rgba(2, 48, 89, 0.4) 0%, rgba(1, 13, 38, 1) 50%);
+            color: #F0F4F8;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(1, 13, 38, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(156, 188, 217, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(2, 48, 89, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(156, 188, 217, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(212, 168, 67, 0.4);
+            box-shadow: 0 10px 30px rgba(212, 168, 67, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .gold-gradient-border {
+            position: relative;
+        }
+        .gold-gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #D4A843, rgba(156, 188, 217, 0.15), #D4A843);
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .btn-primary {
+            position: relative;
+            background: linear-gradient(135deg, #D4A843 0%, #b58e33 100%);
+            color: #010d26;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(212, 168, 67, 0.4);
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Hide scrollbars but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .active-tab {
+            border-color: #D4A843;
+            color: #D4A843;
+            background: rgba(212, 168, 67, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-accent-gold selection:text-brand-navy">
+    <div class="noise-bg" aria-hidden="true"></div>
+
+    <!-- Background Orbs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none" aria-hidden="true">
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob"></div>
+        <div class="absolute top-[30%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-brand-deep/30 opacity-20 blur-[100px] mix-blend-screen animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[38vw] h-[38vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-accent-gold via-brand-medium to-accent-gold z-50 transition-all duration-100" id="reading-progress" style="width: 0%"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-40 glass-panel py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="font-heading font-black text-2xl tracking-tighter text-white">
+                ANDREIA<span class="text-accent-gold">360</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="#receitas" class="text-sm font-semibold text-brand-light/80 hover:text-white transition-colors">
+                    Receitas
+                </a>
+                <button onclick="toggleShoppingList()" class="text-sm font-bold text-brand-navy bg-white px-5 py-2 rounded-full hover:bg-brand-light transition-all flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Lista de Compras
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 min-h-[60vh] flex items-center">
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 flex flex-col items-start animate-fade-in-up">
+                    <span class="inline-block bg-accent-gold/15 text-accent-gold text-xs font-black uppercase tracking-widest py-2 px-5 rounded-full mb-6 border border-accent-gold/30">
+                        E-book Exclusivo Método 360º
+                    </span>
+                    <h1 class="font-heading text-[3.5rem] sm:text-[4.5rem] lg:text-[5rem] font-black tracking-tighter mb-6 leading-[0.95] uppercase">
+                        SALADAS <span class="text-accent-gold">FIT</span>
+                    </h1>
+                    <p class="text-xl sm:text-2xl text-brand-light/90 mb-8 leading-relaxed font-light border-l-2 border-brand-medium pl-6">
+                        10 receitas frescas, proteicas e funcionais para o seu emagrecimento inteligente.
+                    </p>
+                    <div class="flex gap-4 items-center">
+                        <div class="w-10 h-10 rounded-full bg-brand-medium border border-brand-light/20 flex items-center justify-center font-bold text-xs text-white">40+</div>
+                        <span class="text-sm text-brand-light/70 font-medium">Focado em saúde hormonal e aceleração metabólica para mulheres 40+</span>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative mt-10 lg:mt-0 animate-float">
+                    <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden glass-card gold-gradient-border p-1">
+                        <img src="/ebooks/imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium" class="w-full h-full object-cover rounded-[1.8rem]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <p class="text-xs font-bold text-accent-gold uppercase tracking-widest mb-1">Destaque Premium</p>
+                            <p class="text-lg font-heading font-bold text-white uppercase">Salada Andréia 40+ Premium</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Introdução e Conexão com o Método -->
+    <section class="py-24 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-12 gap-16 items-start">
+                <div class="lg:col-span-5">
+                    <h2 class="font-heading text-[2.5rem] sm:text-[3rem] font-black uppercase text-white tracking-tighter leading-none mb-6">
+                        Nutrição<br>Inteligente e<br><span class="text-accent-gold">Hormonal</span>
+                    </h2>
+                    <blockquote class="border-l-4 border-accent-gold pl-6 py-2 italic text-brand-light text-lg mb-6">
+                        "Comer salada não é castigo – é o ato mais inteligente de autocuidado que uma mulher pode praticar."
+                        <cite class="block not-italic font-bold text-white text-sm mt-2 font-sans uppercase tracking-widest">— Andreia Castro</cite>
+                    </blockquote>
+                </div>
+                <div class="lg:col-span-7 space-y-6 text-brand-light/90 leading-relaxed font-light text-lg">
+                    <p>
+                        As saladas são muito mais do que folhas – são veículos de hidratação, vitaminas, minerais e fibras que o seu corpo pede, especialmente após os 40. No <strong>Método Andreia 360º</strong>, a nutrição inteligente trabalha a favor dos seus hormônios, controlando a insulina e combatendo a inflamação de baixo grau de forma prática e saborosa.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-6 pt-6">
+                        <div class="p-6 rounded-2xl bg-brand-deep/30 border border-white/5">
+                            <h3 class="font-heading font-bold text-white text-lg mb-2 flex items-center gap-2">
+                                <span class="text-accent-gold">✔</span> Ação Anti-inflamatória
+                            </h3>
+                            <p class="text-sm text-brand-light/70 font-light">Ingredientes como abacate, azeite, chia e cúrcuma combatem a inflamação natural dessa fase hormonal.</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-brand-deep/30 border border-white/5">
+                            <h3 class="font-heading font-bold text-white text-lg mb-2 flex items-center gap-2">
+                                <span class="text-accent-gold">✔</span> Controle da Glicemia
+                            </h3>
+                            <p class="text-sm text-brand-light/70 font-light">Fibras e proteínas magras combinadas evitam picos de insulina, acabando com os desejos por doces.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prep & Meal Prep Guide -->
+    <section class="py-24 relative bg-brand-deep/20 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent-gold font-bold tracking-widest uppercase text-xs">Organização e Praticidade</span>
+                <h2 class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2 mb-4">Como preparar e conservar</h2>
+                <p class="text-brand-light/80 font-light">Dicas essenciais para manter o frescor e garantir que sua alimentação saudável caiba perfeitamente na sua rotina corrida.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">01</div>
+                    <h3 class="font-heading font-bold text-white text-xl mb-3">Higienização</h3>
+                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Lave em água corrente e deixe de molho por 15 minutos em água com hipoclorito. Seque muito bem (folhas úmidas murcham rápido).</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">02</div>
+                    <h3 class="font-heading font-bold text-white text-xl mb-3">Meal Prep no Pote</h3>
+                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">No fundo coloque o molho. Depois, vegetais duros (cenoura, pepino), depois a proteína (frango, atum) e por último as folhas no topo.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">03</div>
+                    <h3 class="font-heading font-bold text-white text-xl mb-3">Conservação</h3>
+                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Montadas no pote sem misturar o molho duram 3 a 4 dias na geladeira. Se misturar, consuma em até 24 horas. Evite guardar na porta da geladeira.</p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">04</div>
+                    <h3 class="font-heading font-bold text-white text-xl mb-3">Substituições</h3>
+                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Varie as folhas e troque proteínas de acordo com a sua preferência: frango por atum, ovo, carne magra desfiada ou queijo cottage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recipes Interactive Showcase -->
+    <section id="receitas" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                <div>
+                    <span class="text-accent-gold font-bold tracking-widest uppercase text-xs">Livro de Receitas</span>
+                    <h2 class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2">As 10 Saladas Fit</h2>
+                </div>
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
+                    <button onclick="filterRecipes('all')" id="filter-all" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors active-tab">Todas</button>
+                    <button onclick="filterRecipes('proteica')" id="filter-proteica" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Proteicas</button>
+                    <button onclick="filterRecipes('detox')" id="filter-detox" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Detox / Anti-Inchaço</button>
+                    <button onclick="filterRecipes('termogenica')" id="filter-termogenica" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Termogênicas</button>
+                    <button onclick="filterRecipes('premium')" id="filter-premium" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Premium</button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="recipes-grid">
+                <!-- Recipes will be populated dynamically or static with attributes for filtering -->
+
+                <!-- Salada 1 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative">
+                        <img src="/ebooks/imagens/salada_power_frango_abacate.png" alt="Salada Power Frango & Abacate" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Saciedade</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">1. Power Frango & Abacate</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para emagrecimento inteligente. Fornece gorduras monoinsaturadas ótimas para o equilíbrio hormonal.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">295 kcal / 32g Prot</span>
+                            <button onclick="openRecipe(1)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 2 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="detox all">
+                    <div class="aspect-[16/10] overflow-hidden relative">
+                        <img src="/ebooks/imagens/salada_detox_atum.png" alt="Salada Detox de Atum" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Detox</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">2. Detox de Atum</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Efeito diurético natural. Combate o inchaço matinal e a retenção de líquidos com muito ômega-3.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">185 kcal / 22g Prot</span>
+                            <button onclick="openRecipe(2)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 3 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative">
+                        <img src="/ebooks/imagens/salada_tropical_proteica.png" alt="Salada Tropical Proteica" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Equilíbrio</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">3. Tropical Proteica</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Combinação deliciosa de frango com manga. Rica em antioxidantes que combatem o estresse oxidativo pós-treino.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">275 kcal / 30g Prot</span>
+                            <button onclick="openRecipe(3)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 4 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="termogenica all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="text-xs font-mono">Termogênica / Aceleração</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Metabolismo</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">4. Termogênica 40+</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com ovos, espinafre e gengibre ralado. Pimenta caiena aumenta o gasto calórico e melhora a circulação.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">260 kcal / 28g Prot</span>
+                            <button onclick="openRecipe(4)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 5 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A1.5 1.5 0 0018 10.5V8.5a.5.5 0 00-.5-.5h-1a1 1 0 01-1-1V5a2 2 0 00-2-2h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-xs font-mono">Mediterrânea / Saudável</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Anti-inflamatório</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">5. Mediterrânea Fit</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Gorduras boas das azeitonas pretas combinadas com frango. Controla a pressão e combate a inflamação.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">288 kcal / 31g Prot</span>
+                            <button onclick="openRecipe(5)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 6 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                            <span class="text-xs font-mono">Carne Magra / Força</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Ferro & Fibras</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">6. Carne Magra & Legumes</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com patinho moído ou desfiado. Rica em ferro biodisponível para combater o cansaço e a fadiga.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">280 kcal / 30g Prot</span>
+                            <button onclick="openRecipe(6)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 7 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707"></path></svg>
+                            <span class="text-xs font-mono">Ovos & Cottage / Recuperação</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Double Proteica</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">7. Fitness de Ovo & Cottage</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para um jantar leve. Queijo cottage é rico em caseína, que libera aminoácidos lentamente à noite.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">240 kcal / 26g Prot</span>
+                            <button onclick="openRecipe(7)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 8 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="detox all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                            <span class="text-xs font-mono">Verde / Hidratação</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Anti-inchaço</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">8. Verde Anti-inchaço</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com abobrinha ralada, pepino e salsão. Ideal pós final de semana para desinchar rápido.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">120 kcal / 4g Prot</span>
+                            <button onclick="openRecipe(8)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 9 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="all">
+                    <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
+                        <div class="text-center p-6 text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                            <span class="text-xs font-mono">Fibras Solúveis / Digesta</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Proteína Vegetal</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">9. Grão-de-Bico Fit</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para regular o intestino e controlar o colesterol. Cominho ajuda a reduzir gases e melhora a digestão.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">265 kcal / 12g Prot</span>
+                            <button onclick="openRecipe(9)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salada 10 -->
+                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="premium proteica all">
+                    <div class="aspect-[16/10] overflow-hidden relative">
+                        <img src="/ebooks/imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium" class="w-full h-full object-cover">
+                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Premium</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-heading font-bold text-2xl text-white mb-2">10. Andréia 40+ Premium</h3>
+                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com salmão, abacate e chia. Altíssima dose de ômega-3 para modulação hormonal e combate à inflamação crônica.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+                            <span class="text-xs text-brand-light/50 font-mono">345 kcal / 34g Prot</span>
+                            <button onclick="openRecipe(10)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 relative border-t border-white/5 bg-brand-navy/80">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-brand-light/40">
+            <p class="mb-4">© 2026 Método Andreia 360º. Todos os direitos reservados.</p>
+            <p class="max-w-2xl mx-auto text-xs leading-relaxed font-light">Nota: Todas as informações nutricionais são aproximadas. Consulte sempre um profissional de saúde para adequação do seu plano alimentar individual.</p>
+        </div>
+    </footer>
+
+    <!-- Recipe Detail Slide-Over Overlay -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 overflow-hidden">
+            <!-- Modal Background Backdrop -->
+            <div class="absolute inset-0 bg-brand-navy/80 backdrop-filter blur-sm transition-opacity" onclick="closeRecipe()"></div>
+            
+            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+                <div class="w-screen max-w-2xl">
+                    <div class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar relative">
+                        <!-- Header / Close button -->
+                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-brand-navy/65 sticky top-0 z-10 backdrop-filter blur-md">
+                            <h2 id="modal-title" class="font-heading font-black text-2xl text-white uppercase tracking-tighter">Detalhe da Receita</h2>
+                            <button onclick="closeRecipe()" class="p-2 rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body Content -->
+                        <div class="p-8 space-y-8" id="modal-body-content">
+                            <!-- Dynamic Content Inserted Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping List Sidebar / Modal -->
+    <div id="shopping-list-modal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="shopping-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-brand-navy/80 backdrop-filter blur-sm transition-opacity" onclick="toggleShoppingList()"></div>
+            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+                <div class="w-screen max-w-md">
+                    <div class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar">
+                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-brand-navy/65 sticky top-0 z-10 backdrop-filter blur-md">
+                            <h2 id="shopping-title" class="font-heading font-black text-xl text-white uppercase tracking-tighter">Gerador de Compras</h2>
+                            <button onclick="toggleShoppingList()" class="p-2 rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                        <div class="p-6 space-y-6">
+                            <p class="text-sm text-brand-light/70 font-light">Selecione as saladas que planeja preparar esta semana. Nós geramos a lista de ingredientes consolidada para você!</p>
+                            <div class="space-y-3" id="shopping-recipes-list">
+                                <!-- Dynamic check list for recipes -->
+                            </div>
+                            <div class="pt-6 border-t border-white/5">
+                                <button onclick="generateShoppingList()" class="w-full btn-primary py-3 rounded-xl font-bold text-center">Gerar Minha Lista</button>
+                            </div>
+                            <div class="space-y-4 hidden" id="generated-ingredients-section">
+                                <h3 class="font-heading font-bold text-white text-lg">Seus Ingredientes:</h3>
+                                <div class="p-4 rounded-xl bg-brand-navy/50 border border-white/5 text-sm text-brand-light/80 space-y-2 max-h-60 overflow-y-scroll" id="ingredients-checklist">
+                                    <!-- Dynamic consolidated ingredients list -->
+                                </div>
+                                <button onclick="copyToClipboard()" class="w-full py-2.5 rounded-xl border border-accent-gold text-accent-gold font-bold hover:bg-accent-gold/10 text-sm transition-colors">Copiar Lista</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Data -->
+    <script>
+        const recipes = {
+            1: {
+                title: "Salada Power Frango & Abacate",
+                image: "/ebooks/imagens/salada_power_frango_abacate.png",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "150 g de peito de frango grelhado e desfiado",
+                    "1/2 abacate médio em cubos",
+                    "2 xícaras (chá) de folhas verdes (rúcula e alface americana)",
+                    "1/2 tomate picado",
+                    "1/4 de cebola roxa em rodelas finas",
+                    "Suco de 1/2 limão",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "Sal, pimenta-do-reino e orégano a gosto"
+                ],
+                steps: [
+                    "Tempere o frango com sal, pimenta e limão. Grelhe em frigideira antiaderente até dourar dos dois lados. Desfie.",
+                    "Em uma tigela grande, coloque as folhas verdes, o tomate, a cebola roxa e o abacate.",
+                    "Adicione o frango desfiado por cima.",
+                    "Regue com azeite, suco de limão, sal, pimenta e orégano. Misture delicadamente e sirva."
+                ],
+                benefits: [
+                    "Saciedade prolongada",
+                    "Gorduras boas para equilíbrio hormonal",
+                    "Rica em proteína magra",
+                    "Baixo índice glicêmico"
+                ],
+                tip: "Perfeita para o almoço dos dias de treino. O abacate fornece gorduras monoinsaturadas que ajudam na absorção de vitaminas lipossolúveis e mantêm a saciedade por horas.",
+                nutritional: {
+                    time: "20 min",
+                    yield: "1 porção",
+                    calories: "295 kcal",
+                    protein: "32 g",
+                    carbs: "8 g",
+                    fat: "14 g",
+                    fiber: "6 g"
+                }
+            },
+            2: {
+                title: "Salada Detox de Atum",
+                image: "/ebooks/imagens/salada_detox_atum.png",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "1 lata de atum sólido em água (escorrido)",
+                    "2 xícaras (chá) de mix de folhas (alface, agrião, rúcula)",
+                    "1/2 pepino fatiado",
+                    "1/2 cenoura ralada",
+                    "1 talo de salsão picado",
+                    "Suco de 1/2 limão",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "Sal, pimenta e salsinha picada a gosto"
+                ],
+                steps: [
+                    "Em uma tigela, desfie o atum com um garfo.",
+                    "Junte as folhas, o pepino, a cenoura e o salsão.",
+                    "Tempere com azeite, limão, sal, pimenta e salsinha.",
+                    "Misture bem e sirva imediatamente."
+                ],
+                benefits: [
+                    "Baixíssima caloria",
+                    "Efeito diurético natural",
+                    "Rica em ômega-3 (atum)",
+                    "Ajuda a desinchar"
+                ],
+                tip: "Ideal para o jantar ou dias de pouco movimento. O salsão e o pepino potencializam a eliminação de líquidos retidos e combatem o inchaço matinal.",
+                nutritional: {
+                    time: "10 min",
+                    yield: "1 porção",
+                    calories: "185 kcal",
+                    protein: "22 g",
+                    carbs: "6 g",
+                    fat: "8 g",
+                    fiber: "4 g"
+                }
+            },
+            3: {
+                title: "Salada Tropical Proteica",
+                image: "/ebooks/imagens/salada_tropical_proteica.png",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "150 g de frango grelhado em cubos",
+                    "1/2 xícara (chá) de manga em cubos",
+                    "2 xícaras (chá) de folhas verdes (alface crespa e rúcula)",
+                    "1/3 de pepino em cubos",
+                    "1 colher (sopa) de gergelim torrado",
+                    "Suco de 1/2 limão",
+                    "1 colher (sopa) de azeite de oliva",
+                    "Sal e pimenta a gosto"
+                ],
+                steps: [
+                    "Tempere o frango e grelhe até dourar. Corte em cubos.",
+                    "Em uma tigela, misture as folhas, o pepino e a manga.",
+                    "Adicione o frango e o gergelim.",
+                    "Tempere com azeite, limão, sal e pimenta. Misture e sirva."
+                ],
+                benefits: [
+                    "Combinação proteína + fibra + gordura boa",
+                    "Vitamina C da manga auxilia colágeno",
+                    "Baixo índice glicêmico",
+                    "Sabor doce sem açúcar"
+                ],
+                tip: "Ótima opção para o almoço, especialmente após um treino de força. A manga fornece antioxidantes que combatem o estresse oxidativo, enquanto o gergelim contribui com cálcio e magnésio.",
+                nutritional: {
+                    time: "20 min",
+                    yield: "1 porção",
+                    calories: "275 kcal",
+                    protein: "30 g",
+                    carbs: "10 g",
+                    fat: "10 g",
+                    fiber: "5 g"
+                }
+            },
+            4: {
+                title: "Salada Termogênica 40+",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "2 ovos cozidos",
+                    "1/2 xícara (chá) de frango desfiado",
+                    "2 xícaras (chá) de espinafre baby",
+                    "1/2 pimentão vermelho em tiras",
+                    "1 colher (chá) de gengibre ralado",
+                    "1 colher (sopa) de azeite de oliva",
+                    "Suco de 1/2 limão",
+                    "Sal e pimenta caiena a gosto"
+                ],
+                steps: [
+                    "Cozinhe os ovos por 8 minutos, descasque e corte em rodelas.",
+                    "Em uma tigela, coloque o espinafre, o pimentão e o frango desfiado.",
+                    "Adicione os ovos cozidos.",
+                    "Prepare o molho: misture azeite, limão, gengibre ralado, sal e pimenta caiena. Regue a salada e sirva."
+                ],
+                benefits: [
+                    "Efeito termogênico natural (gengibre + pimenta)",
+                    "Acelera o metabolismo",
+                    "Rica em proteína e colina (ovos)",
+                    "Anti-inflamatória"
+                ],
+                tip: "Excelente para o almoço antes do treino. A pimenta caiena e o gengibre aumentam o gasto calórico e melhoram a circulação.",
+                nutritional: {
+                    time: "20 min",
+                    yield: "1 porção",
+                    calories: "260 kcal",
+                    protein: "28 g",
+                    carbs: "5 g",
+                    fat: "12 g",
+                    fiber: "4 g"
+                }
+            },
+            5: {
+                title: "Salada Mediterrânea Fit",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "150 g de peito de frango grelhado em tiras",
+                    "1/2 xícara (chá) de tomate-cereja cortado ao meio",
+                    "1/4 de xícara (chá) de azeitonas pretas fatiadas",
+                    "1/3 de pepino em cubos",
+                    "2 xícaras (chá) de alface romana",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "1 colher (sopa) de vinagre balsâmico",
+                    "Orégano, sal e pimenta a gosto"
+                ],
+                steps: [
+                    "Grelhe o frango temperado com sal, pimenta e orégano. Corte em tiras.",
+                    "Em uma tigela, coloque a alface romana, o tomate-cereja, as azeitonas e o pepino.",
+                    "Adicione o frango.",
+                    "Prepare o molho com azeite, vinagre balsâmico, orégano, sal e pimenta. Regue e sirva."
+                ],
+                benefits: [
+                    "Gorduras boas das azeitonas (anti-inflamatórias)",
+                    "Baixo teor de sódio (controla a pressão)",
+                    "Rica em antioxidantes",
+                    "Excelente fonte de proteína magra"
+                ],
+                tip: "Uma refeição completa e elegante para o almoço em dias de home office ou presencial. Monte em pote de vidro para levar na bolsa térmica.",
+                nutritional: {
+                    time: "20 min",
+                    yield: "1 porção",
+                    calories: "288 kcal",
+                    protein: "31 g",
+                    carbs: "7 g",
+                    fat: "13 g",
+                    fiber: "5 g"
+                }
+            },
+            6: {
+                title: "Salada de Carne Magra com Legumes",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "150 g de patinho moído magro (ou carne desfiada)",
+                    "2 xícaras (chá) de mix de folhas (alface e rúcula)",
+                    "1/2 cenoura ralada",
+                    "1/2 beterraba ralada",
+                    "1/3 de xícara (chá) de brócolis cozido no vapor",
+                    "1 colher (sopa) de azeite de oliva",
+                    "Suco de 1/2 limão",
+                    "Sal, pimenta e salsinha a gosto"
+                ],
+                steps: [
+                    "Tempere e grelhe a carne moída em frigideira antiaderente até dourar bem.",
+                    "Em uma tigela, coloque as folhas, a cenoura, a beterraba e o brócolis.",
+                    "Adicione a carne moída.",
+                    "Tempere com azeite, limão, sal, pimenta e salsinha. Sirva."
+                ],
+                benefits: [
+                    "Rica em ferro (prevenção de anemia)",
+                    "Proteína de alto valor biológico",
+                    "Baixo teor de gordura saturada",
+                    "Fibras dos legumes auxiliam o intestino"
+                ],
+                tip: "Ideal para o almoço após um treino intenso. A beterraba fornece nitratos naturais que melhoram a performance e a circulação.",
+                nutritional: {
+                    time: "25 min",
+                    yield: "1 porção",
+                    calories: "280 kcal",
+                    protein: "30 g",
+                    carbs: "9 g",
+                    fat: "9 g",
+                    fiber: "5 g"
+                }
+            },
+            7: {
+                title: "Salada Fitness de Ovo & Cottage",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "2 ovos cozidos",
+                    "1/2 xícara (chá) de queijo cottage",
+                    "2 xícaras (chá) de folhas verdes (alface americana e agrião)",
+                    "1/2 tomate picado",
+                    "1 colher (sopa) de cebolinha picada",
+                    "1 colher (sopa) de azeite de oliva",
+                    "Suco de 1/2 limão",
+                    "Sal e pimenta a gosto"
+                ],
+                steps: [
+                    "Cozinhe os ovos por 8 minutos. Descasque e pique grosseiramente.",
+                    "Em uma tigela, misture as folhas, o tomate e a cebolinha.",
+                    "Adicione os ovos picados e o queijo cottage.",
+                    "Tempere com azeite, limão, sal e pimenta. Sirva."
+                ],
+                benefits: [
+                    "Dupla fonte de proteína (ovo + cottage)",
+                    "Baixo teor de carboidratos",
+                    "Cálcio do cottage fortalece ossos",
+                    "Saciedade imediata"
+                ],
+                tip: "Perfeita para um jantar leve e proteico. O queijo cottage é pobre em gordura e rico em caseína, que mantém a liberação lenta de aminoácidos durante a noite.",
+                nutritional: {
+                    time: "15 min",
+                    yield: "1 porção",
+                    calories: "240 kcal",
+                    protein: "26 g",
+                    carbs: "4 g",
+                    fat: "11 g",
+                    fiber: "3 g"
+                }
+            },
+            8: {
+                title: "Salada Verde Anti-inchaço",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "2 xícaras (chá) de folhas verdes (rúcula, alface, salsão)",
+                    "1/2 pepino fatiado",
+                    "1/2 abobrinha crua ralada",
+                    "1 talo de salsão picado",
+                    "1/2 xícara (chá) de brotos de feijão ou alfafa",
+                    "Suco de 1 limão",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "Hortelã fresca a gosto, sal e pimenta"
+                ],
+                steps: [
+                    "Lave bem todos os vegetais e seque.",
+                    "Em uma tigela, misture as folhas, o pepino, a abobrinha, o salsão e os brotos.",
+                    "Prepare o molho: azeite, suco de limão, hortelã picada, sal e pimenta.",
+                    "Regue a salada, misture e sirva imediatamente."
+                ],
+                benefits: [
+                    "Potente efeito diurético",
+                    "Baixíssima caloria",
+                    "Hidratação profunda",
+                    "Melhora o funcionamento intestinal"
+                ],
+                tip: "Ideal para dias quentes ou após um final de semana com excessos. A hortelã e o limão potencializam a ação detox e aliviam o estômago.",
+                nutritional: {
+                    time: "10 min",
+                    yield: "1 porção",
+                    calories: "120 kcal",
+                    protein: "4 g",
+                    carbs: "6 g",
+                    fat: "8 g",
+                    fiber: "5 g"
+                }
+            },
+            9: {
+                title: "Salada de Grão-de-Bico Fit",
+                image: "",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "1 xícara (chá) de grão-de-bico cozido e escorrido",
+                    "1/2 pepino em cubos",
+                    "1 tomate médio picado",
+                    "1/4 de cebola roxa picada",
+                    "1 colher (sopa) de salsinha picada",
+                    "Suco de 1 limão",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "Sal, pimenta e cominho a gosto"
+                ],
+                steps: [
+                    "Cozinhe o grão-de-bico na panela de pressão por 20 minutos (ou use grão-de-bico em conserva, bem lavado).",
+                    "Em uma tigela, misture o grão-de-bico, o pepino, o tomate e a cebola roxa.",
+                    "Adicione a salsinha.",
+                    "Tempere com azeite, limão, cominho, sal e pimenta. Misture e sirva frio."
+                ],
+                benefits: [
+                    "Rica em fibras solúveis (controla colesterol)",
+                    "Proteína vegetal de alta qualidade",
+                    "Baixo índice glicêmico",
+                    "Melhora o trânsito intestinal"
+                ],
+                tip: "Ideal para dias de descanso ou como entrada reforçada no almoço. O cominho auxilia na digestão e reduz gases.",
+                nutritional: {
+                    time: "25 min (+ cozimento)",
+                    yield: "1 porção",
+                    calories: "265 kcal",
+                    protein: "12 g",
+                    carbs: "30 g",
+                    fat: "8 g",
+                    fiber: "10 g"
+                }
+            },
+            10: {
+                title: "Salada Andréia 40+ Premium",
+                image: "/ebooks/imagens/salada_andreia_premium.png",
+                objective: "Saciedade prolongada, baixo impacto glicêmico e densidade de micronutrientes — ideal para emagrecimento e público 40+.",
+                ingredients: [
+                    "150 g de salmão grelhado em cubos",
+                    "2 xícaras (chá) de mix de folhas (rúcula, agrião, alface roxa)",
+                    "1/2 abacate pequeno em cubos",
+                    "1/2 xícara (chá) de tomate-cereja cortado ao meio",
+                    "1 colher (sopa) de sementes de chia",
+                    "Suco de 1/2 limão",
+                    "1 colher (sopa) de azeite de oliva extravirgem",
+                    "Sal, pimenta e endro a gosto"
+                ],
+                steps: [
+                    "Tempere o salmão com sal, pimenta e limão. Grelhe em frigideira antiaderente até dourar (cerca de 3 minutos de cada lado). Corte em cubos.",
+                    "Em uma tigela grande, coloque as folhas, o abacate e o tomate-cereja.",
+                    "Adicione o salmão grelhado.",
+                    "Polvilhe a chia por cima.",
+                    "Prepare o molho com azeite, suco de limão, endro, sal e pimenta. Regue e sirva."
+                ],
+                benefits: [
+                    "Mega dose de ômega-3 (anti-inflamatório natural)",
+                    "Gorduras boas do abacate + chia",
+                    "Proteína de alta digestibilidade",
+                    "Ideal para saúde hormonal"
+                ],
+                tip: "A salada premium do Método! Perfeita para o almoço de domingo ou dias especiais. O salmão e a chia são aliados poderosos na redução da inflamação crônica e no equilíbrio dos hormônios femininos.",
+                nutritional: {
+                    time: "25 min",
+                    yield: "1 porção",
+                    calories: "345 kcal",
+                    protein: "34 g",
+                    carbs: "6 g",
+                    fat: "18 g",
+                    fat_goods: "18 g",
+                    fiber: "7 g"
+                }
+            }
+        };
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const windScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (windScroll / height) * 100;
+            document.getElementById('reading-progress').style.width = scrolled + '%';
+        });
+
+        // Filter recipes in list
+        function filterRecipes(category) {
+            // Remove active classes
+            document.querySelectorAll('#receitas button').forEach(btn => btn.classList.remove('active-tab'));
+            
+            // Add active class to clicked button
+            document.getElementById(`filter-${category}`).classList.add('active-tab');
+
+            // Filter cards
+            document.querySelectorAll('.recipe-card').forEach(card => {
+                if (category === 'all' || card.getAttribute('data-tags').includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Open recipe detail slide-over
+        function openRecipe(id) {
+            const recipe = recipes[id];
+            const modal = document.getElementById('recipe-modal');
+            const body = document.getElementById('modal-body-content');
+
+            // Build dynamic content
+            let imageSection = '';
+            if (recipe.image) {
+                imageSection = `<div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-6 border border-white/10">
+                    <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover">
+                </div>`;
+            } else {
+                imageSection = `<div class="w-full aspect-[16/9] rounded-2xl bg-brand-navy flex items-center justify-center mb-6 border border-white/5">
+                    <svg class="w-16 h-16 text-brand-light/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>`;
+            }
+
+            let ingredientsList = '';
+            recipe.ingredients.forEach(ing => {
+                ingredientsList += `<li class="flex items-start gap-3 text-brand-light/90 font-light text-base">
+                    <span class="text-accent-gold mt-1">•</span>
+                    <span>${ing}</span>
+                </li>`;
+            });
+
+            let stepsList = '';
+            recipe.steps.forEach((step, idx) => {
+                stepsList += `<li class="flex gap-4 items-start text-brand-light/90 font-light text-base">
+                    <span class="w-6 h-6 rounded-full bg-brand-medium border border-accent-gold/30 text-accent-gold flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
+                    <span>${step}</span>
+                </li>`;
+            });
+
+            let benefitsList = '';
+            recipe.benefits.forEach(ben => {
+                benefitsList += `<div class="px-4 py-2 rounded-xl bg-accent-gold/5 border border-accent-gold/20 text-accent-gold font-semibold text-sm flex items-center gap-2 shrink-0">
+                    <span>✔</span> <span>${ben}</span>
+                </div>`;
+            });
+
+            body.innerHTML = `
+                ${imageSection}
+                <div>
+                    <h3 class="font-heading font-black text-3xl text-white uppercase tracking-tighter mb-2">${recipe.title}</h3>
+                    <p class="text-sm text-brand-light/60 font-light">${recipe.objective}</p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    ${benefitsList}
+                </div>
+
+                <!-- Nutrition facts table -->
+                <div class="p-6 rounded-2xl bg-brand-navy/60 border border-white/5">
+                    <h4 class="font-heading font-bold text-white text-lg mb-4">Informações Nutricionais</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Tempo</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.time}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Calorias</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.calories}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Proteínas</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.protein}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Carboidratos</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.carbs}</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 text-center mt-4">
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Gorduras boas</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.fat}</span>
+                        </div>
+                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                            <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Fibras</span>
+                            <span class="text-white font-bold text-sm">${recipe.nutritional.fiber}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-heading font-bold text-white text-lg mb-4">Ingredientes</h4>
+                        <ul class="space-y-3">
+                            ${ingredientsList}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-heading font-bold text-white text-lg mb-4">Modo de Preparo</h4>
+                        <ol class="space-y-4">
+                            ${stepsList}
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-brand-medium/20 border border-brand-medium/50 pl-8 relative">
+                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-accent-gold rounded-l-2xl"></div>
+                    <h4 class="font-heading font-bold text-white text-lg mb-2">Dica do Método</h4>
+                    <p class="text-sm text-brand-light/80 font-light leading-relaxed">${recipe.tip}</p>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        // Close recipe detail modal
+        function closeRecipe() {
+            document.getElementById('recipe-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // Shopping List functionalities
+        let selectedRecipesForShopping = [];
+
+        function toggleShoppingList() {
+            const modal = document.getElementById('shopping-list-modal');
+            const listContainer = document.getElementById('shopping-recipes-list');
+            
+            listContainer.innerHTML = '';
+            Object.keys(recipes).forEach(id => {
+                const r = recipes[id];
+                const checked = selectedRecipesForShopping.includes(parseInt(id)) ? 'checked' : '';
+                listContainer.innerHTML += `
+                    <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-white/5 cursor-pointer transition-colors text-sm text-brand-light/95">
+                        <input type="checkbox" value="${id}" ${checked} class="accent-gold w-4 h-4 rounded" onchange="toggleRecipeInList(${id})">
+                        <span>${r.title}</span>
+                    </label>
+                `;
+            });
+
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function toggleRecipeInList(id) {
+            const idx = selectedRecipesForShopping.indexOf(id);
+            if (idx > -1) {
+                selectedRecipesForShopping.splice(idx, 1);
+            } else {
+                selectedRecipesForShopping.push(id);
+            }
+        }
+
+        function generateShoppingList() {
+            if (selectedRecipesForShopping.length === 0) {
+                alert('Selecione ao menos 1 receita!');
+                return;
+            }
+
+            const checklist = document.getElementById('ingredients-checklist');
+            const section = document.getElementById('generated-ingredients-section');
+            checklist.innerHTML = '';
+
+            let allIngredients = [];
+            selectedRecipesForShopping.forEach(id => {
+                allIngredients = allIngredients.concat(recipes[id].ingredients);
+            });
+
+            // Consolidate ingredients list (basic filter duplicates/similar)
+            const uniqueIngredients = [...new Set(allIngredients)];
+
+            uniqueIngredients.forEach(ing => {
+                checklist.innerHTML += `
+                    <label class="flex items-start gap-2.5 py-1 cursor-pointer select-none">
+                        <input type="checkbox" class="accent-gold mt-1 shrink-0">
+                        <span class="text-sm font-light leading-snug">${ing}</span>
+                    </label>
+                `;
+            });
+
+            section.classList.remove('hidden');
+        }
+
+        function copyToClipboard() {
+            const items = [];
+            document.querySelectorAll('#ingredients-checklist label').forEach(lbl => {
+                items.push('- ' + lbl.innerText.trim());
+            });
+            const text = "Minha Lista de Compras (Saladas Fit - Método Andreia 360º):\n\n" + items.join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Lista de compras copiada para a área de transferência!');
+            });
+        }
+    </script>
+</body>
+</html>

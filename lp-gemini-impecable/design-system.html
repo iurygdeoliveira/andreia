@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System — Andreia 360</title>
+    <meta name="description" content="Design system e pattern library da landing page Método Andreia 360.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ── Inline styles from index.html (reproduced exactly) ─────────────── */
+        body {
+            background-color: #010d26;
+            background-image: radial-gradient(circle at 50% 0%, rgba(2, 48, 89, 0.4) 0%, rgba(1, 13, 38, 1) 50%);
+            color: #F0F4F8;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: #010d26;
+            border-bottom: 1px solid rgba(156, 188, 217, 0.1);
+        }
+
+        .glass-card {
+            background: #023059;
+            border: 1px solid rgba(156, 188, 217, 0.15);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .gold-text-gradient {
+            color: #D4A843;
+        }
+
+        .blue-text-gradient {
+            color: #9cbcd9;
+        }
+
+        /* Modern CTA Button */
+        .btn-primary {
+            position: relative;
+            background: linear-gradient(135deg, #D4A843 0%, #b58e33 100%);
+            color: #010d26;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(212, 168, 67, 0.5);
+        }
+
+        .pricing-premium {
+            position: relative;
+        }
+        .pricing-premium::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 1.5rem;
+            background: linear-gradient(135deg, #D4A843, #5881a6, #D4A843);
+            z-index: -1;
+            opacity: 0.8;
+            animation: pulse-slow 4s infinite;
+        }
+
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* ── Design System Navigation ─────────────────────────────────────── */
+        .ds-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: #010d26;
+            border-bottom: 1px solid rgba(156, 188, 217, 0.1);
+        }
+
+        .ds-nav-inner {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .ds-nav-inner::-webkit-scrollbar { display: none; }
+
+        .ds-nav-logo {
+            font-family: Outfit, sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+            color: white;
+            white-space: nowrap;
+            padding: 1rem 1.5rem 1rem 0;
+            border-right: 1px solid rgba(156, 188, 217, 0.1);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        .ds-nav-logo span { color: #D4A843; }
+
+        .ds-nav-link {
+            font-family: Inter, sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(156, 188, 217, 0.7);
+            padding: 1rem 1rem;
+            white-space: nowrap;
+            transition: color 0.2s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .ds-nav-link:hover { color: #D4A843; }
+
+        /* ── Section labels ───────────────────────────────────────────────── */
+        .ds-section {
+            padding-top: 7rem;
+            padding-bottom: 5rem;
+        }
+        .ds-section-label {
+            font-family: Inter, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(88, 129, 166, 0.6);
+            margin-bottom: 0.5rem;
+        }
+        .ds-section-title {
+            font-family: Outfit, sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.05em;
+            margin-bottom: 3rem;
+        }
+        .ds-divider {
+            border: none;
+            border-top: 1px solid rgba(156, 188, 217, 0.08);
+            margin: 0;
+        }
+
+        /* ── Typography table ─────────────────────────────────────────────── */
+        .typo-row {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(156, 188, 217, 0.07);
+        }
+        .typo-label {
+            font-family: Inter, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(88, 129, 166, 0.6);
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .typo-preview {
+            flex: 1;
+        }
+        .typo-spec {
+            font-family: Inter, sans-serif;
+            font-size: 0.7rem;
+            color: rgba(88, 129, 166, 0.5);
+            white-space: nowrap;
+            flex-shrink: 0;
+            align-self: center;
+        }
+
+        /* ── Color swatches ───────────────────────────────────────────────── */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .color-swatch {
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(156, 188, 217, 0.1);
+        }
+        .color-block {
+            height: 80px;
+        }
+        .color-info {
+            background: rgba(1, 13, 38, 0.7);
+            padding: 0.75rem 1rem;
+        }
+        .color-name {
+            font-family: Inter, sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(156, 188, 217, 0.7);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+        .color-hex {
+            font-family: ui-monospace, monospace;
+            font-size: 0.75rem;
+            color: rgba(156, 188, 217, 0.5);
+        }
+
+        /* ── Gradient swatches ────────────────────────────────────────────── */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .gradient-swatch {
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(156, 188, 217, 0.1);
+        }
+        .gradient-block {
+            height: 100px;
+        }
+        .gradient-info {
+            background: rgba(1, 13, 38, 0.7);
+            padding: 0.75rem 1rem;
+        }
+
+        /* ── Component states row ─────────────────────────────────────────── */
+        .states-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .state-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .state-label {
+            font-family: Inter, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(88, 129, 166, 0.5);
+        }
+
+        /* ── Layout demos ─────────────────────────────────────────────────── */
+        .layout-demo {
+            border: 1px solid rgba(156, 188, 217, 0.08);
+            border-radius: 1rem;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+        }
+        .layout-label {
+            font-family: Inter, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(88, 129, 166, 0.5);
+            padding: 0.5rem 1rem;
+            background: rgba(156, 188, 217, 0.03);
+            border-bottom: 1px solid rgba(156, 188, 217, 0.05);
+        }
+        .layout-content {
+            padding: 2rem;
+        }
+
+        /* ── Motion gallery ───────────────────────────────────────────────── */
+        .motion-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .motion-card {
+            background: rgba(2, 48, 89, 0.3);
+            border: 1px solid rgba(156, 188, 217, 0.08);
+            border-radius: 1rem;
+            padding: 2.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            text-align: center;
+        }
+        .motion-card-label {
+            font-family: Inter, sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(88, 129, 166, 0.5);
+        }
+
+        /* pulse-slow referenced by .pricing-premium but not in tailwind */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Icon gallery */
+        .icon-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-accent-gold selection:text-brand-navy">
+    <!-- Noise overlay (exact from original) -->
+    <div class="noise-bg" aria-hidden="true"></div>
+
+    <!-- Background Orbs (exact from original) -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none" aria-hidden="true">
+        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-deep opacity-30 blur-[120px] mix-blend-screen animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-brand-medium opacity-20 blur-[100px] mix-blend-screen animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[35vw] h-[35vw] rounded-full bg-brand-deep opacity-40 blur-[120px] mix-blend-screen animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- ── Design System Navigation ──────────────────────────────────────── -->
+    <nav class="ds-nav" aria-label="Design system navigation">
+        <div class="ds-nav-inner">
+            <span class="ds-nav-logo">ANDREIA<span>360</span> <span style="font-size:0.6rem;font-weight:400;letter-spacing:0.12em;color:rgba(88,129,166,0.5);text-transform:uppercase;margin-left:0.5rem;">Design System</span></span>
+            <a class="ds-nav-link" href="#ds-hero">0 Hero</a>
+            <a class="ds-nav-link" href="#ds-typography">1 Typography</a>
+            <a class="ds-nav-link" href="#ds-colors">2 Colors</a>
+            <a class="ds-nav-link" href="#ds-components">3 Components</a>
+            <a class="ds-nav-link" href="#ds-layout">4 Layout</a>
+            <a class="ds-nav-link" href="#ds-motion">5 Motion</a>
+            <a class="ds-nav-link" href="#ds-icons">6 Icons</a>
+        </div>
+    </nav>
+
+    <main>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 0 — Hero (Exact Clone, Text Adapted)                       -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <header id="ds-hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 min-h-[90vh] flex items-center" aria-labelledby="ds-hero-title">
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Hero Copy — text adapted to present the Design System -->
+                <div class="lg:col-span-7 flex flex-col items-start animate-fade-in-up">
+
+                    <h1 id="ds-hero-title" class="font-heading text-[3.5rem] sm:text-[5rem] lg:text-[5.5rem] xl:text-[6.5rem] font-black tracking-tighter mb-8 leading-[0.9] uppercase">
+                        <span class="block text-white">Design</span>
+                        <span class="block text-white">System</span>
+                        <span class="block text-accent-gold">Andreia360</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-brand-light mb-10 leading-relaxed font-light max-w-xl border-l-2 border-brand-medium/50 pl-6">
+                        O sistema visual completo que unifica <strong class="text-white font-semibold">tipografia, cores, componentes e motion</strong> — a identidade exata usada na landing page Método Andreia 360.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-5 items-center w-full sm:w-auto">
+                        <a href="#ds-components" class="btn-primary w-full sm:w-auto px-10 py-5 rounded-2xl font-bold text-lg text-center flex items-center justify-center gap-2">
+                            Ver Componentes
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                        <div class="flex items-center gap-3 text-sm text-brand-light font-medium">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-brand-deep border border-brand-navy flex items-center justify-center text-[10px]">T</div>
+                                <div class="w-8 h-8 rounded-full bg-brand-medium border border-brand-navy flex items-center justify-center text-[10px]">C</div>
+                                <div class="w-8 h-8 rounded-full bg-brand-light text-brand-navy border border-brand-navy flex items-center justify-center text-[10px]">M</div>
+                            </div>
+                            <span>Tipografia · Cores · Motion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual (exact structure from original) -->
+                <div class="lg:col-span-5 relative mt-10 lg:mt-0 animate-float">
+                    <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-navy via-brand-deep to-brand-medium opacity-80 mix-blend-multiply"></div>
+                        <figure class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center border border-white/5 rounded-[2rem] m-0" role="img" aria-label="Design System visual — paleta de cores, tipografia e componentes Andreia 360">
+                            <svg class="w-16 h-16 text-brand-light/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                            <figcaption class="text-brand-light/70 font-medium tracking-wide uppercase text-sm">Pattern Library — Andreia 360</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 1 — Typography                                             -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-typography" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">01</p>
+            <h2 class="ds-section-title">Typography</h2>
+
+            <!-- Heading 1 — hero scale -->
+            <div class="typo-row">
+                <span class="typo-label">Heading 1<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-heading / black</span></span>
+                <div class="typo-preview">
+                    <h1 class="font-heading font-black tracking-tighter leading-[0.9] uppercase" style="font-size:clamp(3.5rem,8vw,6.5rem)">Método Andreia<span class="text-accent-gold">360</span></h1>
+                </div>
+                <span class="typo-spec">104px / 0.9<br>Outfit 900</span>
+            </div>
+
+            <!-- Heading 2 — section editorial -->
+            <div class="typo-row">
+                <span class="typo-label">Heading 2<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-heading / black</span></span>
+                <div class="typo-preview">
+                    <h2 class="font-heading font-black tracking-tighter leading-[0.9] uppercase text-[3.5rem] md:text-[5rem]">Sua<br>Transformação</h2>
+                </div>
+                <span class="typo-spec">56–80px / 0.9<br>Outfit 900</span>
+            </div>
+
+            <!-- Heading 3 — section medium -->
+            <div class="typo-row">
+                <span class="typo-label">Heading 3<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-heading / extrabold</span></span>
+                <div class="typo-preview">
+                    <h2 class="font-heading text-4xl font-extrabold text-white">O Método 360</h2>
+                </div>
+                <span class="typo-spec">36px / 1<br>Outfit 800</span>
+            </div>
+
+            <!-- Heading 4 — card titles -->
+            <div class="typo-row">
+                <span class="typo-label">Heading 4<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-heading / black</span></span>
+                <div class="typo-preview">
+                    <h3 class="font-heading text-3xl font-black text-white uppercase tracking-tighter">Plano Essencial</h3>
+                </div>
+                <span class="typo-spec">30px / 2.25rem<br>Outfit 900</span>
+            </div>
+
+            <!-- Bold L — error/accent labels -->
+            <div class="typo-row">
+                <span class="typo-label">Bold L<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / bold</span></span>
+                <div class="typo-preview">
+                    <p class="text-2xl font-bold text-white tracking-tight">Treinos Método 360 + Ajustes Dinâmicos</p>
+                </div>
+                <span class="typo-spec">24px / 2rem<br>Inter 700</span>
+            </div>
+
+            <!-- Bold M — section labels -->
+            <div class="typo-row">
+                <span class="typo-label">Bold M<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / bold uppercase</span></span>
+                <div class="typo-preview">
+                    <span class="text-accent-gold font-bold tracking-widest uppercase">01 / Metabolismo</span>
+                </div>
+                <span class="typo-spec">14px / 1.25rem<br>Inter 700 widest</span>
+            </div>
+
+            <!-- Bold S — nav / tags -->
+            <div class="typo-row">
+                <span class="typo-label">Bold S<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / bold</span></span>
+                <div class="typo-preview">
+                    <span class="text-sm font-bold text-brand-navy bg-white px-5 py-2 rounded-full">Garantir Vaga</span>
+                </div>
+                <span class="typo-spec">14px / 1.25rem<br>Inter 700</span>
+            </div>
+
+            <!-- Paragraph (larger body) -->
+            <div class="typo-row">
+                <span class="typo-label">Paragraph<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / light</span></span>
+                <div class="typo-preview">
+                    <p class="text-xl text-brand-light font-light leading-relaxed max-w-xl">O método exclusivo que já ajudou mulheres 40+ a eliminarem até <strong class="text-white font-semibold">12kg nas primeiras semanas</strong> — unindo treino, ajuste hormonal e suporte emocional.</p>
+                </div>
+                <span class="typo-spec">20px / 1.75rem<br>Inter 300</span>
+            </div>
+
+            <!-- Regular L — large quote -->
+            <div class="typo-row">
+                <span class="typo-label">Regular L<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-heading / bold</span></span>
+                <div class="typo-preview">
+                    <p class="text-white text-[2rem] leading-[1.2] font-heading font-bold">"Já perdi mais um quilo em dois dias, começamos com 69 kg e hoje estou com 61 kg."</p>
+                </div>
+                <span class="typo-spec">32px / 1.2<br>Outfit 700</span>
+            </div>
+
+            <!-- Regular M — body text -->
+            <div class="typo-row">
+                <span class="typo-label">Regular M<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / regular</span></span>
+                <div class="typo-preview">
+                    <p class="text-brand-light leading-relaxed text-lg">Após os 40, a queda do estrogênio desacelera o metabolismo. O que funcionava aos 20 anos agora só gera frustração.</p>
+                </div>
+                <span class="typo-spec">18px / 1.75rem<br>Inter 400</span>
+            </div>
+
+            <!-- Regular S — captions / meta -->
+            <div class="typo-row">
+                <span class="typo-label">Regular S<br><span style="color:rgba(88,129,166,0.4);font-family:ui-monospace,monospace;font-size:0.6rem;letter-spacing:0">font-sans / regular</span></span>
+                <div class="typo-preview">
+                    <span class="text-brand-light/60 text-sm uppercase tracking-wider">Por Mês</span>
+                    <span class="text-brand-light text-xs ml-4">© 2026 Andreia Castro Fit</span>
+                </div>
+                <span class="typo-spec">12–14px / 1.25rem<br>Inter 400</span>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 2 — Colors & Surfaces                                      -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-colors" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">02</p>
+            <h2 class="ds-section-title">Colors &amp; Surfaces</h2>
+
+            <!-- Brand Palette -->
+            <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-6" style="font-size:0.8rem;letter-spacing:0.12em;color:rgba(156,188,217,0.5)">Brand Palette</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#010d26"></div>
+                    <div class="color-info">
+                        <span class="color-name">brand-navy</span>
+                        <span class="color-hex">#010d26</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#023059"></div>
+                    <div class="color-info">
+                        <span class="color-name">brand-deep</span>
+                        <span class="color-hex">#023059</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#021f3b"></div>
+                    <div class="color-info">
+                        <span class="color-name">pricing-bg</span>
+                        <span class="color-hex">#021f3b</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#010a1f"></div>
+                    <div class="color-info">
+                        <span class="color-name">footer-bg</span>
+                        <span class="color-hex">#010a1f</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#5881a6"></div>
+                    <div class="color-info">
+                        <span class="color-name">brand-medium</span>
+                        <span class="color-hex">#5881a6</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#9cbcd9"></div>
+                    <div class="color-info">
+                        <span class="color-name">brand-light</span>
+                        <span class="color-hex">#9cbcd9</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#F0F4F8"></div>
+                    <div class="color-info">
+                        <span class="color-name">base-off / text</span>
+                        <span class="color-hex">#F0F4F8</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#ffffff"></div>
+                    <div class="color-info">
+                        <span class="color-name">white</span>
+                        <span class="color-hex">#ffffff</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accent -->
+            <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-6 mt-10" style="font-size:0.8rem;letter-spacing:0.12em;color:rgba(156,188,217,0.5)">Accent</h3>
+            <div class="color-grid">
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#D4A843"></div>
+                    <div class="color-info">
+                        <span class="color-name">accent-gold</span>
+                        <span class="color-hex">#D4A843</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#b58e33"></div>
+                    <div class="color-info">
+                        <span class="color-name">accent-goldhover</span>
+                        <span class="color-hex">#b58e33</span>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#25D366"></div>
+                    <div class="color-info">
+                        <span class="color-name">whatsapp</span>
+                        <span class="color-hex">#25D366</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Surfaces -->
+            <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-6 mt-10" style="font-size:0.8rem;letter-spacing:0.12em;color:rgba(156,188,217,0.5)">Surfaces &amp; Overlays</h3>
+            <div class="color-grid">
+                <!-- Page bg -->
+                <div class="color-swatch">
+                    <div class="color-block" style="background:#010d26;background-image:radial-gradient(circle at 50% 0%, rgba(2,48,89,0.4) 0%, rgba(1,13,38,1) 50%)"></div>
+                    <div class="color-info">
+                        <span class="color-name">page-bg</span>
+                        <span class="color-hex">navy + radial</span>
+                    </div>
+                </div>
+                <!-- glass-panel -->
+                <div class="color-swatch">
+                    <div class="color-block glass-panel"></div>
+                    <div class="color-info">
+                        <span class="color-name">glass-panel</span>
+                        <span class="color-hex">#010d26 + border</span>
+                    </div>
+                </div>
+                <!-- glass-card -->
+                <div class="color-swatch">
+                    <div class="color-block glass-card"></div>
+                    <div class="color-info">
+                        <span class="color-name">glass-card</span>
+                        <span class="color-hex">#023059 + border</span>
+                    </div>
+                </div>
+                <!-- border white/5 -->
+                <div class="color-swatch">
+                    <div class="color-block" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1)"></div>
+                    <div class="color-info">
+                        <span class="color-name">white/5 surface</span>
+                        <span class="color-hex">rgba(255,255,255,.05)</span>
+                    </div>
+                </div>
+                <!-- Decor divider overlay -->
+                <div class="color-swatch">
+                    <div class="color-block" style="background:linear-gradient(to right,rgba(2,48,89,0.3),rgba(2,48,89,0.3));transform:skewY(3deg);transform-origin:bottom left"></div>
+                    <div class="color-info">
+                        <span class="color-name">skewed section bg</span>
+                        <span class="color-hex">brand-deep/30 skew-y-3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gradients -->
+            <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-6 mt-10" style="font-size:0.8rem;letter-spacing:0.12em;color:rgba(156,188,217,0.5)">Gradients</h3>
+            <div class="gradient-grid">
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(135deg,#D4A843 0%,#b58e33 100%)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">btn-primary</span>
+                        <span class="color-hex">gold → goldhover 135°</span>
+                    </div>
+                </div>
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(to right,#D4A843,#b58e33)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">btn-primary-r</span>
+                        <span class="color-hex">gold → goldhover →</span>
+                    </div>
+                </div>
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(135deg,#D4A843,#5881a6,#D4A843)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">pricing-premium border</span>
+                        <span class="color-hex">gold → medium → gold</span>
+                    </div>
+                </div>
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(to top right,#010d26,#023059,#5881a6)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">hero-card overlay</span>
+                        <span class="color-hex">navy → deep → medium ↗</span>
+                    </div>
+                </div>
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(to right,#D4A843,#5881a6,transparent)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">decor line</span>
+                        <span class="color-hex">gold → medium → transparent →</span>
+                    </div>
+                </div>
+                <div class="gradient-swatch">
+                    <div class="gradient-block" style="background:linear-gradient(to right,transparent,rgba(88,129,166,0.5),transparent)"></div>
+                    <div class="gradient-info">
+                        <span class="color-name">connecting line</span>
+                        <span class="color-hex">transparent → medium/50 → transparent</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Borders -->
+            <h3 class="text-lg font-bold text-white uppercase tracking-widest mb-6 mt-10" style="font-size:0.8rem;letter-spacing:0.12em;color:rgba(156,188,217,0.5)">Borders &amp; Dividers</h3>
+            <div style="display:flex;flex-direction:column;gap:1.5rem;max-width:36rem">
+                <div>
+                    <div style="height:1px;background:rgba(255,255,255,0.05)"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-white/5 — subtle card border</span>
+                </div>
+                <div>
+                    <div style="height:1px;background:rgba(255,255,255,0.1)"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-white/10 — section dividers</span>
+                </div>
+                <div>
+                    <div style="height:2px;background:rgba(255,255,255,0.1)"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-t-2 border-white/10 — editorial item separator</span>
+                </div>
+                <div>
+                    <div style="height:1px;background:rgba(88,129,166,0.5)"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-brand-medium/50 — left accent border</span>
+                </div>
+                <div>
+                    <div style="height:4px;background:#D4A843"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-l-4 border-accent-gold — pull-quote border</span>
+                </div>
+                <div>
+                    <div style="height:1px;background:rgba(212,168,67,0.3)"></div>
+                    <span class="color-name" style="margin-top:0.4rem;display:block">border-accent-gold/30 — glass-card gold accent</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 3 — UI Components                                          -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-components" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">03</p>
+            <h2 class="ds-section-title">UI Components</h2>
+
+            <!-- ── Buttons ──────────────────────────────────────────────── -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Buttons</h3>
+
+            <div class="states-row">
+                <div class="state-item">
+                    <a href="#" class="btn-primary px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2" style="pointer-events:none">
+                        Quero minha transformação
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                    <span class="state-label">btn-primary — default</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="btn-primary px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2" style="transform:translateY(-3px);box-shadow:0 15px 30px -10px rgba(212,168,67,0.5)">
+                        Quero minha transformação
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                    <span class="state-label">btn-primary — :hover</span>
+                </div>
+            </div>
+
+            <!-- Secondary button (navbar CTA) -->
+            <div class="states-row">
+                <div class="state-item">
+                    <a href="#" class="text-sm font-bold text-brand-navy bg-white px-5 py-2 rounded-full hover:bg-base-off transition-colors" style="pointer-events:none">
+                        Garantir Vaga
+                    </a>
+                    <span class="state-label">nav-btn — default</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="text-sm font-bold text-brand-navy bg-white px-5 py-2 rounded-full" style="background:#F0F4F8;pointer-events:none">
+                        Garantir Vaga
+                    </a>
+                    <span class="state-label">nav-btn — :hover (base-off)</span>
+                </div>
+            </div>
+
+            <!-- Pricing CTA button -->
+            <div class="states-row">
+                <div class="state-item">
+                    <a href="#" class="text-center px-10 py-6 rounded-2xl bg-gradient-to-r from-accent-gold to-accent-goldhover text-brand-navy font-black text-xl uppercase tracking-wider" style="pointer-events:none">
+                        Garantir Vaga
+                    </a>
+                    <span class="state-label">pricing-btn — default</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="text-center px-10 py-6 rounded-2xl bg-gradient-to-r from-accent-gold to-accent-goldhover text-brand-navy font-black text-xl uppercase tracking-wider" style="transform:scale(1.05);box-shadow:0 10px 30px rgba(212,168,67,0.4);pointer-events:none">
+                        Garantir Vaga
+                    </a>
+                    <span class="state-label">pricing-btn — :hover</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="text-center px-10 py-6 rounded-2xl bg-gradient-to-r from-accent-gold to-accent-goldhover text-brand-navy font-black text-xl uppercase tracking-wider" style="transform:scale(0.95);pointer-events:none">
+                        Garantir Vaga
+                    </a>
+                    <span class="state-label">pricing-btn — :active</span>
+                </div>
+            </div>
+
+            <!-- Secondary outline button -->
+            <div class="states-row">
+                <div class="state-item">
+                    <a href="#" class="px-6 py-4 rounded-xl bg-brand-deep border border-brand-medium/50 text-white font-bold" style="pointer-events:none">
+                        Assinar Essencial
+                    </a>
+                    <span class="state-label">outline-btn — default</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="px-6 py-4 rounded-xl bg-brand-medium border border-brand-medium text-white font-bold" style="pointer-events:none">
+                        Assinar Essencial
+                    </a>
+                    <span class="state-label">outline-btn — :hover</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="px-6 py-4 rounded-xl bg-brand-deep border border-brand-medium/50 text-white font-bold" style="transform:scale(0.98);pointer-events:none">
+                        Assinar Essencial
+                    </a>
+                    <span class="state-label">outline-btn — :active</span>
+                </div>
+            </div>
+
+            <!-- WhatsApp inline link -->
+            <div class="states-row mb-16">
+                <div class="state-item">
+                    <a href="#" class="inline-flex items-center gap-4 text-brand-light font-medium" style="pointer-events:none">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 transition-all duration-300" aria-hidden="true">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <span>Dúvidas sobre os planos? Fale comigo no WhatsApp</span>
+                    </a>
+                    <span class="state-label">whatsapp-link — default</span>
+                </div>
+                <div class="state-item">
+                    <a href="#" class="inline-flex items-center gap-4 text-white font-medium" style="pointer-events:none">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300" style="background:#25D366;border-color:#25D366;transform:scale(1.1)">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </div>
+                        <span>Dúvidas sobre os planos? Fale comigo no WhatsApp</span>
+                    </a>
+                    <span class="state-label">whatsapp-link — :hover</span>
+                </div>
+            </div>
+
+            <!-- ── Cards ─────────────────────────────────────────────────── -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Cards</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- glass-card default -->
+                <div class="glass-card rounded-[2rem] p-10 flex flex-col h-full border-white/5">
+                    <div class="mb-4">
+                        <span class="ds-section-label">glass-card — default state</span>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-3xl font-heading font-black text-white mb-2 uppercase tracking-tighter">Essencial</h3>
+                        <p class="text-brand-light text-sm">Para iniciar a sua mudança hoje.</p>
+                    </div>
+                    <div class="mb-10">
+                        <div class="flex items-start gap-1">
+                            <span class="text-xl font-bold text-brand-medium mt-1">R$</span>
+                            <span class="text-5xl font-black text-white tracking-tighter">149</span>
+                            <span class="text-xl font-bold text-brand-medium mt-1">,90</span>
+                        </div>
+                        <span class="text-brand-light/60 text-sm">/mês</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-medium font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">Treinos do Método 360</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-medium font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">Cardápio base 40+</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-medium font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">Grupo WhatsApp VIP</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="w-full block text-center px-6 py-4 rounded-xl bg-brand-deep border border-brand-medium/50 text-white font-bold" style="pointer-events:none">
+                        Assinar Essencial
+                    </a>
+                </div>
+
+                <!-- glass-card hover state -->
+                <div class="glass-card rounded-[2rem] p-10 flex flex-col h-full border-white/20 transition-all duration-300" style="transform:translateY(-0.25rem)">
+                    <div class="mb-4">
+                        <span class="ds-section-label">glass-card — :hover state</span>
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-3xl font-heading font-black text-white mb-2 uppercase tracking-tighter">VIP 360</h3>
+                        <p class="text-accent-gold font-bold text-sm tracking-widest uppercase">Limitado a 10 Vagas</p>
+                    </div>
+                    <div class="mb-10">
+                        <div class="flex items-start gap-1">
+                            <span class="text-xl font-bold text-brand-medium mt-1">R$</span>
+                            <span class="text-5xl font-black text-white tracking-tighter">499</span>
+                            <span class="text-xl font-bold text-brand-medium mt-1">,90</span>
+                        </div>
+                        <span class="text-brand-light/60 text-sm">/mês</span>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent-gold font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">Tudo do Premium</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent-gold font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">Suporte individual 1 a 1</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-accent-gold font-black" aria-hidden="true">/</span>
+                            <span class="text-white/80 font-medium">1 Reunião de zoom por mês</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="w-full block text-center px-6 py-4 rounded-xl bg-brand-deep border border-brand-medium/50 text-white font-bold" style="pointer-events:none">
+                        Aplicar para o VIP
+                    </a>
+                </div>
+            </div>
+
+            <!-- pricing-premium card -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Pricing Premium Card</h3>
+            <div class="pricing-premium rounded-[2rem] mb-16">
+                <div class="bg-[#021f3b] rounded-[2rem] p-12 lg:p-16 flex flex-col lg:flex-row gap-12 relative z-10 border border-accent-gold/40 shadow-2xl items-center">
+                    <div class="flex-1">
+                        <div class="inline-block bg-accent-gold text-brand-navy text-xs font-black uppercase tracking-widest py-2 px-6 rounded-full mb-8">
+                            ⭐ O Plano Recomendado
+                        </div>
+                        <h3 class="text-[3rem] lg:text-[4rem] font-heading font-black text-white mb-2 leading-none uppercase tracking-tighter">Premium</h3>
+                        <p class="text-brand-light text-xl mt-4 max-w-md">O método completo. Treino, dieta e suporte emocional lado a lado com a Andreia.</p>
+                        <ul class="space-y-6 mt-12">
+                            <li class="flex items-start gap-4">
+                                <svg class="w-8 h-8 text-accent-gold shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-white text-2xl font-bold tracking-tight">Treinos Método 360 + Ajustes Dinâmicos</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <svg class="w-8 h-8 text-accent-gold shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-white text-2xl font-bold tracking-tight">Cardápio 40+ com Avaliação Corporal</span>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <svg class="w-8 h-8 text-accent-gold shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                <span class="text-white text-2xl font-bold tracking-tight">Mentoria em Grupo Quinzenal</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-1/3 w-full flex flex-col items-center lg:items-end lg:border-l border-white/10 lg:pl-12">
+                        <div class="text-center lg:text-right mb-10">
+                            <span class="block text-brand-light font-bold uppercase tracking-widest mb-2">Investimento</span>
+                            <div class="flex items-start justify-center lg:justify-end gap-1 text-white">
+                                <span class="text-2xl font-bold text-accent-gold mt-2">R$</span>
+                                <span class="text-[6rem] lg:text-[7rem] font-black tracking-tighter leading-none">299</span>
+                                <span class="text-2xl font-bold text-accent-gold mt-2">,90</span>
+                            </div>
+                            <span class="text-brand-light/60 text-lg uppercase tracking-wider block mt-2">Por Mês</span>
+                        </div>
+                        <a href="#" class="w-full text-center px-10 py-6 rounded-2xl bg-gradient-to-r from-accent-gold to-accent-goldhover text-brand-navy font-black text-xl uppercase tracking-wider" style="pointer-events:none">
+                            Garantir Vaga
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ card -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">FAQ Card (glass-card rounded-2xl)</h3>
+            <dl class="space-y-6 max-w-3xl mb-16">
+                <div class="glass-card rounded-2xl p-8">
+                    <dt class="text-lg font-bold text-white mb-3">Tenho mais de 40 anos. Ainda consigo resultado?</dt>
+                    <dd class="text-brand-light leading-relaxed">Sim. O método foi desenhado especificamente para mulheres 40+. Alunas relatam perdas de até <strong class="text-white">12 kg nas primeiras semanas</strong> e 8 kg em 40 dias.</dd>
+                </div>
+                <div class="glass-card rounded-2xl p-8">
+                    <dt class="text-lg font-bold text-white mb-3">Vou ter que passar fome ou fazer dieta restritiva?</dt>
+                    <dd class="text-brand-light leading-relaxed">Não. O método ajusta a alimentação para nutrir e acelerar seu metabolismo na fase hormonal — sem cortar tudo.</dd>
+                </div>
+            </dl>
+
+            <!-- Step card (rotated glass-card) -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Step Card (método 360 steps)</h3>
+            <ol class="grid md:grid-cols-3 gap-12 relative max-w-5xl mx-auto list-none p-0 m-0 mb-8">
+                <li class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-2xl glass-card flex items-center justify-center text-accent-gold font-heading font-black text-3xl mb-8 border border-accent-gold/30 shadow-[0_0_30px_rgba(212,168,67,0.15)] rotate-3 hover:rotate-0 transition-transform">
+                        1
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Avaliação</h3>
+                    <p class="text-brand-light leading-relaxed">Entendo sua rotina, saúde e momento hormonal para traçar o mapa exato.</p>
+                </li>
+                <li class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-2xl glass-card flex items-center justify-center text-accent-gold font-heading font-black text-3xl mb-8 border border-accent-gold/30 shadow-[0_0_30px_rgba(212,168,67,0.15)] -rotate-3 hover:rotate-0 transition-transform">
+                        2
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Plano Personalizado</h3>
+                    <p class="text-brand-light leading-relaxed">Treino e alimentação adaptados à SUA realidade.</p>
+                </li>
+                <li class="relative z-10 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 rounded-2xl glass-card flex items-center justify-center text-accent-gold font-heading font-black text-3xl mb-8 border border-accent-gold/30 shadow-[0_0_30px_rgba(212,168,67,0.15)] rotate-3 hover:rotate-0 transition-transform">
+                        3
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Acompanhamento</h3>
+                    <p class="text-brand-light leading-relaxed">Você não é mais uma. Caminhamos juntas semana a semana.</p>
+                </li>
+            </ol>
+
+            <!-- Badge / Tag -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Badges &amp; Tags</h3>
+            <div class="states-row mb-8">
+                <div class="state-item">
+                    <div class="inline-block bg-accent-gold text-brand-navy text-xs font-black uppercase tracking-widest py-2 px-6 rounded-full">
+                        ⭐ O Plano Recomendado
+                    </div>
+                    <span class="state-label">badge-gold</span>
+                </div>
+                <div class="state-item">
+                    <span class="text-accent-gold font-bold text-sm tracking-widest uppercase">Limitado a 10 Vagas</span>
+                    <span class="state-label">label-gold-tight</span>
+                </div>
+                <div class="state-item">
+                    <span class="text-accent-gold font-bold tracking-widest uppercase text-sm">01 / Metabolismo</span>
+                    <span class="state-label">section-counter-label</span>
+                </div>
+                <div class="state-item">
+                    <span class="text-accent-gold ml-2 text-sm font-bold">-8kg em 40 dias</span>
+                    <span class="state-label">result-tag</span>
+                </div>
+            </div>
+
+            <!-- Testimonial featured -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Testimonial — Featured</h3>
+            <div class="max-w-2xl relative mb-16">
+                <svg class="absolute -top-10 -left-10 w-32 h-32 text-white/5" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm18 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"></path></svg>
+                <p class="text-white text-[2rem] leading-[1.2] font-heading font-bold mb-10 relative z-10">
+                    "Já perdi mais um quilo em dois dias, começamos com 69 kg e hoje estou com 61 kg. Nem eu acredito que perdi 8 kg em 40 dias."
+                </p>
+                <div class="flex items-center gap-6 pt-8 border-t-4 border-brand-medium/30">
+                    <div class="w-16 h-16 rounded-full bg-brand-deep flex items-center justify-center font-black text-2xl text-white">A</div>
+                    <div>
+                        <p class="font-bold text-white text-xl">Aluna</p>
+                        <p class="text-sm text-accent-gold font-bold uppercase tracking-widest mt-1">-8kg em 40 dias</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avatar group -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Avatar Group</h3>
+            <div class="states-row">
+                <div class="state-item">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-brand-deep border border-brand-navy flex items-center justify-center text-[10px]">A</div>
+                        <div class="w-8 h-8 rounded-full bg-brand-medium border border-brand-navy flex items-center justify-center text-[10px]">M</div>
+                        <div class="w-8 h-8 rounded-full bg-brand-light text-brand-navy border border-brand-navy flex items-center justify-center text-[10px]">+</div>
+                    </div>
+                    <span class="state-label">avatar-group sm</span>
+                </div>
+                <div class="state-item">
+                    <div class="flex items-center gap-3 text-sm text-brand-light font-medium">
+                        <div class="flex -space-x-2">
+                            <div class="w-8 h-8 rounded-full bg-brand-deep border border-brand-navy flex items-center justify-center text-[10px]">A</div>
+                            <div class="w-8 h-8 rounded-full bg-brand-medium border border-brand-navy flex items-center justify-center text-[10px]">M</div>
+                            <div class="w-8 h-8 rounded-full bg-brand-light text-brand-navy border border-brand-navy flex items-center justify-center text-[10px]">+</div>
+                        </div>
+                        <span>Junte-se a dezenas de mulheres</span>
+                    </div>
+                    <span class="state-label">avatar-group with label</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 4 — Layout & Spacing                                        -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-layout" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">04</p>
+            <h2 class="ds-section-title">Layout &amp; Spacing</h2>
+
+            <!-- Container -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Container</h3>
+            <div class="layout-demo">
+                <div class="layout-label">max-w-7xl mx-auto px-6 — main container (1280px max)</div>
+                <div class="layout-content">
+                    <div style="background:rgba(88,129,166,0.07);border:1px dashed rgba(88,129,166,0.2);padding:1.5rem;border-radius:0.5rem;text-align:center">
+                        <span style="font-size:0.7rem;color:rgba(88,129,166,0.5);font-family:ui-monospace,monospace">max-width: 80rem | padding: 0 1.5rem</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero 12-col grid -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Pattern 1 — Hero: 12-column grid (7+5)</h3>
+            <div class="layout-demo">
+                <div class="layout-label">grid lg:grid-cols-12 gap-12 items-center | lg:col-span-7 + lg:col-span-5</div>
+                <div class="layout-content">
+                    <div class="grid lg:grid-cols-12 gap-4" style="min-height:100px">
+                        <div class="lg:col-span-7" style="background:rgba(212,168,67,0.08);border:1px dashed rgba(212,168,67,0.2);border-radius:0.5rem;padding:1.5rem;display:flex;align-items:center;justify-content:center">
+                            <span style="font-size:0.7rem;color:rgba(212,168,67,0.5);font-family:ui-monospace,monospace">col-span-7 — Hero copy (h1 + p + CTA)</span>
+                        </div>
+                        <div class="lg:col-span-5" style="background:rgba(88,129,166,0.08);border:1px dashed rgba(88,129,166,0.2);border-radius:0.5rem;padding:1.5rem;display:flex;align-items:center;justify-content:center">
+                            <span style="font-size:0.7rem;color:rgba(88,129,166,0.5);font-family:ui-monospace,monospace">col-span-5 — Hero visual</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky sidebar editorial -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Pattern 2 — Editorial Scroll: 12-column grid (5+7), sticky left</h3>
+            <div class="layout-demo">
+                <div class="layout-label">grid lg:grid-cols-12 gap-16 lg:gap-24 items-start | col-5 lg:sticky top-32 + col-7 space-y-16</div>
+                <div class="layout-content">
+                    <div class="grid lg:grid-cols-12 gap-4">
+                        <div class="lg:col-span-5" style="background:rgba(212,168,67,0.08);border:1px dashed rgba(212,168,67,0.2);border-radius:0.5rem;padding:1.5rem;min-height:80px;display:flex;align-items:center;justify-content:center">
+                            <span style="font-size:0.7rem;color:rgba(212,168,67,0.5);font-family:ui-monospace,monospace">col-5 sticky — Section h2 + lead</span>
+                        </div>
+                        <div class="lg:col-span-7" style="background:rgba(88,129,166,0.08);border:1px dashed rgba(88,129,166,0.2);border-radius:0.5rem;padding:1.5rem;min-height:80px;display:flex;align-items:center;justify-content:center">
+                            <span style="font-size:0.7rem;color:rgba(88,129,166,0.5);font-family:ui-monospace,monospace">col-7 — Scrollable content blocks (space-y-16)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-col grid -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Pattern 3 — Step Grid (md:grid-cols-3)</h3>
+            <div class="layout-demo">
+                <div class="layout-label">grid md:grid-cols-3 gap-12 | relative z-10 for each step</div>
+                <div class="layout-content">
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div style="background:rgba(212,168,67,0.08);border:1px dashed rgba(212,168,67,0.2);border-radius:0.5rem;padding:1.5rem;text-align:center">
+                            <span style="font-size:0.7rem;color:rgba(212,168,67,0.5);font-family:ui-monospace,monospace">Step 1<br>icon + h3 + p</span>
+                        </div>
+                        <div style="background:rgba(212,168,67,0.08);border:1px dashed rgba(212,168,67,0.2);border-radius:0.5rem;padding:1.5rem;text-align:center">
+                            <span style="font-size:0.7rem;color:rgba(212,168,67,0.5);font-family:ui-monospace,monospace">Step 2<br>icon + h3 + p</span>
+                        </div>
+                        <div style="background:rgba(212,168,67,0.08);border:1px dashed rgba(212,168,67,0.2);border-radius:0.5rem;padding:1.5rem;text-align:center">
+                            <span style="font-size:0.7rem;color:rgba(212,168,67,0.5);font-family:ui-monospace,monospace">Step 3<br>icon + h3 + p</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section paddings -->
+            <h3 style="font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(156,188,217,0.5);margin-bottom:1.5rem">Section Spacing Tokens</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;max-width:60rem">
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">py-32 (8rem / 128px)</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Main sections</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">py-24 (6rem / 96px)</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">FAQ, method</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">pt-32 lg:pt-48</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Hero top padding</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">gap-12 (3rem)</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Grid column gap</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">mb-24 (6rem)</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Section heading bottom</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">p-10 / p-12 / p-16</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Card inner padding</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">px-6 (1.5rem)</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Horizontal page padding</span>
+                </div>
+                <div style="background:rgba(88,129,166,0.05);border:1px solid rgba(88,129,166,0.1);border-radius:0.75rem;padding:1.25rem">
+                    <span style="font-family:ui-monospace,monospace;font-size:0.7rem;color:rgba(212,168,67,0.7);display:block;margin-bottom:0.25rem">rounded-[2rem]</span>
+                    <span style="font-size:0.65rem;color:rgba(88,129,166,0.5)">Card border radius</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 5 — Motion & Interaction                                   -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-motion" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">05</p>
+            <h2 class="ds-section-title">Motion &amp; Interaction</h2>
+
+            <div class="motion-gallery">
+
+                <!-- animate-fade-in-up -->
+                <div class="motion-card">
+                    <div class="animate-fade-in-up" style="animation-iteration-count:infinite;animation-duration:3s">
+                        <div style="width:60px;height:60px;background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.3);border-radius:1rem;display:flex;align-items:center;justify-content:center">
+                            <svg width="24" height="24" fill="none" stroke="#D4A843" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                        </div>
+                    </div>
+                    <span class="motion-card-label">animate-fade-in-up</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">fadeInUp 1s ease-out<br>Hero entrance</span>
+                </div>
+
+                <!-- animate-float -->
+                <div class="motion-card">
+                    <div class="animate-float">
+                        <div style="width:60px;height:60px;background:rgba(88,129,166,0.15);border:1px solid rgba(88,129,166,0.3);border-radius:1rem;display:flex;align-items:center;justify-content:center">
+                            <svg width="24" height="24" fill="none" stroke="#9cbcd9" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                        </div>
+                    </div>
+                    <span class="motion-card-label">animate-float</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">float 6s ease-in-out infinite<br>Hero visual card</span>
+                </div>
+
+                <!-- animate-blob -->
+                <div class="motion-card">
+                    <div style="position:relative;width:60px;height:60px">
+                        <div class="animate-blob" style="width:60px;height:60px;background:rgba(2,48,89,0.5);border-radius:50%;filter:blur(4px)"></div>
+                    </div>
+                    <span class="motion-card-label">animate-blob</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">blob 7s infinite<br>Background orbs</span>
+                </div>
+
+                <!-- reveal (scroll-triggered) -->
+                <div class="motion-card">
+                    <div class="reveal active">
+                        <div style="width:60px;height:60px;background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:1rem;display:flex;align-items:center;justify-content:center">
+                            <svg width="24" height="24" fill="none" stroke="#D4A843" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                        </div>
+                    </div>
+                    <span class="motion-card-label">.reveal + .active</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">opacity 0→1, translateY 30px→0<br>0.8s cubic-bezier(0.5,0,0,1)<br>Scroll reveal</span>
+                </div>
+
+                <!-- btn-primary hover -->
+                <div class="motion-card">
+                    <a href="#" class="btn-primary px-6 py-3 rounded-xl font-bold text-sm" style="pointer-events:none">
+                        Hover me
+                    </a>
+                    <span class="motion-card-label">btn-primary hover</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">translateY(-3px)<br>glow shadow 0.4s<br>shine ::before sweep 0.6s</span>
+                </div>
+
+                <!-- Step card rotate hover -->
+                <div class="motion-card">
+                    <div class="w-20 h-20 rounded-2xl glass-card flex items-center justify-center text-accent-gold font-heading font-black text-3xl border border-accent-gold/30 shadow-[0_0_30px_rgba(212,168,67,0.15)] rotate-3 hover:rotate-0 transition-transform">
+                        1
+                    </div>
+                    <span class="motion-card-label">step-card rotate</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">rotate(3deg)→0<br>transition-transform<br>Hover to straighten</span>
+                </div>
+
+                <!-- glass-card hover lift -->
+                <div class="motion-card">
+                    <div class="glass-card rounded-2xl p-4 hover:-translate-y-1 hover:border-white/20 transition-all duration-300" style="width:80px">
+                        <span class="text-brand-light text-xs text-center block">hover</span>
+                    </div>
+                    <span class="motion-card-label">glass-card hover</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">translateY(-0.25rem)<br>border-white/20<br>0.3s ease</span>
+                </div>
+
+                <!-- pricing-premium pulse-slow -->
+                <div class="motion-card">
+                    <div class="pricing-premium rounded-2xl" style="width:80px;height:60px">
+                        <div class="bg-[#021f3b] rounded-2xl w-full h-full flex items-center justify-center relative z-10 border border-accent-gold/40">
+                            <span style="font-size:0.6rem;color:rgba(212,168,67,0.6)">border</span>
+                        </div>
+                    </div>
+                    <span class="motion-card-label">pricing border pulse</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">pulse-slow 4s infinite<br>opacity 0.8 ↔ 0.4<br>gradient border inset -2px</span>
+                </div>
+
+                <!-- Navbar scroll blur -->
+                <div class="motion-card">
+                    <div style="width:120px;height:40px;background:#010d26;border-bottom:1px solid rgba(156,188,217,0.1);border-radius:0.5rem;display:flex;align-items:center;justify-content:center">
+                        <span style="font-family:ui-monospace,monospace;font-size:0.6rem;color:rgba(88,129,166,0.5)">nav default</span>
+                    </div>
+                    <div style="width:120px;height:40px;border-radius:0.5rem;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 15px -3px rgba(0,0,0,.1);background:rgba(1,13,38,0.8)">
+                        <span style="font-family:ui-monospace,monospace;font-size:0.6rem;color:rgba(88,129,166,0.5)">nav scrolled</span>
+                    </div>
+                    <span class="motion-card-label">navbar scroll</span>
+                    <span style="font-family:ui-monospace,monospace;font-size:0.65rem;color:rgba(88,129,166,0.4)">shadow-lg + bg-brand-navy/80<br>on scrollY &gt; 50px</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- SECTION 6 — Icons                                                  -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <section id="ds-icons" class="ds-section">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="ds-section-label">06</p>
+            <h2 class="ds-section-title">Icons</h2>
+            <p style="font-size:0.8rem;color:rgba(88,129,166,0.5);margin-bottom:3rem">Inline SVG icons — Heroicons style (stroke, rounded). All used in the reference page.</p>
+
+            <div class="icon-gallery">
+
+                <!-- Arrow right -->
+                <div class="icon-item">
+                    <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    <span class="state-label">arrow-right<br>CTA button</span>
+                </div>
+
+                <!-- Checkmark -->
+                <div class="icon-item">
+                    <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <span class="state-label">check<br>Premium features</span>
+                </div>
+
+                <!-- Image placeholder -->
+                <div class="icon-item">
+                    <svg class="w-8 h-8 text-brand-light/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <span class="state-label">image<br>Hero visual placeholder</span>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="icon-item">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <span class="state-label">whatsapp<br>CTA link</span>
+                </div>
+
+                <!-- Quotation mark (decorative SVG) -->
+                <div class="icon-item">
+                    <svg class="w-12 h-12 text-white/30" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm18 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"></path></svg>
+                    <span class="state-label">quote-mark<br>Testimonial decor</span>
+                </div>
+
+                <!-- Sizes -->
+                <div class="icon-item">
+                    <div style="display:flex;align-items:flex-end;gap:0.75rem">
+                        <svg class="w-5 h-5 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg class="w-6 h-6 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg class="w-16 h-16 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <span class="state-label">w-5 / w-6 / w-8 / w-16<br>Size variants in use</span>
+                </div>
+
+                <!-- Color variants -->
+                <div class="icon-item">
+                    <div style="display:flex;gap:0.75rem">
+                        <svg class="w-8 h-8 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <svg class="w-8 h-8 text-brand-light/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <span class="state-label">accent-gold / white / muted<br>Color inheritance</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer (exact clone from original) -->
+    <footer class="bg-[#010a1f] py-16 border-t border-white/5 text-center text-brand-medium/70 relative z-10">
+        <div class="font-heading font-black text-2xl tracking-tighter text-white/50 mb-6">
+            ANDREIA<span class="text-accent-gold/50">360</span>
+        </div>
+        <p class="mb-8">Design System — Andreia 360 Landing Page</p>
+    </footer>
+
+    <!-- Scroll reveal (exact from original) -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>

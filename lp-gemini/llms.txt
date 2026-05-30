@@ -1,0 +1,26 @@
+# Método Andreia 360
+
+> Programa online de transformação feminina para mulheres 40+, criado por Andreia Castro (personal trainer). Integra treino, nutrição adaptada à fase hormonal, comportamento e suporte emocional — sem dietas restritivas. Domínio oficial: https://metodoandreia360.com.br/
+
+Andreia Castro Fit atende mulheres maduras que buscam emagrecer com saúde, recuperar autoestima e resultados nas primeiras semanas (alunas relatam perdas de 5 a 12 kg).
+
+## Páginas principais
+
+- [Landing page](https://metodoandreia360.com.br/): oferta, benefícios, depoimentos, planos Essencial/Premium/VIP 360 e FAQ
+- [Página de obrigado](https://metodoandreia360.com.br/obrigado.html): confirmação pós-compra
+
+## Planos e preços
+
+- [Planos](https://metodoandreia360.com.br/#planos): Essencial R$ 149,90/mês, Premium R$ 299,90/mês (recomendado), VIP 360 R$ 499,90/mês (10 vagas, consultoria individual)
+
+## Conteúdo por seção
+
+- [Por que nada funciona depois dos 40](https://metodoandreia360.com.br/#por-que-nada-funciona): metabolismo, menopausa e método 360
+- [Depoimentos](https://metodoandreia360.com.br/#depoimentos): resultados reais de alunas 40+
+- [Como funciona](https://metodoandreia360.com.br/#metodo-360): avaliação, plano personalizado, acompanhamento
+- [FAQ](https://metodoandreia360.com.br/#faq): idade, fome, tempo, inclusões
+
+## Optional
+
+- [Instagram oficial](https://www.instagram.com/andreiacastrofit/): conteúdo e prova social da Andreia Castro
+- [llms-full.txt](https://metodoandreia360.com.br/llms-full.txt): agregação expandida para contexto de IA
