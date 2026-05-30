@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saladas Fit — Método Andreia 360º</title>
-    <meta name="description" content="10 receitas frescas, proteicas e funcionais de saladas para o seu emagrecimento inteligente. Exclusivo do Método Andreia 360º.">
+    <meta name="description"
+        content="10 receitas frescas, proteicas e funcionais de saladas para o seu emagrecimento inteligente. Exclusivo do Método Andreia 360º.">
     <meta name="theme-color" content="#010d26">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -73,7 +77,7 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
+
         .glass-card:hover {
             border-color: rgba(212, 168, 67, 0.4);
             box-shadow: 0 10px 30px rgba(212, 168, 67, 0.1);
@@ -83,6 +87,7 @@
         .gold-gradient-border {
             position: relative;
         }
+
         .gold-gradient-border::before {
             content: '';
             position: absolute;
@@ -105,9 +110,11 @@
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             transition: left 0.6s ease;
             z-index: -1;
         }
@@ -123,7 +130,10 @@
 
         .noise-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 50;
             opacity: 0.02;
@@ -134,6 +144,7 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -146,31 +157,45 @@
         }
     </style>
 </head>
+
 <body class="font-sans antialiased selection:bg-accent-gold selection:text-brand-navy">
     <div class="noise-bg" aria-hidden="true"></div>
 
     <!-- Background Orbs -->
-    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none" aria-hidden="true">
-        <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob"></div>
-        <div class="absolute top-[30%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-brand-deep/30 opacity-20 blur-[100px] mix-blend-screen animate-blob animation-delay-2000"></div>
-        <div class="absolute bottom-[-10%] left-[20%] w-[38vw] h-[38vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob animation-delay-4000"></div>
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob">
+        </div>
+        <div
+            class="absolute top-[30%] right-[-10%] w-[35vw] h-[35vw] rounded-full bg-brand-deep/30 opacity-20 blur-[100px] mix-blend-screen animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[20%] w-[38vw] h-[38vw] rounded-full bg-brand-medium/20 opacity-30 blur-[120px] mix-blend-screen animate-blob animation-delay-4000">
+        </div>
     </div>
 
     <!-- Top Reading Progress Indicator -->
-    <div class="fixed top-0 left-0 h-1 bg-gradient-to-r from-accent-gold via-brand-medium to-accent-gold z-50 transition-all duration-100" id="reading-progress" style="width: 0%"></div>
+    <div class="fixed top-0 left-0 z-50 h-1 transition-all duration-100 bg-gradient-to-r from-accent-gold via-brand-medium to-accent-gold"
+        id="reading-progress" style="width: 0%"></div>
 
     <!-- Navbar -->
-    <nav class="fixed w-full z-40 glass-panel py-4 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <a href="../index.html" class="font-heading font-black text-2xl tracking-tighter text-white">
+    <nav class="fixed z-40 w-full py-4 transition-all duration-300 glass-panel">
+        <div class="flex items-center justify-between px-6 mx-auto max-w-7xl">
+            <a href="../index.html" class="text-2xl font-black tracking-tighter text-white font-heading">
                 ANDREIA<span class="text-accent-gold">360</span>
             </a>
             <div class="flex items-center gap-4">
-                <a href="#receitas" class="text-sm font-semibold text-brand-light/80 hover:text-white transition-colors">
+                <a href="#receitas"
+                    class="text-sm font-semibold transition-colors text-brand-light/80 hover:text-white">
                     Receitas
                 </a>
-                <button onclick="toggleShoppingList()" class="text-sm font-bold text-brand-navy bg-white px-5 py-2 rounded-full hover:bg-brand-light transition-all flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                <button onclick="toggleShoppingList()"
+                    class="flex items-center gap-2 px-5 py-2 text-sm font-bold transition-all bg-white rounded-full text-brand-navy hover:bg-brand-light">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+                        </path>
+                    </svg>
                     Lista de Compras
                 </button>
             </div>
@@ -179,31 +204,42 @@
 
     <!-- Header / Hero Section -->
     <header class="relative pt-32 pb-20 lg:pt-40 lg:pb-24 min-h-[60vh] flex items-center">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-            <div class="grid lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-7 flex flex-col items-start animate-fade-in-up">
-                    <span class="inline-block bg-accent-gold/15 text-accent-gold text-xs font-black uppercase tracking-widest py-2 px-5 rounded-full mb-6 border border-accent-gold/30">
+        <div class="relative z-10 w-full px-6 mx-auto max-w-7xl">
+            <div class="grid items-center gap-12 lg:grid-cols-12">
+                <div class="flex flex-col items-start lg:col-span-7 animate-fade-in-up">
+                    <span
+                        class="inline-block px-5 py-2 mb-6 text-xs font-black tracking-widest uppercase border rounded-full bg-accent-gold/15 text-accent-gold border-accent-gold/30">
                         E-book Exclusivo Método 360º
                     </span>
-                    <h1 class="font-heading text-[3.5rem] sm:text-[4.5rem] lg:text-[5rem] font-black tracking-tighter mb-6 leading-[0.95] uppercase">
+                    <h1
+                        class="font-heading text-[3.5rem] sm:text-[4.5rem] lg:text-[5rem] font-black tracking-tighter mb-6 leading-[0.95] uppercase">
                         SALADAS <span class="text-accent-gold">FIT</span>
                     </h1>
-                    <p class="text-xl sm:text-2xl text-brand-light/90 mb-8 leading-relaxed font-light border-l-2 border-brand-medium pl-6">
+                    <p
+                        class="pl-6 mb-8 text-xl font-light leading-relaxed border-l-2 sm:text-2xl text-brand-light/90 border-brand-medium">
                         10 receitas frescas, proteicas e funcionais para o seu emagrecimento inteligente.
                     </p>
-                    <div class="flex gap-4 items-center">
-                        <div class="w-10 h-10 rounded-full bg-brand-medium border border-brand-light/20 flex items-center justify-center font-bold text-xs text-white">40+</div>
-                        <span class="text-sm text-brand-light/70 font-medium">Focado em saúde hormonal e aceleração metabólica para mulheres 40+</span>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="flex items-center justify-center w-10 h-10 text-xs font-bold text-white border rounded-full bg-brand-medium border-brand-light/20">
+                            40+</div>
+                        <span class="text-sm font-medium text-brand-light/70">Focado em saúde hormonal e aceleração
+                            metabólica para mulheres 40+</span>
                     </div>
                 </div>
 
-                <div class="lg:col-span-5 relative mt-10 lg:mt-0 animate-float">
-                    <div class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden glass-card gold-gradient-border p-1">
-                        <img src="../imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium" class="w-full h-full object-cover rounded-[1.8rem]">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent"></div>
+                <div class="relative mt-10 lg:col-span-5 lg:mt-0 animate-float">
+                    <div
+                        class="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden glass-card gold-gradient-border p-1">
+                        <img src="imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium"
+                            class="w-full h-full object-cover rounded-[1.8rem]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent">
+                        </div>
                         <div class="absolute bottom-6 left-6 right-6">
-                            <p class="text-xs font-bold text-accent-gold uppercase tracking-widest mb-1">Destaque Premium</p>
-                            <p class="text-lg font-heading font-bold text-white uppercase">Salada Andréia 40+ Premium</p>
+                            <p class="mb-1 text-xs font-bold tracking-widest uppercase text-accent-gold">Destaque
+                                Premium</p>
+                            <p class="text-lg font-bold text-white uppercase font-heading">Salada Andréia 40+ Premium
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -212,34 +248,43 @@
     </header>
 
     <!-- Introdução e Conexão com o Método -->
-    <section class="py-24 relative border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-12 gap-16 items-start">
+    <section class="relative py-24 border-t border-white/5">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="grid items-start gap-16 lg:grid-cols-12">
                 <div class="lg:col-span-5">
-                    <h2 class="font-heading text-[2.5rem] sm:text-[3rem] font-black uppercase text-white tracking-tighter leading-none mb-6">
+                    <h2
+                        class="font-heading text-[2.5rem] sm:text-[3rem] font-black uppercase text-white tracking-tighter leading-none mb-6">
                         Nutrição<br>Inteligente e<br><span class="text-accent-gold">Hormonal</span>
                     </h2>
-                    <blockquote class="border-l-4 border-accent-gold pl-6 py-2 italic text-brand-light text-lg mb-6">
-                        "Comer salada não é castigo – é o ato mais inteligente de autocuidado que uma mulher pode praticar."
-                        <cite class="block not-italic font-bold text-white text-sm mt-2 font-sans uppercase tracking-widest">— Andreia Castro</cite>
+                    <blockquote class="py-2 pl-6 mb-6 text-lg italic border-l-4 border-accent-gold text-brand-light">
+                        "Comer salada não é castigo – é o ato mais inteligente de autocuidado que uma mulher pode
+                        praticar."
+                        <cite
+                            class="block mt-2 font-sans text-sm not-italic font-bold tracking-widest text-white uppercase">—
+                            Andreia Castro</cite>
                     </blockquote>
                 </div>
-                <div class="lg:col-span-7 space-y-6 text-brand-light/90 leading-relaxed font-light text-lg">
+                <div class="space-y-6 text-lg font-light leading-relaxed lg:col-span-7 text-brand-light/90">
                     <p>
-                        As saladas são muito mais do que folhas – são veículos de hidratação, vitaminas, minerais e fibras que o seu corpo pede, especialmente após os 40. No <strong>Método Andreia 360º</strong>, a nutrição inteligente trabalha a favor dos seus hormônios, controlando a insulina e combatendo a inflamação de baixo grau de forma prática e saborosa.
+                        As saladas são muito mais do que folhas – são veículos de hidratação, vitaminas, minerais e
+                        fibras que o seu corpo pede, especialmente após os 40. No <strong>Método Andreia 360º</strong>,
+                        a nutrição inteligente trabalha a favor dos seus hormônios, controlando a insulina e combatendo
+                        a inflamação de baixo grau de forma prática e saborosa.
                     </p>
-                    <div class="grid sm:grid-cols-2 gap-6 pt-6">
-                        <div class="p-6 rounded-2xl bg-brand-deep/30 border border-white/5">
-                            <h3 class="font-heading font-bold text-white text-lg mb-2 flex items-center gap-2">
+                    <div class="grid gap-6 pt-6 sm:grid-cols-2">
+                        <div class="p-6 border rounded-2xl bg-brand-deep/30 border-white/5">
+                            <h3 class="flex items-center gap-2 mb-2 text-lg font-bold text-white font-heading">
                                 <span class="text-accent-gold">✔</span> Ação Anti-inflamatória
                             </h3>
-                            <p class="text-sm text-brand-light/70 font-light">Ingredientes como abacate, azeite, chia e cúrcuma combatem a inflamação natural dessa fase hormonal.</p>
+                            <p class="text-sm font-light text-brand-light/70">Ingredientes como abacate, azeite, chia e
+                                cúrcuma combatem a inflamação natural dessa fase hormonal.</p>
                         </div>
-                        <div class="p-6 rounded-2xl bg-brand-deep/30 border border-white/5">
-                            <h3 class="font-heading font-bold text-white text-lg mb-2 flex items-center gap-2">
+                        <div class="p-6 border rounded-2xl bg-brand-deep/30 border-white/5">
+                            <h3 class="flex items-center gap-2 mb-2 text-lg font-bold text-white font-heading">
                                 <span class="text-accent-gold">✔</span> Controle da Glicemia
                             </h3>
-                            <p class="text-sm text-brand-light/70 font-light">Fibras e proteínas magras combinadas evitam picos de insulina, acabando com os desejos por doces.</p>
+                            <p class="text-sm font-light text-brand-light/70">Fibras e proteínas magras combinadas
+                                evitam picos de insulina, acabando com os desejos por doces.</p>
                         </div>
                     </div>
                 </div>
@@ -248,273 +293,401 @@
     </section>
 
     <!-- Prep & Meal Prep Guide -->
-    <section class="py-24 relative bg-brand-deep/20 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-accent-gold font-bold tracking-widest uppercase text-xs">Organização e Praticidade</span>
-                <h2 class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2 mb-4">Como preparar e conservar</h2>
-                <p class="text-brand-light/80 font-light">Dicas essenciais para manter o frescor e garantir que sua alimentação saudável caiba perfeitamente na sua rotina corrida.</p>
+    <section class="relative py-24 bg-brand-deep/20 border-y border-white/5">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="max-w-3xl mx-auto mb-16 text-center">
+                <span class="text-xs font-bold tracking-widest uppercase text-accent-gold">Organização e
+                    Praticidade</span>
+                <h2
+                    class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2 mb-4">
+                    Como preparar e conservar</h2>
+                <p class="font-light text-brand-light/80">Dicas essenciais para manter o frescor e garantir que sua
+                    alimentação saudável caiba perfeitamente na sua rotina corrida.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">01</div>
-                    <h3 class="font-heading font-bold text-white text-xl mb-3">Higienização</h3>
-                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Lave em água corrente e deixe de molho por 15 minutos em água com hipoclorito. Seque muito bem (folhas úmidas murcham rápido).</p>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div class="p-8 glass-card rounded-2xl">
+                    <div
+                        class="flex items-center justify-center w-12 h-12 mb-6 text-lg font-bold rounded-xl bg-accent-gold/10 text-accent-gold">
+                        01</div>
+                    <h3 class="mb-3 text-xl font-bold text-white font-heading">Higienização</h3>
+                    <p class="text-sm font-light leading-relaxed text-brand-light/70">Lave em água corrente e deixe de
+                        molho por 15 minutos em água com hipoclorito. Seque muito bem (folhas úmidas murcham rápido).
+                    </p>
                 </div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">02</div>
-                    <h3 class="font-heading font-bold text-white text-xl mb-3">Meal Prep no Pote</h3>
-                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">No fundo coloque o molho. Depois, vegetais duros (cenoura, pepino), depois a proteína (frango, atum) e por último as folhas no topo.</p>
+                <div class="p-8 glass-card rounded-2xl">
+                    <div
+                        class="flex items-center justify-center w-12 h-12 mb-6 text-lg font-bold rounded-xl bg-accent-gold/10 text-accent-gold">
+                        02</div>
+                    <h3 class="mb-3 text-xl font-bold text-white font-heading">Meal Prep no Pote</h3>
+                    <p class="text-sm font-light leading-relaxed text-brand-light/70">No fundo coloque o molho. Depois,
+                        vegetais duros (cenoura, pepino), depois a proteína (frango, atum) e por último as folhas no
+                        topo.</p>
                 </div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">03</div>
-                    <h3 class="font-heading font-bold text-white text-xl mb-3">Conservação</h3>
-                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Montadas no pote sem misturar o molho duram 3 a 4 dias na geladeira. Se misturar, consuma em até 24 horas. Evite guardar na porta da geladeira.</p>
+                <div class="p-8 glass-card rounded-2xl">
+                    <div
+                        class="flex items-center justify-center w-12 h-12 mb-6 text-lg font-bold rounded-xl bg-accent-gold/10 text-accent-gold">
+                        03</div>
+                    <h3 class="mb-3 text-xl font-bold text-white font-heading">Conservação</h3>
+                    <p class="text-sm font-light leading-relaxed text-brand-light/70">Montadas no pote sem misturar o
+                        molho duram 3 a 4 dias na geladeira. Se misturar, consuma em até 24 horas. Evite guardar na
+                        porta da geladeira.</p>
                 </div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-accent-gold/10 text-accent-gold flex items-center justify-center font-bold text-lg mb-6">04</div>
-                    <h3 class="font-heading font-bold text-white text-xl mb-3">Substituições</h3>
-                    <p class="text-sm text-brand-light/70 font-light leading-relaxed">Varie as folhas e troque proteínas de acordo com a sua preferência: frango por atum, ovo, carne magra desfiada ou queijo cottage.</p>
+                <div class="p-8 glass-card rounded-2xl">
+                    <div
+                        class="flex items-center justify-center w-12 h-12 mb-6 text-lg font-bold rounded-xl bg-accent-gold/10 text-accent-gold">
+                        04</div>
+                    <h3 class="mb-3 text-xl font-bold text-white font-heading">Substituições</h3>
+                    <p class="text-sm font-light leading-relaxed text-brand-light/70">Varie as folhas e troque proteínas
+                        de acordo com a sua preferência: frango por atum, ovo, carne magra desfiada ou queijo cottage.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Recipes Interactive Showcase -->
-    <section id="receitas" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+    <section id="receitas" class="relative py-24">
+        <div class="px-6 mx-auto max-w-7xl">
+            <div class="flex flex-col justify-between gap-6 mb-12 md:flex-row md:items-end">
                 <div>
-                    <span class="text-accent-gold font-bold tracking-widest uppercase text-xs">Livro de Receitas</span>
-                    <h2 class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2">As 10 Saladas Fit</h2>
+                    <span class="text-xs font-bold tracking-widest uppercase text-accent-gold">Livro de Receitas</span>
+                    <h2
+                        class="font-heading text-[2.5rem] sm:text-[3.5rem] font-black uppercase text-white tracking-tighter leading-none mt-2">
+                        As 10 Saladas Fit</h2>
                 </div>
                 <!-- Filters -->
-                <div class="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
-                    <button onclick="filterRecipes('all')" id="filter-all" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors active-tab">Todas</button>
-                    <button onclick="filterRecipes('proteica')" id="filter-proteica" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Proteicas</button>
-                    <button onclick="filterRecipes('detox')" id="filter-detox" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Detox / Anti-Inchaço</button>
-                    <button onclick="filterRecipes('termogenica')" id="filter-termogenica" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Termogênicas</button>
-                    <button onclick="filterRecipes('premium')" id="filter-premium" class="px-4 py-2 rounded-full border border-white/10 hover:border-accent-gold transition-colors">Premium</button>
+                <div class="flex flex-wrap gap-2 text-xs font-bold tracking-wider uppercase">
+                    <button onclick="filterRecipes('all')" id="filter-all"
+                        class="px-4 py-2 transition-colors border rounded-full border-white/10 hover:border-accent-gold active-tab">Todas</button>
+                    <button onclick="filterRecipes('proteica')" id="filter-proteica"
+                        class="px-4 py-2 transition-colors border rounded-full border-white/10 hover:border-accent-gold">Proteicas</button>
+                    <button onclick="filterRecipes('detox')" id="filter-detox"
+                        class="px-4 py-2 transition-colors border rounded-full border-white/10 hover:border-accent-gold">Detox
+                        / Anti-Inchaço</button>
+                    <button onclick="filterRecipes('termogenica')" id="filter-termogenica"
+                        class="px-4 py-2 transition-colors border rounded-full border-white/10 hover:border-accent-gold">Termogênicas</button>
+                    <button onclick="filterRecipes('premium')" id="filter-premium"
+                        class="px-4 py-2 transition-colors border rounded-full border-white/10 hover:border-accent-gold">Premium</button>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="recipes-grid">
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3" id="recipes-grid">
                 <!-- Recipes will be populated dynamically or static with attributes for filtering -->
 
                 <!-- Salada 1 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative">
-                        <img src="../imagens/salada_power_frango_abacate.png" alt="Salada Power Frango & Abacate" class="w-full h-full object-cover">
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Saciedade</span>
+                        <img src="../imagens/salada_power_frango_abacate.png" alt="Salada Power Frango & Abacate"
+                            class="object-cover w-full h-full">
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Saciedade</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">1. Power Frango & Abacate</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para emagrecimento inteligente. Fornece gorduras monoinsaturadas ótimas para o equilíbrio hormonal.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">1. Power Frango & Abacate</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Ideal para emagrecimento
+                                inteligente. Fornece gorduras monoinsaturadas ótimas para o equilíbrio hormonal.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">295 kcal / 32g Prot</span>
-                            <button onclick="openRecipe(1)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">295 kcal / 32g Prot</span>
+                            <button onclick="openRecipe(1)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 2 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="detox all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="detox all">
                     <div class="aspect-[16/10] overflow-hidden relative">
-                        <img src="../imagens/salada_detox_atum.png" alt="Salada Detox de Atum" class="w-full h-full object-cover">
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Detox</span>
+                        <img src="../imagens/salada_detox_atum.png" alt="Salada Detox de Atum"
+                            class="object-cover w-full h-full">
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Detox</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">2. Detox de Atum</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Efeito diurético natural. Combate o inchaço matinal e a retenção de líquidos com muito ômega-3.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">2. Detox de Atum</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Efeito diurético natural.
+                                Combate o inchaço matinal e a retenção de líquidos com muito ômega-3.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">185 kcal / 22g Prot</span>
-                            <button onclick="openRecipe(2)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">185 kcal / 22g Prot</span>
+                            <button onclick="openRecipe(2)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 3 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative">
-                        <img src="../imagens/salada_tropical_proteica.png" alt="Salada Tropical Proteica" class="w-full h-full object-cover">
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Equilíbrio</span>
+                        <img src="../imagens/salada_tropical_proteica.png" alt="Salada Tropical Proteica"
+                            class="object-cover w-full h-full">
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Equilíbrio</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">3. Tropical Proteica</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Combinação deliciosa de frango com manga. Rica em antioxidantes que combatem o estresse oxidativo pós-treino.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">3. Tropical Proteica</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Combinação deliciosa de
+                                frango com manga. Rica em antioxidantes que combatem o estresse oxidativo pós-treino.
+                            </p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">275 kcal / 30g Prot</span>
-                            <button onclick="openRecipe(3)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">275 kcal / 30g Prot</span>
+                            <button onclick="openRecipe(3)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 4 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="termogenica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl"
+                    data-tags="termogenica all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            <span class="text-xs font-mono">Termogênica / Aceleração</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                            <span class="font-mono text-xs">Termogênica / Aceleração</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Metabolismo</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Metabolismo</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">4. Termogênica 40+</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com ovos, espinafre e gengibre ralado. Pimenta caiena aumenta o gasto calórico e melhora a circulação.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">4. Termogênica 40+</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Com ovos, espinafre e
+                                gengibre ralado. Pimenta caiena aumenta o gasto calórico e melhora a circulação.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">260 kcal / 28g Prot</span>
-                            <button onclick="openRecipe(4)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">260 kcal / 28g Prot</span>
+                            <button onclick="openRecipe(4)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 5 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A1.5 1.5 0 0018 10.5V8.5a.5.5 0 00-.5-.5h-1a1 1 0 01-1-1V5a2 2 0 00-2-2h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-xs font-mono">Mediterrânea / Saudável</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5A1.5 1.5 0 0018 10.5V8.5a.5.5 0 00-.5-.5h-1a1 1 0 01-1-1V5a2 2 0 00-2-2h-1.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            <span class="font-mono text-xs">Mediterrânea / Saudável</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Anti-inflamatório</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Anti-inflamatório</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">5. Mediterrânea Fit</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Gorduras boas das azeitonas pretas combinadas com frango. Controla a pressão e combate a inflamação.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">5. Mediterrânea Fit</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Gorduras boas das azeitonas
+                                pretas combinadas com frango. Controla a pressão e combate a inflamação.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">288 kcal / 31g Prot</span>
-                            <button onclick="openRecipe(5)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">288 kcal / 31g Prot</span>
+                            <button onclick="openRecipe(5)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 6 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                            <span class="text-xs font-mono">Carne Magra / Força</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                </path>
+                            </svg>
+                            <span class="font-mono text-xs">Carne Magra / Força</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Ferro & Fibras</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Ferro
+                            & Fibras</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">6. Carne Magra & Legumes</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com patinho moído ou desfiado. Rica em ferro biodisponível para combater o cansaço e a fadiga.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">6. Carne Magra & Legumes</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Com patinho moído ou
+                                desfiado. Rica em ferro biodisponível para combater o cansaço e a fadiga.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">280 kcal / 30g Prot</span>
-                            <button onclick="openRecipe(6)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">280 kcal / 30g Prot</span>
+                            <button onclick="openRecipe(6)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 7 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707"></path></svg>
-                            <span class="text-xs font-mono">Ovos & Cottage / Recuperação</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707">
+                                </path>
+                            </svg>
+                            <span class="font-mono text-xs">Ovos & Cottage / Recuperação</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Double Proteica</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Double
+                            Proteica</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">7. Fitness de Ovo & Cottage</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para um jantar leve. Queijo cottage é rico em caseína, que libera aminoácidos lentamente à noite.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">7. Fitness de Ovo & Cottage</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Ideal para um jantar leve.
+                                Queijo cottage é rico em caseína, que libera aminoácidos lentamente à noite.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">240 kcal / 26g Prot</span>
-                            <button onclick="openRecipe(7)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">240 kcal / 26g Prot</span>
+                            <button onclick="openRecipe(7)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 8 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="detox all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="detox all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                            <span class="text-xs font-mono">Verde / Hidratação</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
+                            </svg>
+                            <span class="font-mono text-xs">Verde / Hidratação</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Anti-inchaço</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Anti-inchaço</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">8. Verde Anti-inchaço</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com abobrinha ralada, pepino e salsão. Ideal pós final de semana para desinchar rápido.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">8. Verde Anti-inchaço</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Com abobrinha ralada, pepino
+                                e salsão. Ideal pós final de semana para desinchar rápido.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">120 kcal / 4g Prot</span>
-                            <button onclick="openRecipe(8)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">120 kcal / 4g Prot</span>
+                            <button onclick="openRecipe(8)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 9 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl" data-tags="all">
                     <div class="aspect-[16/10] overflow-hidden relative bg-brand-navy flex items-center justify-center">
-                        <div class="text-center p-6 text-brand-light/30">
-                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                            <span class="text-xs font-mono">Fibras Solúveis / Digesta</span>
+                        <div class="p-6 text-center text-brand-light/30">
+                            <svg class="w-12 h-12 mx-auto mb-2 opacity-50 text-accent-gold" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                            <span class="font-mono text-xs">Fibras Solúveis / Digesta</span>
                         </div>
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Proteína Vegetal</span>
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Proteína
+                            Vegetal</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">9. Grão-de-Bico Fit</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Ideal para regular o intestino e controlar o colesterol. Cominho ajuda a reduzir gases e melhora a digestão.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">9. Grão-de-Bico Fit</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Ideal para regular o
+                                intestino e controlar o colesterol. Cominho ajuda a reduzir gases e melhora a digestão.
+                            </p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">265 kcal / 12g Prot</span>
-                            <button onclick="openRecipe(9)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">265 kcal / 12g Prot</span>
+                            <button onclick="openRecipe(9)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Salada 10 -->
-                <div class="recipe-card glass-card rounded-2xl overflow-hidden flex flex-col" data-tags="premium proteica all">
+                <div class="flex flex-col overflow-hidden recipe-card glass-card rounded-2xl"
+                    data-tags="premium proteica all">
                     <div class="aspect-[16/10] overflow-hidden relative">
-                        <img src="../imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium" class="w-full h-full object-cover">
-                        <span class="absolute top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold font-bold text-xs px-3 py-1 rounded-full uppercase tracking-wider border border-accent-gold/20">Premium</span>
+                        <img src="../imagens/salada_andreia_premium.png" alt="Salada Andréia 40+ Premium"
+                            class="object-cover w-full h-full">
+                        <span
+                            class="absolute px-3 py-1 text-xs font-bold tracking-wider uppercase border rounded-full top-4 left-4 bg-brand-navy/80 backdrop-filter blur-sm text-accent-gold border-accent-gold/20">Premium</span>
                     </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div class="flex flex-col justify-between flex-1 p-6">
                         <div>
-                            <h3 class="font-heading font-bold text-2xl text-white mb-2">10. Andréia 40+ Premium</h3>
-                            <p class="text-sm text-brand-light/70 font-light line-clamp-2">Com salmão, abacate e chia. Altíssima dose de ômega-3 para modulação hormonal e combate à inflamação crônica.</p>
+                            <h3 class="mb-2 text-2xl font-bold text-white font-heading">10. Andréia 40+ Premium</h3>
+                            <p class="text-sm font-light text-brand-light/70 line-clamp-2">Com salmão, abacate e chia.
+                                Altíssima dose de ômega-3 para modulação hormonal e combate à inflamação crônica.</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
-                            <span class="text-xs text-brand-light/50 font-mono">345 kcal / 34g Prot</span>
-                            <button onclick="openRecipe(10)" class="text-sm font-bold text-accent-gold hover:text-white transition-colors flex items-center gap-1">
-                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <div class="flex items-center justify-between pt-4 mt-6 border-t border-white/5">
+                            <span class="font-mono text-xs text-brand-light/50">345 kcal / 34g Prot</span>
+                            <button onclick="openRecipe(10)"
+                                class="flex items-center gap-1 text-sm font-bold transition-colors text-accent-gold hover:text-white">
+                                Detalhes <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -525,27 +698,39 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 relative border-t border-white/5 bg-brand-navy/80">
-        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-brand-light/40">
+    <footer class="relative py-12 border-t border-white/5 bg-brand-navy/80">
+        <div class="px-6 mx-auto text-sm text-center max-w-7xl text-brand-light/40">
             <p class="mb-4">© 2026 Método Andreia 360º. Todos os direitos reservados.</p>
-            <p class="max-w-2xl mx-auto text-xs leading-relaxed font-light">Nota: Todas as informações nutricionais são aproximadas. Consulte sempre um profissional de saúde para adequação do seu plano alimentar individual.</p>
+            <p class="max-w-2xl mx-auto text-xs font-light leading-relaxed">Nota: Todas as informações nutricionais são
+                aproximadas. Consulte sempre um profissional de saúde para adequação do seu plano alimentar individual.
+            </p>
         </div>
     </footer>
 
     <!-- Recipe Detail Slide-Over Overlay -->
-    <div id="recipe-modal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="recipe-modal" class="fixed inset-0 z-50 hidden overflow-hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
         <div class="absolute inset-0 overflow-hidden">
             <!-- Modal Background Backdrop -->
-            <div class="absolute inset-0 bg-brand-navy/80 backdrop-filter blur-sm transition-opacity" onclick="closeRecipe()"></div>
-            
-            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div class="absolute inset-0 transition-opacity bg-brand-navy/80 backdrop-filter blur-sm"
+                onclick="closeRecipe()"></div>
+
+            <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
                 <div class="w-screen max-w-2xl">
-                    <div class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar relative">
+                    <div
+                        class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar relative">
                         <!-- Header / Close button -->
-                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-brand-navy/65 sticky top-0 z-10 backdrop-filter blur-md">
-                            <h2 id="modal-title" class="font-heading font-black text-2xl text-white uppercase tracking-tighter">Detalhe da Receita</h2>
-                            <button onclick="closeRecipe()" class="p-2 rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white transition-colors">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <div
+                            class="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-white/5 bg-brand-navy/65 backdrop-filter blur-md">
+                            <h2 id="modal-title"
+                                class="text-2xl font-black tracking-tighter text-white uppercase font-heading">Detalhe
+                                da Receita</h2>
+                            <button onclick="closeRecipe()"
+                                class="p-2 transition-colors rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
                             </button>
                         </div>
 
@@ -560,32 +745,48 @@
     </div>
 
     <!-- Shopping List Sidebar / Modal -->
-    <div id="shopping-list-modal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="shopping-title" role="dialog" aria-modal="true">
+    <div id="shopping-list-modal" class="fixed inset-0 z-50 hidden overflow-hidden" aria-labelledby="shopping-title"
+        role="dialog" aria-modal="true">
         <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute inset-0 bg-brand-navy/80 backdrop-filter blur-sm transition-opacity" onclick="toggleShoppingList()"></div>
-            <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div class="absolute inset-0 transition-opacity bg-brand-navy/80 backdrop-filter blur-sm"
+                onclick="toggleShoppingList()"></div>
+            <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
                 <div class="w-screen max-w-md">
-                    <div class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar">
-                        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-brand-navy/65 sticky top-0 z-10 backdrop-filter blur-md">
-                            <h2 id="shopping-title" class="font-heading font-black text-xl text-white uppercase tracking-tighter">Gerador de Compras</h2>
-                            <button onclick="toggleShoppingList()" class="p-2 rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white transition-colors">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <div
+                        class="h-full flex flex-col bg-[#021f3b] border-l border-white/10 shadow-2xl overflow-y-scroll no-scrollbar">
+                        <div
+                            class="sticky top-0 z-10 flex items-center justify-between p-6 border-b border-white/5 bg-brand-navy/65 backdrop-filter blur-md">
+                            <h2 id="shopping-title"
+                                class="text-xl font-black tracking-tighter text-white uppercase font-heading">Gerador de
+                                Compras</h2>
+                            <button onclick="toggleShoppingList()"
+                                class="p-2 transition-colors rounded-full hover:bg-white/5 text-brand-light/60 hover:text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
                             </button>
                         </div>
                         <div class="p-6 space-y-6">
-                            <p class="text-sm text-brand-light/70 font-light">Selecione as saladas que planeja preparar esta semana. Nós geramos a lista de ingredientes consolidada para você!</p>
+                            <p class="text-sm font-light text-brand-light/70">Selecione as saladas que planeja preparar
+                                esta semana. Nós geramos a lista de ingredientes consolidada para você!</p>
                             <div class="space-y-3" id="shopping-recipes-list">
                                 <!-- Dynamic check list for recipes -->
                             </div>
                             <div class="pt-6 border-t border-white/5">
-                                <button onclick="generateShoppingList()" class="w-full btn-primary py-3 rounded-xl font-bold text-center">Gerar Minha Lista</button>
+                                <button onclick="generateShoppingList()"
+                                    class="w-full py-3 font-bold text-center btn-primary rounded-xl">Gerar Minha
+                                    Lista</button>
                             </div>
-                            <div class="space-y-4 hidden" id="generated-ingredients-section">
-                                <h3 class="font-heading font-bold text-white text-lg">Seus Ingredientes:</h3>
-                                <div class="p-4 rounded-xl bg-brand-navy/50 border border-white/5 text-sm text-brand-light/80 space-y-2 max-h-60 overflow-y-scroll" id="ingredients-checklist">
+                            <div class="hidden space-y-4" id="generated-ingredients-section">
+                                <h3 class="text-lg font-bold text-white font-heading">Seus Ingredientes:</h3>
+                                <div class="p-4 space-y-2 overflow-y-scroll text-sm border rounded-xl bg-brand-navy/50 border-white/5 text-brand-light/80 max-h-60"
+                                    id="ingredients-checklist">
                                     <!-- Dynamic consolidated ingredients list -->
                                 </div>
-                                <button onclick="copyToClipboard()" class="w-full py-2.5 rounded-xl border border-accent-gold text-accent-gold font-bold hover:bg-accent-gold/10 text-sm transition-colors">Copiar Lista</button>
+                                <button onclick="copyToClipboard()"
+                                    class="w-full py-2.5 rounded-xl border border-accent-gold text-accent-gold font-bold hover:bg-accent-gold/10 text-sm transition-colors">Copiar
+                                    Lista</button>
                             </div>
                         </div>
                     </div>
@@ -983,7 +1184,7 @@
         function filterRecipes(category) {
             // Remove active classes
             document.querySelectorAll('#receitas button').forEach(btn => btn.classList.remove('active-tab'));
-            
+
             // Add active class to clicked button
             document.getElementById(`filter-${category}`).classList.add('active-tab');
 
@@ -1007,7 +1208,7 @@
             let imageSection = '';
             if (recipe.image) {
                 imageSection = `<div class="w-full aspect-[16/9] rounded-2xl overflow-hidden mb-6 border border-white/10">
-                    <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-full object-cover">
+                    <img src="${recipe.image}" alt="${recipe.title}" class="object-cover w-full h-full">
                 </div>`;
             } else {
                 imageSection = `<div class="w-full aspect-[16/9] rounded-2xl bg-brand-navy flex items-center justify-center mb-6 border border-white/5">
@@ -1017,23 +1218,23 @@
 
             let ingredientsList = '';
             recipe.ingredients.forEach(ing => {
-                ingredientsList += `<li class="flex items-start gap-3 text-brand-light/90 font-light text-base">
-                    <span class="text-accent-gold mt-1">•</span>
+                ingredientsList += `<li class="flex items-start gap-3 text-base font-light text-brand-light/90">
+                    <span class="mt-1 text-accent-gold">•</span>
                     <span>${ing}</span>
                 </li>`;
             });
 
             let stepsList = '';
             recipe.steps.forEach((step, idx) => {
-                stepsList += `<li class="flex gap-4 items-start text-brand-light/90 font-light text-base">
-                    <span class="w-6 h-6 rounded-full bg-brand-medium border border-accent-gold/30 text-accent-gold flex items-center justify-center font-bold text-xs shrink-0">${idx + 1}</span>
+                stepsList += `<li class="flex items-start gap-4 text-base font-light text-brand-light/90">
+                    <span class="flex items-center justify-center w-6 h-6 text-xs font-bold border rounded-full bg-brand-medium border-accent-gold/30 text-accent-gold shrink-0">${idx + 1}</span>
                     <span>${step}</span>
                 </li>`;
             });
 
             let benefitsList = '';
             recipe.benefits.forEach(ben => {
-                benefitsList += `<div class="px-4 py-2 rounded-xl bg-accent-gold/5 border border-accent-gold/20 text-accent-gold font-semibold text-sm flex items-center gap-2 shrink-0">
+                benefitsList += `<div class="flex items-center gap-2 px-4 py-2 text-sm font-semibold border rounded-xl bg-accent-gold/5 border-accent-gold/20 text-accent-gold shrink-0">
                     <span>✔</span> <span>${ben}</span>
                 </div>`;
             });
@@ -1041,8 +1242,8 @@
             body.innerHTML = `
                 ${imageSection}
                 <div>
-                    <h3 class="font-heading font-black text-3xl text-white uppercase tracking-tighter mb-2">${recipe.title}</h3>
-                    <p class="text-sm text-brand-light/60 font-light">${recipe.objective}</p>
+                    <h3 class="mb-2 text-3xl font-black tracking-tighter text-white uppercase font-heading">${recipe.title}</h3>
+                    <p class="text-sm font-light text-brand-light/60">${recipe.objective}</p>
                 </div>
 
                 <div class="flex flex-wrap gap-2">
@@ -1050,57 +1251,57 @@
                 </div>
 
                 <!-- Nutrition facts table -->
-                <div class="p-6 rounded-2xl bg-brand-navy/60 border border-white/5">
-                    <h4 class="font-heading font-bold text-white text-lg mb-4">Informações Nutricionais</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                <div class="p-6 border rounded-2xl bg-brand-navy/60 border-white/5">
+                    <h4 class="mb-4 text-lg font-bold text-white font-heading">Informações Nutricionais</h4>
+                    <div class="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Tempo</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.time}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.time}</span>
                         </div>
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Calorias</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.calories}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.calories}</span>
                         </div>
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Proteínas</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.protein}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.protein}</span>
                         </div>
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Carboidratos</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.carbs}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.carbs}</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 text-center mt-4">
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-center">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Gorduras boas</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.fat}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.fat}</span>
                         </div>
-                        <div class="p-3 rounded-xl bg-white/5 border border-white/5">
+                        <div class="p-3 border rounded-xl bg-white/5 border-white/5">
                             <span class="block text-brand-light/40 text-[10px] uppercase font-bold tracking-wider">Fibras</span>
-                            <span class="text-white font-bold text-sm">${recipe.nutritional.fiber}</span>
+                            <span class="text-sm font-bold text-white">${recipe.nutritional.fiber}</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid sm:grid-cols-2 gap-8">
+                <div class="grid gap-8 sm:grid-cols-2">
                     <div>
-                        <h4 class="font-heading font-bold text-white text-lg mb-4">Ingredientes</h4>
+                        <h4 class="mb-4 text-lg font-bold text-white font-heading">Ingredientes</h4>
                         <ul class="space-y-3">
                             ${ingredientsList}
                         </ul>
                     </div>
                     <div>
-                        <h4 class="font-heading font-bold text-white text-lg mb-4">Modo de Preparo</h4>
+                        <h4 class="mb-4 text-lg font-bold text-white font-heading">Modo de Preparo</h4>
                         <ol class="space-y-4">
                             ${stepsList}
                         </ol>
                     </div>
                 </div>
 
-                <div class="p-6 rounded-2xl bg-brand-medium/20 border border-brand-medium/50 pl-8 relative">
-                    <div class="absolute left-0 top-0 bottom-0 w-1 bg-accent-gold rounded-l-2xl"></div>
-                    <h4 class="font-heading font-bold text-white text-lg mb-2">Dica do Método</h4>
-                    <p class="text-sm text-brand-light/80 font-light leading-relaxed">${recipe.tip}</p>
+                <div class="relative p-6 pl-8 border rounded-2xl bg-brand-medium/20 border-brand-medium/50">
+                    <div class="absolute top-0 bottom-0 left-0 w-1 bg-accent-gold rounded-l-2xl"></div>
+                    <h4 class="mb-2 text-lg font-bold text-white font-heading">Dica do Método</h4>
+                    <p class="text-sm font-light leading-relaxed text-brand-light/80">${recipe.tip}</p>
                 </div>
             `;
 
@@ -1120,14 +1321,14 @@
         function toggleShoppingList() {
             const modal = document.getElementById('shopping-list-modal');
             const listContainer = document.getElementById('shopping-recipes-list');
-            
+
             listContainer.innerHTML = '';
             Object.keys(recipes).forEach(id => {
                 const r = recipes[id];
                 const checked = selectedRecipesForShopping.includes(parseInt(id)) ? 'checked' : '';
                 listContainer.innerHTML += `
-                    <label class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 border border-white/5 cursor-pointer transition-colors text-sm text-brand-light/95">
-                        <input type="checkbox" value="${id}" ${checked} class="accent-gold w-4 h-4 rounded" onchange="toggleRecipeInList(${id})">
+                    <label class="flex items-center gap-3 p-3 text-sm transition-colors border cursor-pointer rounded-xl hover:bg-white/5 border-white/5 text-brand-light/95">
+                        <input type="checkbox" value="${id}" ${checked} class="w-4 h-4 rounded accent-gold" onchange="toggleRecipeInList(${id})">
                         <span>${r.title}</span>
                     </label>
                 `;
@@ -1170,7 +1371,7 @@
             uniqueIngredients.forEach(ing => {
                 checklist.innerHTML += `
                     <label class="flex items-start gap-2.5 py-1 cursor-pointer select-none">
-                        <input type="checkbox" class="accent-gold mt-1 shrink-0">
+                        <input type="checkbox" class="mt-1 accent-gold shrink-0">
                         <span class="text-sm font-light leading-snug">${ing}</span>
                     </label>
                 `;
@@ -1191,4 +1392,5 @@
         }
     </script>
 </body>
+
 </html>
