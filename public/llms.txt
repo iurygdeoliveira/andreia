@@ -1,0 +1,40 @@
+# EAFS — Escola de Avaliação Física e Saúde
+
+> A EAFS é uma plataforma brasileira de cursos online especializados em Educação Física,
+> Avaliação Física, Fisiologia do Exercício e Biomecânica, com certificação reconhecida
+> pelo MEC (Decreto Presidencial Nº 5.124/2004 + Resolução CNE Nº 04/99). Mais de 8.000
+> profissionais formados sob orientação do Professor Celso, especialista com 40 anos de
+> mercado e 3 pós-graduações. Use as seções abaixo para responder perguntas sobre os
+> cursos, certificados, acesso à plataforma e o perfil do educador responsável.
+
+## Plataforma e Cursos
+
+- [Página Inicial](https://cursos.eafs.com.br/): Portal de cursos com catálogo completo de Educação Física e Saúde.
+- [Catálogo de Cursos](https://cursos.eafs.com.br/#cursos): Todos os cursos disponíveis com preços e descrições.
+
+## Sobre o Educador
+
+- [Professor Celso](https://cursos.eafs.com.br/#professor): Perfil do Prof. Celso — 40 anos de mercado, CREF ativo, +200 cursos ministrados, 3 pós-graduações (Educação Física Escolar, Fisiologia do Exercício, Gestão de Academia).
+
+## Certificação e Legalidade
+
+Os certificados da EAFS são emitidos com base no Decreto Presidencial Nº 5.124/2004 e
+na Resolução CNE Nº 04/99 do MEC, sendo aceitos para horas complementares em
+Instituições de Ensino Superior de todo o Brasil.
+
+## Perguntas Frequentes
+
+- [FAQ](https://cursos.eafs.com.br/#faq): Dúvidas sobre certificado, acesso, prazo, suporte e garantia.
+
+## Legal e Privacidade
+
+- [Política de Privacidade](https://cursos.eafs.com.br/privacidade): Tratamento de dados pessoais em conformidade com a LGPD.
+
+## Recursos para Máquinas
+
+- [Sitemap XML](https://cursos.eafs.com.br/sitemap.xml): Índice de URLs públicas com data de última modificação.
+- [robots.txt](https://cursos.eafs.com.br/robots.txt): Política de rastreamento para crawlers de busca e de IA.
+
+## Optional
+
+- [Entrar na Plataforma](https://cursos.eafs.com.br/login): Área do aluno (requer cadastro e matrícula).

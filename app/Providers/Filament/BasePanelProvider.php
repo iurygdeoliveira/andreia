@@ -1,0 +1,80 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Providers\Filament;
+
+use App\Http\Middleware\EnsureSecurityHeaders;
+use App\Http\Middleware\RedirectToProperPanelMiddleware;
+use App\Livewire\NotificationCenter;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
+use Filament\Enums\DatabaseNotificationsPosition;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\AuthenticateSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Enums\Width;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+
+abstract class BasePanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $this->applySharedPlugins(
+            $panel
+                ->id($this->getPanelId())
+                ->path($this->getPanelPath())
+                ->spa()
+                ->globalSearch(false)
+                ->databaseNotifications(position: DatabaseNotificationsPosition::Topbar)
+                ->databaseNotificationsLivewireComponent(NotificationCenter::class)
+                ->databaseTransactions()
+                ->profile()
+                ->topbar(false)
+                ->darkMode(true, true)
+                ->brandLogo(fn (): Factory|View => view('panels.auth.logo_base'))
+                ->brandLogoHeight('5rem')
+                ->multiFactorAuthentication(
+                    AppAuthentication::make()
+                        ->recoverable()
+                )
+                ->viteTheme('resources/css/filament/admin/theme.css')
+                ->sidebarWidth('15rem')
+                ->maxContentWidth(Width::Full)
+                ->middleware([
+                    EncryptCookies::class,
+                    AddQueuedCookiesToResponse::class,
+                    StartSession::class,
+                    AuthenticateSession::class,
+                    ShareErrorsFromSession::class,
+                    PreventRequestForgery::class,
+                    SubstituteBindings::class,
+                    DisableBladeIconComponents::class,
+                    DispatchServingFilamentEvent::class,
+                    RedirectToProperPanelMiddleware::class,
+                    EnsureSecurityHeaders::class,
+                ])
+                ->authMiddleware([
+                    Authenticate::class,
+                ])
+        );
+    }
+
+    protected function applySharedPlugins(Panel $panel): Panel
+    {
+        return $panel;
+    }
+
+    abstract protected function getPanelId(): string;
+
+    abstract protected function getPanelPath(): string;
+}

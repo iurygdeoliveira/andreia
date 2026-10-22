@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Filament\Clusters\Permissions;
+
+use App\Enums\OrganizationRole;
+use App\Models\Organization;
+use App\Models\User;
+use App\Traits\Filament\HasConfigurableNavigationSort;
+use Filament\Clusters\Cluster;
+use Filament\Facades\Filament;
+use Filament\Support\Icons\Heroicon;
+
+class PermissionsCluster extends Cluster
+{
+    use HasConfigurableNavigationSort;
+
+    protected static ?string $title = '';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Administração';
+
+    protected static ?string $navigationLabel = 'Permissões';
+
+    protected static string|\BackedEnum|null $navigationIcon = Heroicon::ShieldCheck;
+
+    protected static ?int $navigationSort = 2;
+
+    #[\Override]
+    public static function canAccess(): bool
+    {
+        $user = Filament::auth()->user();
+
+        if (! $user instanceof User) {
+            return false;
+        }
+
+        if ($user->hasRole(OrganizationRole::Admin->value)) {
+            return true;
+        }
+
+        $currentTeam = Filament::getTenant();
+
+        return $currentTeam instanceof Organization && $user->isOwnerOfOrganization($currentTeam);
+    }
+}

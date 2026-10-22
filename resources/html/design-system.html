@@ -1,0 +1,1580 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EAFS — Design System</title>
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            dark: {
+                                DEFAULT: "#050a08",
+                                surface: "#0d1a15",
+                                card: "#13241d",
+                                border: "#1b3329",
+                            },
+                            brand: {
+                                DEFAULT: "#10B981",
+                                hover: "#059669",
+                                light: "#34D399",
+                                muted: "rgba(16, 185, 129, 0.1)",
+                            },
+                        },
+                        fontFamily: {
+                            sans: ["Inter", "sans-serif"],
+                        },
+                        animation: {
+                            "float-slow": "float 6s ease-in-out infinite",
+                            "spin-slow": "spin 60s linear infinite",
+                        },
+                        keyframes: {
+                            float: {
+                                "0%, 100%": { transform: "translateY(0)" },
+                                "50%": { transform: "translateY(-15px)" },
+                            },
+                        },
+                    },
+                },
+            };
+        </script>
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Phosphor Icons -->
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                background-color: #050a08;
+                color: #f8fafc;
+            }
+
+            .glass-nav {
+                background: rgba(5, 10, 8, 0.85);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(27, 51, 41, 0.5);
+            }
+
+            .course-card {
+                transition: all 0.3s ease;
+            }
+
+            .course-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 32px rgba(16, 185, 129, 0.15);
+                border-color: rgba(16, 185, 129, 0.4);
+            }
+
+            .text-gradient {
+                background: linear-gradient(to right, #34d399, #10b981);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero-glow {
+                position: absolute;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(
+                    circle,
+                    rgba(16, 185, 129, 0.15) 0%,
+                    rgba(5, 10, 8, 0) 70%
+                );
+                top: -200px;
+                right: -100px;
+                z-index: -1;
+                pointer-events: none;
+            }
+
+            .glass-effect {
+                background: rgba(13, 26, 21, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(16, 185, 129, 0.15);
+            }
+
+            /* ── Design System specific helpers ── */
+            .ds-section-title {
+                font-size: 0.75rem;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: #10b981;
+                margin-bottom: 0.5rem;
+            }
+
+            .ds-section-heading {
+                font-size: 1.875rem;
+                font-weight: 800;
+                color: #fff;
+                margin-bottom: 2rem;
+            }
+
+            .ds-type-row {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                padding: 1.25rem 0;
+                border-bottom: 1px solid #1b3329;
+                gap: 2rem;
+            }
+
+            .ds-type-label {
+                flex-shrink: 0;
+                width: 160px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #9ca3af;
+            }
+
+            .ds-type-preview {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .ds-type-spec {
+                flex-shrink: 0;
+                font-size: 0.75rem;
+                font-family: "Inter", monospace;
+                color: #6b7280;
+                text-align: right;
+                white-space: nowrap;
+            }
+
+            .ds-swatch {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .ds-swatch-circle {
+                width: 64px;
+                height: 64px;
+                border-radius: 9999px;
+                border: 2px solid #1b3329;
+            }
+
+            .ds-swatch-name {
+                font-size: 0.75rem;
+                font-weight: 600;
+                color: #f8fafc;
+            }
+
+            .ds-swatch-value {
+                font-size: 0.625rem;
+                color: #6b7280;
+                font-family: monospace;
+            }
+
+            .ds-surface-card {
+                border-radius: 1rem;
+                padding: 2rem;
+                min-height: 120px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+        </style>
+    </head>
+
+    <body class="antialiased selection:bg-brand selection:text-white">
+        <!-- ════════════════════════════════════════════════════════
+         TOP NAV — Anchor links to each design system section
+         ════════════════════════════════════════════════════════ -->
+        <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex items-center gap-8">
+                        <a href="#" class="flex items-center gap-2">
+                            <img
+                                src="./Logo.svg"
+                                alt="EAFS Logo"
+                                class="h-10 w-auto"
+                                onerror="
+                                    this.src =
+                                        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMxMEI5ODEiIHJ4PSI4Ii8+PHRleHQgeD0iMjAiIHk9IjI2IiBmb250LWZhbWlseT0iSW50ZXIsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkU8L3RleHQ+PC9zdmc+'
+                                "
+                            />
+                        </a>
+
+                        <div
+                            class="hidden md:flex items-center space-x-6 text-sm font-medium text-gray-300"
+                        >
+                            <a href="#ds-hero" class="hover:text-brand transition-colors">Hero</a>
+                            <a href="#ds-typography" class="hover:text-brand transition-colors"
+                                >Tipografia</a
+                            >
+                            <a href="#ds-colors" class="hover:text-brand transition-colors"
+                                >Cores</a
+                            >
+                            <a href="#ds-components" class="hover:text-brand transition-colors"
+                                >Componentes</a
+                            >
+                            <a href="#ds-layout" class="hover:text-brand transition-colors"
+                                >Layout</a
+                            >
+                            <a href="#ds-motion" class="hover:text-brand transition-colors"
+                                >Motion</a
+                            >
+                            <a href="#ds-icons" class="hover:text-brand transition-colors"
+                                >Ícones</a
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <a
+                            href="./index.html"
+                            class="hidden sm:block text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                            >Ver Site</a
+                        >
+                        <a
+                            href="#ds-hero"
+                            class="bg-brand hover:bg-brand-hover text-white text-sm font-semibold py-2.5 px-5 rounded-full transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)]"
+                        >
+                            Explorar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ════════════════════════════════════════════════════════
+         0) HERO — Exact clone, text adapted
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+            <div class="hero-glow"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Text Content -->
+                    <div class="max-w-2xl">
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-muted border border-brand/20 text-brand text-sm font-semibold mb-6"
+                        >
+                            <i class="ph-fill ph-certificate text-lg"></i>
+                            Design System — EAFS
+                        </div>
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6"
+                        >
+                            Biblioteca Visual do <br />
+                            <span class="text-gradient">Portal de Cursos EAFS.</span>
+                        </h1>
+                        <p class="text-lg text-gray-400 mb-8 leading-relaxed max-w-xl">
+                            Referência viva de todos os tokens, componentes, padrões de layout e
+                            comportamentos de motion utilizados no site. Tudo extraído diretamente
+                            do HTML de produção.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a
+                                href="#ds-typography"
+                                class="bg-brand hover:bg-brand-hover text-white text-center font-semibold py-4 px-8 rounded-full transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2"
+                            >
+                                Explorar Componentes <i class="ph-bold ph-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="mt-8 flex items-center gap-4 text-sm text-gray-500 font-medium">
+                            <div class="flex -space-x-2">
+                                <img
+                                    class="w-8 h-8 rounded-full border-2 border-dark"
+                                    src="https://i.pravatar.cc/100?img=11"
+                                    alt="Aluno"
+                                />
+                                <img
+                                    class="w-8 h-8 rounded-full border-2 border-dark"
+                                    src="https://i.pravatar.cc/100?img=33"
+                                    alt="Aluno"
+                                />
+                                <img
+                                    class="w-8 h-8 rounded-full border-2 border-dark"
+                                    src="https://i.pravatar.cc/100?img=68"
+                                    alt="Aluno"
+                                />
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-dark bg-dark-card flex items-center justify-center text-xs text-brand"
+                                >
+                                    +8k
+                                </div>
+                            </div>
+                            <p>Guia de referência para desenvolvedores</p>
+                        </div>
+                    </div>
+
+                    <!-- Hero Logo Showcase -->
+                    <div
+                        class="relative lg:ml-auto flex justify-center items-center h-full py-12 lg:py-0 w-full max-w-lg mx-auto lg:mx-0"
+                    >
+                        <!-- Elegant Bento Container -->
+                        <div
+                            class="relative w-full aspect-square bg-gradient-to-br from-dark-card/50 to-dark-surface border border-dark-border/80 rounded-[3rem] shadow-2xl flex justify-center items-center overflow-hidden group"
+                        >
+                            <!-- Subtle static ambient light inside the card -->
+                            <div
+                                class="absolute -top-20 -right-20 w-72 h-72 bg-brand/10 rounded-full blur-[80px] group-hover:bg-brand/15 transition-colors duration-700"
+                            ></div>
+                            <div
+                                class="absolute -bottom-20 -left-20 w-64 h-64 bg-brand-light/5 rounded-full blur-[60px]"
+                            ></div>
+
+                            <!-- Highlighted Logo -->
+                            <img
+                                src="./Logo.svg"
+                                alt="EAFS Logo"
+                                class="relative z-10 w-64 md:w-80 lg:w-[380px] h-auto drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-700"
+                                onerror="
+                                    this.src =
+                                        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMxMEI5ODEiIHJ4PSI4Ii8+PHRleHQgeD0iMjAiIHk9IjI2IiBmb250LWZhbWlseT0iSW50ZXIsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkU8L3RleHQ+PC9zdmc+'
+                                "
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         1) TYPOGRAPHY
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-typography" class="py-24 bg-dark-surface border-y border-dark-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Tipografia</p>
+                <h2 class="ds-section-heading">Escala Tipográfica</h2>
+                <p class="text-gray-400 mb-12 max-w-2xl">
+                    Família: <strong class="text-white">Inter</strong> — pesos 400, 500, 600, 700,
+                    800. Todas as classes abaixo vêm do Tailwind config original.
+                </p>
+
+                <!-- Heading 1 -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Heading 1</span>
+                    <div class="ds-type-preview">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]"
+                        >
+                            Capacitação em Educação Física
+                        </h1>
+                    </div>
+                    <span class="ds-type-spec">60px / 1.1</span>
+                </div>
+
+                <!-- Heading 1 — gradient -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Heading 1 Gradient</span>
+                    <div class="ds-type-preview">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1]"
+                        >
+                            <span class="text-gradient">Certificado Aceito pelo MEC.</span>
+                        </h1>
+                    </div>
+                    <span class="ds-type-spec">60px / 1.1</span>
+                </div>
+
+                <!-- Heading 2 -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Heading 2</span>
+                    <div class="ds-type-preview">
+                        <h2
+                            class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight"
+                        >
+                            Profissionais de elite cobram pelo resultado
+                        </h2>
+                    </div>
+                    <span class="ds-type-spec">48px / tight</span>
+                </div>
+
+                <!-- Heading 3 -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Heading 3</span>
+                    <div class="ds-type-preview">
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-white">
+                            Catálogo de Cursos
+                        </h3>
+                    </div>
+                    <span class="ds-type-spec">36px / normal</span>
+                </div>
+
+                <!-- Heading 4 -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Heading 4</span>
+                    <div class="ds-type-preview">
+                        <h4 class="text-xl font-bold text-white">
+                            Formação em Avaliação Física Avançada
+                        </h4>
+                    </div>
+                    <span class="ds-type-spec">20px / normal</span>
+                </div>
+
+                <!-- Bold L -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Bold L</span>
+                    <div class="ds-type-preview">
+                        <strong class="text-white text-lg block">Aumento de Ticket Médio</strong>
+                    </div>
+                    <span class="ds-type-spec">18px / normal</span>
+                </div>
+
+                <!-- Bold M (card h3) -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Bold M</span>
+                    <div class="ds-type-preview">
+                        <h3 class="text-white font-bold text-lg">Horas Válidas</h3>
+                    </div>
+                    <span class="ds-type-spec">18px / normal</span>
+                </div>
+
+                <!-- Bold S -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Bold S</span>
+                    <div class="ds-type-preview">
+                        <h4 class="text-white font-bold">Navegação</h4>
+                    </div>
+                    <span class="ds-type-spec">16px / normal</span>
+                </div>
+
+                <!-- Section Label -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Section Label</span>
+                    <div class="ds-type-preview">
+                        <h2 class="text-brand text-sm font-bold tracking-wider uppercase">
+                            Plataforma de Cursos
+                        </h2>
+                    </div>
+                    <span class="ds-type-spec">14px / wider</span>
+                </div>
+
+                <!-- Paragraph (body lg) -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Paragraph L</span>
+                    <div class="ds-type-preview">
+                        <p class="text-lg text-gray-400 leading-relaxed">
+                            Saia da sala de musculação e torne-se um profissional de elite. Acesso
+                            imediato a cursos práticos de quem tem 40 anos de mercado.
+                        </p>
+                    </div>
+                    <span class="ds-type-spec">18px / relaxed</span>
+                </div>
+
+                <!-- Blockquote / italic -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Blockquote</span>
+                    <div class="ds-type-preview">
+                        <p
+                            class="text-xl text-gray-300 font-medium italic border-l-4 border-brand pl-4"
+                        >
+                            "Eu sei exatamente o que funciona no mercado, porque eu vivo isso há 4
+                            décadas."
+                        </p>
+                    </div>
+                    <span class="ds-type-spec">20px / italic</span>
+                </div>
+
+                <!-- Regular M -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Regular M</span>
+                    <div class="ds-type-preview">
+                        <p class="text-gray-400 text-sm">
+                            Aprenda a realizar testes precisos e valorize sua hora/aula entregando
+                            resultados comprovados.
+                        </p>
+                    </div>
+                    <span class="ds-type-spec">14px / normal</span>
+                </div>
+
+                <!-- Regular S -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Regular S</span>
+                    <div class="ds-type-preview">
+                        <p class="text-sm text-gray-400">Certificados aceitos pelo MEC</p>
+                    </div>
+                    <span class="ds-type-spec">14px / normal</span>
+                </div>
+
+                <!-- Badge text -->
+                <div class="ds-type-row">
+                    <span class="ds-type-label">Badge Text</span>
+                    <div class="ds-type-preview">
+                        <span
+                            class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                            >Avaliação</span
+                        >
+                    </div>
+                    <span class="ds-type-spec">12px / bold</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         2) COLORS & SURFACES
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-colors" class="py-24 bg-dark border-b border-dark-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Cores &amp; Superfícies</p>
+                <h2 class="ds-section-heading">Paleta de Cores</h2>
+
+                <!-- ── Core Palette ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Cores Primárias (Brand)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #10b981"></div>
+                        <span class="ds-swatch-name">brand</span>
+                        <span class="ds-swatch-value">#10B981</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #059669"></div>
+                        <span class="ds-swatch-name">brand-hover</span>
+                        <span class="ds-swatch-value">#059669</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #34d399"></div>
+                        <span class="ds-swatch-name">brand-light</span>
+                        <span class="ds-swatch-value">#34D399</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div
+                            class="ds-swatch-circle"
+                            style="background: rgba(16, 185, 129, 0.1); border-color: #10b981"
+                        ></div>
+                        <span class="ds-swatch-name">brand-muted</span>
+                        <span class="ds-swatch-value">rgba(16,185,129,0.1)</span>
+                    </div>
+                </div>
+
+                <!-- ── Dark palette ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Superfícies (Dark)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #050a08"></div>
+                        <span class="ds-swatch-name">dark (page)</span>
+                        <span class="ds-swatch-value">#050a08</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #0d1a15"></div>
+                        <span class="ds-swatch-name">dark-surface</span>
+                        <span class="ds-swatch-value">#0d1a15</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #13241d"></div>
+                        <span class="ds-swatch-name">dark-card</span>
+                        <span class="ds-swatch-value">#13241d</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #1b3329"></div>
+                        <span class="ds-swatch-name">dark-border</span>
+                        <span class="ds-swatch-value">#1b3329</span>
+                    </div>
+                </div>
+
+                <!-- ── Text Colors ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Cores de Texto</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #f8fafc"></div>
+                        <span class="ds-swatch-name">white / heading</span>
+                        <span class="ds-swatch-value">#f8fafc</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #d1d5db"></div>
+                        <span class="ds-swatch-name">gray-300 / sub</span>
+                        <span class="ds-swatch-value">#d1d5db</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #9ca3af"></div>
+                        <span class="ds-swatch-name">gray-400 / body</span>
+                        <span class="ds-swatch-value">#9ca3af</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #6b7280"></div>
+                        <span class="ds-swatch-name">gray-500 / muted</span>
+                        <span class="ds-swatch-value">#6b7280</span>
+                    </div>
+                </div>
+
+                <!-- ── Category badge colors ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Cores de Categoria (Badges)</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 mb-16">
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #10b981"></div>
+                        <span class="ds-swatch-name">Avaliação</span>
+                        <span class="ds-swatch-value">bg-brand</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #3b82f6"></div>
+                        <span class="ds-swatch-name">Consultoria</span>
+                        <span class="ds-swatch-value">bg-blue-500</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #a855f7"></div>
+                        <span class="ds-swatch-name">Fisiologia</span>
+                        <span class="ds-swatch-value">bg-purple-500</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #eab308"></div>
+                        <span class="ds-swatch-name">Biomecânica</span>
+                        <span class="ds-swatch-value">bg-yellow-500</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #f97316"></div>
+                        <span class="ds-swatch-name">Nutrição</span>
+                        <span class="ds-swatch-value">bg-orange-500</span>
+                    </div>
+                    <div class="ds-swatch">
+                        <div class="ds-swatch-circle" style="background: #ec4899"></div>
+                        <span class="ds-swatch-name">Marketing</span>
+                        <span class="ds-swatch-value">bg-pink-500</span>
+                    </div>
+                </div>
+
+                <!-- ── Gradients ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Gradientes</h3>
+                <div class="grid md:grid-cols-3 gap-6 mb-16">
+                    <div
+                        class="ds-surface-card"
+                        style="background: linear-gradient(to right, #34d399, #10b981)"
+                    >
+                        <span class="text-white font-bold text-sm">Text Gradient</span>
+                        <span class="text-white/70 text-xs mt-1"
+                            >linear-gradient(to right, #34D399, #10B981)</span
+                        >
+                    </div>
+                    <div
+                        class="ds-surface-card"
+                        style="
+                            background: radial-gradient(
+                                circle,
+                                rgba(16, 185, 129, 0.15) 0%,
+                                rgba(5, 10, 8, 0) 70%
+                            );
+                        "
+                    >
+                        <span class="text-white font-bold text-sm">Hero Glow</span>
+                        <span class="text-white/70 text-xs mt-1"
+                            >radial-gradient brand → transparent</span
+                        >
+                    </div>
+                    <div
+                        class="ds-surface-card"
+                        style="
+                            background: linear-gradient(
+                                to bottom right,
+                                rgba(19, 36, 29, 0.5),
+                                #0d1a15
+                            );
+                        "
+                    >
+                        <span class="text-white font-bold text-sm">Bento Card</span>
+                        <span class="text-white/70 text-xs mt-1"
+                            >from-dark-card/50 to-dark-surface</span
+                        >
+                    </div>
+                </div>
+
+                <!-- ── Surfaces ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Superfícies Especiais</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-nav ds-surface-card">
+                        <span class="text-white font-bold text-sm">glass-nav</span>
+                        <span class="text-gray-400 text-xs mt-1"
+                            >bg: rgba(5,10,8,0.85) — blur(16px)</span
+                        >
+                    </div>
+                    <div class="glass-effect ds-surface-card">
+                        <span class="text-white font-bold text-sm">glass-effect</span>
+                        <span class="text-gray-400 text-xs mt-1"
+                            >bg: rgba(13,26,21,0.7) — blur(12px)</span
+                        >
+                    </div>
+                    <div class="bg-dark-card border border-dark-border ds-surface-card">
+                        <span class="text-white font-bold text-sm">dark-card</span>
+                        <span class="text-gray-400 text-xs mt-1"
+                            >bg: #13241d — border: #1b3329</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         3) UI COMPONENTS
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-components" class="py-24 bg-dark-surface border-b border-dark-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Componentes UI</p>
+                <h2 class="ds-section-heading">Botões, Inputs, Cards &amp; Badges</h2>
+
+                <!-- ── Buttons ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Botões</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <!-- Primary CTA (pill) -->
+                    <div class="flex flex-col items-center gap-3">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider"
+                            >Primary CTA</span
+                        >
+                        <a
+                            href="#"
+                            class="bg-brand hover:bg-brand-hover text-white text-center font-semibold py-4 px-8 rounded-full transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] flex items-center justify-center gap-2"
+                        >
+                            Ver Cursos <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <!-- Nav CTA (small pill) -->
+                    <div class="flex flex-col items-center gap-3">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider">Nav CTA</span>
+                        <a
+                            href="#"
+                            class="bg-brand hover:bg-brand-hover text-white text-sm font-semibold py-2.5 px-5 rounded-full transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)]"
+                        >
+                            Começar Agora
+                        </a>
+                    </div>
+
+                    <!-- Ghost / Card CTA -->
+                    <div class="flex flex-col items-center gap-3">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider"
+                            >Ghost CTA</span
+                        >
+                        <button
+                            class="w-full bg-brand/10 hover:bg-brand text-brand hover:text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 border border-brand/30"
+                        >
+                            Realizar Curso <i class="ph-bold ph-caret-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Search button -->
+                    <div class="flex flex-col items-center gap-3">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider"
+                            >Search Button</span
+                        >
+                        <button
+                            class="bg-brand hover:bg-brand-hover text-white font-semibold py-2 px-6 rounded-full transition-colors"
+                        >
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ── Link styles ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Links</h3>
+                <div class="flex flex-wrap gap-8 mb-16 items-center">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider">Nav Link</span>
+                        <a
+                            href="#"
+                            class="text-sm font-medium text-gray-300 hover:text-brand transition-colors"
+                            >Cursos</a
+                        >
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider"
+                            >Text Link</span
+                        >
+                        <a
+                            href="#"
+                            class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                            >Entrar</a
+                        >
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider"
+                            >Footer Link</span
+                        >
+                        <a href="#" class="hover:text-brand transition-colors text-sm text-gray-400"
+                            >Todos os Cursos</a
+                        >
+                    </div>
+                </div>
+
+                <!-- ── Input ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Input (Search)</h3>
+                <div class="grid md:grid-cols-2 gap-6 mb-16">
+                    <!-- Default -->
+                    <div>
+                        <span class="text-xs text-gray-500 uppercase tracking-wider block mb-3"
+                            >Default</span
+                        >
+                        <div class="relative w-full">
+                            <i
+                                class="ph-bold ph-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"
+                            ></i>
+                            <input
+                                type="text"
+                                placeholder="Qual curso você está buscando hoje?"
+                                class="w-full bg-dark-surface border border-dark-border rounded-full py-4 pl-14 pr-6 text-white placeholder-gray-500 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all shadow-lg text-lg"
+                            />
+                        </div>
+                    </div>
+                    <!-- Focused (simulated via classes) -->
+                    <div>
+                        <span class="text-xs text-gray-500 uppercase tracking-wider block mb-3"
+                            >Focused</span
+                        >
+                        <div class="relative w-full">
+                            <i
+                                class="ph-bold ph-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"
+                            ></i>
+                            <input
+                                type="text"
+                                placeholder="Fisiologia..."
+                                class="w-full bg-dark-surface border border-brand rounded-full py-4 pl-14 pr-6 text-white placeholder-gray-500 focus:outline-none focus:border-brand ring-1 ring-brand transition-all shadow-lg text-lg"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Badges ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Badges</h3>
+                <div class="flex flex-wrap gap-3 mb-16">
+                    <span
+                        class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Avaliação</span
+                    >
+                    <span
+                        class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Consultoria</span
+                    >
+                    <span
+                        class="bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Fisiologia</span
+                    >
+                    <span
+                        class="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Biomecânica</span
+                    >
+                    <span
+                        class="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Nutrição</span
+                    >
+                    <span
+                        class="bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                        >Marketing</span
+                    >
+                </div>
+
+                <!-- ── Pill / Tag ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Pill / Tag</h3>
+                <div class="flex flex-wrap gap-3 mb-16">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-muted border border-brand/20 text-brand text-sm font-semibold"
+                    >
+                        <i class="ph-fill ph-certificate text-lg"></i>
+                        Certificado aceito pelo MEC
+                    </div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-muted border border-brand/20 text-brand text-sm font-semibold"
+                    >
+                        <i class="ph-fill ph-rocket-launch text-lg"></i>
+                        Escale sua Carreira
+                    </div>
+                </div>
+
+                <!-- ── Course Card ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Course Card</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div
+                        class="course-card bg-dark-card border border-dark-border rounded-2xl overflow-hidden flex flex-col h-full group"
+                    >
+                        <div class="relative h-48 overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-dark/20 group-hover:bg-transparent transition-colors z-10"
+                            ></div>
+                            <img
+                                src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=600&q=80"
+                                alt="Curso"
+                                loading="lazy"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div class="absolute top-4 left-4 z-20">
+                                <span
+                                    class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                                    >Avaliação</span
+                                >
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                                <i class="ph-fill ph-clock text-brand"></i> 20 Horas
+                                <span class="w-1 h-1 rounded-full bg-gray-600 mx-1"></span>
+                                <i class="ph-fill ph-video-camera text-brand"></i> 15 Aulas
+                            </div>
+                            <h4
+                                class="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-brand transition-colors"
+                            >
+                                Formação em Avaliação Física Avançada
+                            </h4>
+                            <p class="text-gray-400 text-sm mb-6 line-clamp-2">
+                                Aprenda a realizar testes precisos e valorize sua hora/aula
+                                entregando resultados comprovados.
+                            </p>
+
+                            <div
+                                class="mt-auto pt-6 border-t border-dark-border flex flex-col gap-4"
+                            >
+                                <div class="text-2xl font-extrabold text-white text-center">
+                                    R$ 297
+                                </div>
+                                <button
+                                    class="w-full bg-brand/10 hover:bg-brand text-brand hover:text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 border border-brand/30"
+                                >
+                                    Realizar Curso <i class="ph-bold ph-caret-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Stats Card ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Stats Card</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    <div
+                        class="bg-dark-card border border-dark-border p-6 rounded-2xl glass-effect"
+                    >
+                        <i class="ph-fill ph-money text-4xl text-brand mb-4"></i>
+                        <h4 class="text-white font-bold text-2xl mb-2">+150%</h4>
+                        <p class="text-sm text-gray-400">
+                            Aumento médio na renda relatado por alunos que foram para o online.
+                        </p>
+                    </div>
+                    <div class="bg-dark border border-dark-border p-6 rounded-2xl shadow-xl">
+                        <i class="ph-fill ph-certificate text-4xl text-brand mb-4"></i>
+                        <h4 class="text-white font-bold text-xl mb-2">100% Válido</h4>
+                        <p class="text-sm text-gray-400">
+                            Aceito em faculdades e valorizado no mercado de trabalho.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-dark border border-dark-border p-6 rounded-2xl shadow-xl flex items-center gap-4"
+                    >
+                        <div class="text-4xl font-extrabold text-brand">40</div>
+                        <div class="text-sm font-medium text-gray-300 leading-tight uppercase">
+                            Anos de<br />Profissão
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── FAQ Accordion ── -->
+                <h3 class="text-white font-bold text-lg mb-6">FAQ Accordion</h3>
+                <div class="max-w-3xl space-y-4 mb-16">
+                    <details
+                        class="group bg-dark-card border border-dark-border rounded-xl open:ring-1 open:ring-brand/30"
+                    >
+                        <summary
+                            class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-white group-open:text-brand transition-colors"
+                        >
+                            <span>O certificado é válido na minha faculdade?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="ph-bold ph-caret-down"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 pt-2">
+                            Sim. O certificado segue os termos do Decreto Presidencial Nº 5.124/2004
+                            e a Resolução CNE Nº 04/99 (MEC).
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-dark-card border border-dark-border rounded-xl open:ring-1 open:ring-brand/30"
+                    >
+                        <summary
+                            class="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-white group-open:text-brand transition-colors"
+                        >
+                            <span>Como e quando eu recebo o acesso?</span>
+                            <span class="transition group-open:rotate-180">
+                                <i class="ph-bold ph-caret-down"></i>
+                            </span>
+                        </summary>
+                        <div class="text-gray-400 px-6 pb-6 pt-2">
+                            O acesso é imediato após a confirmação do pagamento.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- ── Social Icon Buttons ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Social Icon Buttons</h3>
+                <div class="flex items-center gap-4 mb-16">
+                    <a
+                        href="#"
+                        class="w-10 h-10 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-400 hover:text-brand hover:border-brand transition-colors"
+                    >
+                        <i class="ph-fill ph-instagram-logo text-xl"></i>
+                    </a>
+                    <a
+                        href="#"
+                        class="w-10 h-10 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-400 hover:text-brand hover:border-brand transition-colors"
+                    >
+                        <i class="ph-fill ph-facebook-logo text-xl"></i>
+                    </a>
+                    <a
+                        href="#"
+                        class="w-10 h-10 rounded-full bg-dark-surface border border-dark-border flex items-center justify-center text-gray-400 hover:text-brand hover:border-brand transition-colors"
+                    >
+                        <i class="ph-fill ph-youtube-logo text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- ── Payment Badges ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Payment Icons</h3>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="h-8 w-12 bg-white rounded flex items-center justify-center opacity-70"
+                    >
+                        <i class="ph-fill ph-credit-card text-gray-800 text-xl"></i>
+                    </div>
+                    <div
+                        class="h-8 w-12 bg-white rounded flex items-center justify-center opacity-70"
+                    >
+                        <i class="ph-fill ph-barcode text-gray-800 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         4) LAYOUT & SPACING
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-layout" class="py-24 bg-dark border-b border-dark-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Layout &amp; Espaçamento</p>
+                <h2 class="ds-section-heading">Containers, Grids &amp; Padrões</h2>
+
+                <!-- ── Container ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Container Principal</h3>
+                <div class="mb-16">
+                    <div class="border border-dashed border-brand/40 rounded-2xl p-6">
+                        <p class="text-sm text-gray-400 mb-2">
+                            <code class="text-brand text-xs"
+                                >max-w-7xl mx-auto px-4 sm:px-6 lg:px-8</code
+                            >
+                        </p>
+                        <p class="text-xs text-gray-500">
+                            Largura máxima: 80rem (1280px). Padding lateral responsivo: 16px → 24px
+                            → 32px.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ── Hero (2-col split) ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Padrão: Hero Split (2 cols)</h3>
+                <div class="mb-16">
+                    <div
+                        class="grid lg:grid-cols-2 gap-12 items-center border border-dashed border-brand/40 rounded-2xl p-6"
+                    >
+                        <div
+                            class="bg-dark-card border border-dark-border rounded-xl p-8 min-h-[200px] flex items-center justify-center"
+                        >
+                            <p class="text-gray-400 text-sm text-center">
+                                Conteúdo Textual<br /><code class="text-brand text-xs"
+                                    >max-w-2xl</code
+                                >
+                            </p>
+                        </div>
+                        <div
+                            class="bg-dark-card border border-dark-border rounded-xl p-8 min-h-[200px] flex items-center justify-center"
+                        >
+                            <p class="text-gray-400 text-sm text-center">
+                                Showcase Visual<br /><code class="text-brand text-xs"
+                                    >max-w-lg mx-auto</code
+                                >
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">
+                        <code class="text-brand text-xs"
+                            >grid lg:grid-cols-2 gap-12 items-center</code
+                        >
+                    </p>
+                </div>
+
+                <!-- ── Course Grid (3 cols) ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Padrão: Grid de Cards (3 cols)</h3>
+                <div class="mb-16">
+                    <div
+                        class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 border border-dashed border-brand/40 rounded-2xl p-6"
+                    >
+                        <div
+                            class="bg-dark-card border border-dark-border rounded-xl p-8 h-32 flex items-center justify-center"
+                        >
+                            <span class="text-gray-500 text-sm">Card 1</span>
+                        </div>
+                        <div
+                            class="bg-dark-card border border-dark-border rounded-xl p-8 h-32 flex items-center justify-center"
+                        >
+                            <span class="text-gray-500 text-sm">Card 2</span>
+                        </div>
+                        <div
+                            class="bg-dark-card border border-dark-border rounded-xl p-8 h-32 flex items-center justify-center"
+                        >
+                            <span class="text-gray-500 text-sm">Card 3</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">
+                        <code class="text-brand text-xs"
+                            >grid md:grid-cols-2 lg:grid-cols-3 gap-8</code
+                        >
+                    </p>
+                </div>
+
+                <!-- ── Features bar (4 cols) ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Padrão: Features Bar (4 cols)</h3>
+                <div class="mb-16">
+                    <div
+                        class="grid grid-cols-2 md:grid-cols-4 gap-8 border border-dashed border-brand/40 rounded-2xl p-6 bg-dark-surface"
+                    >
+                        <div class="flex flex-col items-center text-center">
+                            <i class="ph-fill ph-certificate text-3xl text-brand mb-3"></i>
+                            <h3 class="text-white font-bold text-lg mb-1">Horas Válidas</h3>
+                            <p class="text-sm text-gray-400">Certificados aceitos pelo MEC</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i class="ph-fill ph-briefcase text-3xl text-brand mb-3"></i>
+                            <h3 class="text-white font-bold text-lg mb-1">Foco na Prática</h3>
+                            <p class="text-sm text-gray-400">Do salão para a consultoria online</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i class="ph-fill ph-graduation-cap text-3xl text-brand mb-3"></i>
+                            <h3 class="text-white font-bold text-lg mb-1">40 Anos de XP</h3>
+                            <p class="text-sm text-gray-400">Aprenda com um mestre experiente</p>
+                        </div>
+                        <div class="flex flex-col items-center text-center">
+                            <i class="ph-fill ph-devices text-3xl text-brand mb-3"></i>
+                            <h3 class="text-white font-bold text-lg mb-1">Estude Onde Quiser</h3>
+                            <p class="text-sm text-gray-400">Acesso por celular, tablet ou PC</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-3">
+                        <code class="text-brand text-xs"
+                            >grid grid-cols-2 md:grid-cols-4 gap-8</code
+                        >
+                    </p>
+                </div>
+
+                <!-- ── Section paddings ── -->
+                <h3 class="text-white font-bold text-lg mb-6">Section Paddings</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-4">
+                        <code class="text-brand text-xs w-48">py-24</code>
+                        <span class="text-gray-400 text-sm">Seções principais (6rem / 96px)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <code class="text-brand text-xs w-48">py-12</code>
+                        <span class="text-gray-400 text-sm">Features bar (3rem / 48px)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <code class="text-brand text-xs w-48">pt-32 pb-20 lg:pt-40 lg:pb-28</code>
+                        <span class="text-gray-400 text-sm">Hero (top extra para navbar fixa)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <code class="text-brand text-xs w-48">pt-16 pb-8</code>
+                        <span class="text-gray-400 text-sm">Footer</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         5) MOTION & INTERACTION
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-motion" class="py-24 bg-dark-surface border-b border-dark-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Motion &amp; Interação</p>
+                <h2 class="ds-section-heading">Galeria de Animações</h2>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card Hover Lift -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Card Hover Lift</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">.course-card</code> — translateY(-4px) + glow
+                            shadow
+                        </p>
+                        <div
+                            class="course-card bg-dark-surface border border-dark-border rounded-xl p-6 text-center cursor-pointer"
+                        >
+                            <p class="text-gray-400 text-sm">Passe o mouse aqui ↑</p>
+                        </div>
+                    </div>
+
+                    <!-- Image Scale on Hover -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Image Scale</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">group-hover:scale-105</code> — duration-500
+                        </p>
+                        <div class="overflow-hidden rounded-xl group cursor-pointer">
+                            <img
+                                src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=400&q=80"
+                                alt="Demo"
+                                loading="lazy"
+                                class="w-full h-32 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Logo Hover Scale -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Logo Scale</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">group-hover:scale-105</code> — duration-700
+                        </p>
+                        <div class="flex justify-center group cursor-pointer">
+                            <img
+                                src="./Logo.svg"
+                                alt="Logo"
+                                class="h-20 w-auto transform group-hover:scale-105 transition-transform duration-700"
+                                onerror="
+                                    this.src =
+                                        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMxMEI5ODEiIHJ4PSI4Ii8+PHRleHQgeD0iMjAiIHk9IjI2IiBmb250LWZhbWlseT0iSW50ZXIsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkU8L3RleHQ+PC9zdmc+'
+                                "
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Ambient Glow -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Ambient Glow</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">group-hover:bg-brand/15</code> — duration-700
+                        </p>
+                        <div
+                            class="relative h-32 rounded-xl overflow-hidden group cursor-pointer bg-dark-surface border border-dark-border flex items-center justify-center"
+                        >
+                            <div
+                                class="absolute -top-10 -right-10 w-32 h-32 bg-brand/10 rounded-full blur-[40px] group-hover:bg-brand/15 transition-colors duration-700"
+                            ></div>
+                            <span class="relative z-10 text-gray-400 text-sm">Hover para glow</span>
+                        </div>
+                    </div>
+
+                    <!-- Grayscale to Color -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Grayscale → Color</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">grayscale hover:grayscale-0</code> —
+                            duration-500
+                        </p>
+                        <img
+                            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=400&q=80"
+                            alt="Demo"
+                            loading="lazy"
+                            class="rounded-xl border border-dark-border h-32 w-full object-cover grayscale hover:grayscale-0 transition-all duration-500 cursor-pointer"
+                        />
+                    </div>
+
+                    <!-- Button Glow Transition -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Button Glow</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">shadow glow</code> — 15px → 25px on hover
+                        </p>
+                        <div class="flex justify-center">
+                            <a
+                                href="#"
+                                class="bg-brand hover:bg-brand-hover text-white text-sm font-semibold py-2.5 px-5 rounded-full transition-all shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)]"
+                            >
+                                Hover me
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Accordion rotation -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Accordion Chevron</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">group-open:rotate-180</code> — CSS transition
+                        </p>
+                        <details
+                            class="group bg-dark-surface border border-dark-border rounded-xl open:ring-1 open:ring-brand/30"
+                        >
+                            <summary
+                                class="flex justify-between items-center font-medium cursor-pointer list-none p-4 text-white group-open:text-brand transition-colors text-sm"
+                            >
+                                <span>Clique para abrir</span>
+                                <span class="transition group-open:rotate-180">
+                                    <i class="ph-bold ph-caret-down"></i>
+                                </span>
+                            </summary>
+                            <div class="text-gray-400 px-4 pb-4 pt-1 text-sm">
+                                Conteúdo revelado com rotação do ícone.
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Ghost button state change -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Ghost → Solid</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">bg-brand/10 → bg-brand</code> + color flip
+                        </p>
+                        <button
+                            class="w-full bg-brand/10 hover:bg-brand text-brand hover:text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 border border-brand/30"
+                        >
+                            Hover me <i class="ph-bold ph-caret-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Color transitions -->
+                    <div class="bg-dark-card border border-dark-border rounded-2xl p-6">
+                        <h4 class="text-white font-bold mb-3">Nav Color Shift</h4>
+                        <p class="text-gray-400 text-xs mb-4">
+                            <code class="text-brand">hover:text-brand</code> — transition-colors
+                        </p>
+                        <div class="flex gap-4">
+                            <a
+                                href="#"
+                                class="text-sm font-medium text-gray-300 hover:text-brand transition-colors"
+                                >Link 1</a
+                            >
+                            <a
+                                href="#"
+                                class="text-sm font-medium text-gray-300 hover:text-brand transition-colors"
+                                >Link 2</a
+                            >
+                            <a
+                                href="#"
+                                class="text-sm font-medium text-gray-300 hover:text-brand transition-colors"
+                                >Link 3</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         6) ICONS
+         ════════════════════════════════════════════════════════ -->
+        <section id="ds-icons" class="py-24 bg-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="ds-section-title">Ícones</p>
+                <h2 class="ds-section-heading">Phosphor Icons (Fill)</h2>
+                <p class="text-gray-400 mb-12 max-w-2xl">
+                    Sistema: <strong class="text-white">Phosphor Icons</strong> — variante
+                    <code class="text-brand">ph-fill</code>. Tamanhos usados:
+                    <code class="text-brand">text-lg</code>,
+                    <code class="text-brand">text-xl</code>,
+                    <code class="text-brand">text-3xl</code>,
+                    <code class="text-brand">text-4xl</code>.
+                </p>
+
+                <!-- Icon grid -->
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6">
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-certificate text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">certificate</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-briefcase text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">briefcase</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-graduation-cap text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">graduation-cap</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-devices text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">devices</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-clock text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">clock</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-video-camera text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">video-camera</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-rocket-launch text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">rocket-launch</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-trend-up text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">trend-up</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-laptop text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">laptop</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-shield-check text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">shield-check</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-money text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">money</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-users-three text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">users-three</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-identification-card text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">id-card</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-student text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">student</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-lock-key text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">lock-key</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-dark-card border border-dark-border flex items-center justify-center"
+                        >
+                            <i class="ph-fill ph-credit-card text-3xl text-brand"></i>
+                        </div>
+                        <span class="text-xs text-gray-500">credit-card</span>
+                    </div>
+                </div>
+
+                <!-- ── Icon sizes ── -->
+                <h3 class="text-white font-bold text-lg mb-6 mt-16">Variantes de Tamanho</h3>
+                <div class="flex items-end gap-8">
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-certificate text-lg text-brand"></i>
+                        <span class="text-xs text-gray-500">text-lg</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-certificate text-xl text-brand"></i>
+                        <span class="text-xs text-gray-500">text-xl</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-certificate text-3xl text-brand"></i>
+                        <span class="text-xs text-gray-500">text-3xl</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-certificate text-4xl text-brand"></i>
+                        <span class="text-xs text-gray-500">text-4xl</span>
+                    </div>
+                </div>
+
+                <!-- ── Bold variant (directional) ── -->
+                <h3 class="text-white font-bold text-lg mb-6 mt-16">Variante Bold (Direcional)</h3>
+                <div class="flex items-center gap-8">
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-bold ph-arrow-right text-xl text-brand"></i>
+                        <span class="text-xs text-gray-500">arrow-right</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-bold ph-caret-right text-xl text-brand"></i>
+                        <span class="text-xs text-gray-500">caret-right</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-bold ph-caret-down text-xl text-brand"></i>
+                        <span class="text-xs text-gray-500">caret-down</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-bold ph-magnifying-glass text-xl text-brand"></i>
+                        <span class="text-xs text-gray-500">magnifying-glass</span>
+                    </div>
+                </div>
+
+                <!-- ── Social icons ── -->
+                <h3 class="text-white font-bold text-lg mb-6 mt-16">Social</h3>
+                <div class="flex items-center gap-8">
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-instagram-logo text-3xl text-brand"></i>
+                        <span class="text-xs text-gray-500">instagram</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-facebook-logo text-3xl text-brand"></i>
+                        <span class="text-xs text-gray-500">facebook</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <i class="ph-fill ph-youtube-logo text-3xl text-brand"></i>
+                        <span class="text-xs text-gray-500">youtube</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════════════════
+         FOOTER
+         ════════════════════════════════════════════════════════ -->
+        <footer class="bg-dark border-t border-dark-border pt-16 pb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="text-sm text-gray-500">
+                        EAFS Design System — Gerado automaticamente a partir de
+                        <a
+                            href="./index.html"
+                            class="text-brand hover:text-brand-light transition-colors"
+                            >index.html</a
+                        >
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

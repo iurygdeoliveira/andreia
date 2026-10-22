@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Support\Changelog;
+
+use App\Filament\Resources\Changelog\ChangelogResource;
+use Filament\Contracts\Plugin;
+use Filament\Panel;
+
+class ChangelogPlugin implements Plugin
+{
+    public static function make(): static
+    {
+        return resolve(static::class);
+    }
+
+    public function getId(): string
+    {
+        return 'changelog';
+    }
+
+    public function register(Panel $panel): void
+    {
+        $panel
+            ->resources([
+                ChangelogResource::class,
+            ]);
+    }
+
+    public function boot(Panel $panel): void
+    {
+        //
+    }
+
+    public function navigationGroup(?string $group): static
+    {
+        return $this;
+    }
+
+    public function navigationLabel(?string $label): static
+    {
+        return $this;
+    }
+
+    public function canManage(mixed $callback): static
+    {
+        return $this;
+    }
+}

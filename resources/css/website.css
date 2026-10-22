@@ -1,0 +1,842 @@
+@import "tailwindcss" source(none);
+
+@source '../**/*.blade.php';
+@source '../../app/Livewire/**/*.php';
+
+/* ==========================================================================
+   Fontes auto-hospedadas
+   Antes: Google Fonts (cadeia de 987 ms) + barrel @phosphor-icons/web no unpkg,
+   que injetava 6 folhas de estilo (~84 KiB) e 2 fontes de icones (~276 KiB).
+   Agora: tudo local, servido junto com este CSS (que ja tem hash de conteudo).
+   ========================================================================== */
+
+/* --- Inter (variable 400..800), subsets latin e latin-ext ---
+   Os unicode-range sao obrigatorios: sem eles o browser baixa os dois arquivos.
+   Com eles, uma pagina em pt-BR baixa apenas inter-latin.woff2. */
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("/fonts/inter/inter-latin-ext.woff2") format("woff2");
+    unicode-range:
+        U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+        U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+        U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url("/fonts/inter/inter-latin.woff2") format("woff2");
+    unicode-range:
+        U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308,
+        U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Phosphor Icons 2.1.2 — apenas as variantes Bold e Fill ---
+   Somente os 20 icones em uso estao declarados abaixo. Ao adicionar um icone
+   novo no Blade, a regra correspondente PRECISA ser adicionada aqui, senao ele
+   renderiza em branco. Os codepoints saem de:
+     https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/<variante>/style.css
+   font-display trocado de `block` (padrao do pacote) para `swap`. */
+
+@font-face {
+    font-family: "Phosphor-Fill";
+    src: url("/fonts/phosphor/Phosphor-Fill.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.ph-fill {
+    font-family: "Phosphor-Fill" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+}
+
+.ph-fill.ph-briefcase:before {
+    content: "\e0ee";
+}
+.ph-fill.ph-certificate:before {
+    content: "\e766";
+}
+.ph-fill.ph-check-circle:before {
+    content: "\e184";
+}
+.ph-fill.ph-clock-countdown:before {
+    content: "\ed2c";
+}
+.ph-fill.ph-devices:before {
+    content: "\eba4";
+}
+.ph-fill.ph-facebook-logo:before {
+    content: "\e226";
+}
+.ph-fill.ph-graduation-cap:before {
+    content: "\e62c";
+}
+.ph-fill.ph-identification-card:before {
+    content: "\e2c8";
+}
+.ph-fill.ph-instagram-logo:before {
+    content: "\e2d0";
+}
+.ph-fill.ph-laptop:before {
+    content: "\e586";
+}
+.ph-fill.ph-lock-simple:before {
+    content: "\e308";
+}
+.ph-fill.ph-money:before {
+    content: "\e588";
+}
+/* Checkout e pagamento PIX (UC-04). */
+.ph-fill.ph-qr-code:before {
+    content: "\e3e6";
+}
+.ph-fill.ph-copy:before {
+    content: "\e1ca";
+}
+.ph-fill.ph-warning-circle:before {
+    content: "\e4e2";
+}
+.ph-fill.ph-rocket-launch:before {
+    content: "\e3fe";
+}
+.ph-fill.ph-shield-check:before {
+    content: "\e40c";
+}
+.ph-fill.ph-student:before {
+    content: "\e73e";
+}
+.ph-fill.ph-trend-up:before {
+    content: "\e4ae";
+}
+.ph-fill.ph-users-three:before {
+    content: "\e68e";
+}
+.ph-fill.ph-whatsapp-logo:before {
+    content: "\e5d0";
+}
+.ph-fill.ph-youtube-logo:before {
+    content: "\e4fc";
+}
+
+@font-face {
+    font-family: "Phosphor-Bold";
+    src: url("/fonts/phosphor/Phosphor-Bold.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.ph-bold {
+    font-family: "Phosphor-Bold" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+}
+
+.ph-bold.ph-arrow-right:before {
+    content: "\e06c";
+}
+.ph-bold.ph-caret-down:before {
+    content: "\e136";
+}
+.ph-bold.ph-caret-right:before {
+    content: "\e13a";
+}
+.ph-bold.ph-magnifying-glass:before {
+    content: "\e30c";
+}
+
+@theme {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    --color-dark: #050a08;
+    --color-dark-surface: #0d1a15;
+    --color-dark-card: #13241d;
+    --color-dark-border: #1b3329;
+
+    --color-brand: #10b981;
+    --color-brand-hover: #059669;
+    --color-brand-light: #34d399;
+    --color-brand-muted: rgba(16, 185, 129, 0.1);
+
+    /* Fundo de botão sólido com texto branco.
+       #10B981 + branco = 2.54:1 (reprova WCAG AA);
+       #047857 + branco = 5.42:1 (aprova AA).
+       O verde claro segue em ícones, badges, gradientes e bordas. */
+    --color-brand-cta: #047857;
+    --color-brand-cta-hover: #065f46;
+
+    --animate-float-slow: float 6s ease-in-out infinite;
+    --animate-spin-slow: spin 60s linear infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: #050a08;
+    color: #f8fafc;
+}
+
+.glass-nav {
+    background: rgba(5, 10, 8, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(27, 51, 41, 0.5);
+}
+
+.course-card {
+    transition: all 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #34d399, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-glow {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(5, 10, 8, 0) 70%);
+    top: -200px;
+    right: -100px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.glass-effect {
+    background: rgba(13, 26, 21, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+/* Hide scrollbar for carousel */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================================
+   Filament Design System & Public Modal/Slide-over Theme
+   Garante sobreposição completa sobre o Header fixo (z-50) e todo contexto.
+   Segue estritamente as especificações de resources/html/design-system.html
+   ========================================================================== */
+
+:root,
+.dark {
+    /* Paleta primária do Filament mapeada para o verde marca EAFS */
+    --primary-50: 18, 36, 33;
+    --primary-100: 15, 74, 49;
+    --primary-200: 12, 111, 65;
+    --primary-300: 10, 148, 81;
+    --primary-400: 7, 185, 97;
+    --primary-500: 16, 185, 129;
+    --primary-600: 5, 150, 105;
+    --primary-700: 4, 120, 87;
+    --primary-800: 6, 95, 70;
+    --primary-900: 6, 78, 59;
+    --primary-950: 2, 44, 34;
+
+    --color-primary-50: #122421;
+    --color-primary-100: #0f4a31;
+    --color-primary-200: #0c6f41;
+    --color-primary-300: #0a9451;
+    --color-primary-400: #07b961;
+    --color-primary-500: #10b981;
+    --color-primary-600: #059669;
+    --color-primary-700: #047857;
+    --color-primary-800: #065f46;
+    --color-primary-900: #064e3b;
+    --color-primary-950: #022c22;
+}
+
+/* 1. Z-INDEX: Sobreposição absoluta sobre o header fixo (z-50) e todo contexto */
+.fi-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99990 !important;
+}
+
+.fi-modal:not(.fi-modal-open) {
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+.fi-modal.fi-modal-open {
+    pointer-events: auto !important;
+    visibility: visible !important;
+}
+
+.fi-modal-close-overlay,
+.fi-modal > .fi-modal-close-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99990 !important;
+    background-color: rgba(5, 10, 8, 0.85) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    pointer-events: auto !important;
+}
+
+.fi-modal-window-ctn,
+.fi-modal > .fi-modal-window-ctn {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    pointer-events: auto !important;
+}
+
+/* Modais aninhados (confirmação de exclusão do curso, alerts) */
+.fi-modal-open ~ .fi-modal.fi-modal-open > .fi-modal-close-overlay {
+    z-index: 100000 !important;
+}
+
+.fi-modal-open ~ .fi-modal.fi-modal-open > .fi-modal-window-ctn {
+    z-index: 100010 !important;
+}
+
+/* 2. JANELA DO SLIDEOVER & MODAL: Design System Dark EAFS */
+.fi-modal-slide-over > .fi-modal-window-ctn > .fi-modal-window {
+    background-color: #0d1a15 !important;
+    border-left: 1px solid #1b3329 !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-radius: 0 !important;
+    color: #f8fafc !important;
+    max-width: 32rem !important;
+    width: 100% !important;
+    box-shadow:
+        -20px 0 50px rgba(0, 0, 0, 0.8),
+        -1px 0 20px rgba(16, 185, 129, 0.08) !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-window,
+.fi-modal:not(.fi-modal-slide-over) > .fi-modal-window-ctn > .fi-modal-window {
+    background-color: #0d1a15 !important;
+    border: 1px solid #1b3329 !important;
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+    color: #f8fafc !important;
+    outline: none !important;
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.9),
+        0 0 25px rgba(16, 185, 129, 0.08) !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-window,
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-window * {
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
+}
+
+/* 3. CABEÇALHO DO MODAL */
+.fi-modal-slide-over .fi-modal-header {
+    background-color: #0d1a15 !important;
+    border-bottom: 1px solid #1b3329 !important;
+    padding: 1.5rem !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-header {
+    background-color: transparent !important;
+    border-bottom: none !important;
+    padding: 1.75rem 1.5rem 0.5rem 1.5rem !important;
+}
+
+.fi-modal-heading {
+    color: #ffffff !important;
+    font-family: "Inter", sans-serif !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.fi-modal-description {
+    color: #9ca3af !important;
+    font-size: 0.875rem !important;
+    margin-top: 0.25rem !important;
+}
+
+.fi-modal-icon-bg {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+    color: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    border-radius: 9999px !important;
+    padding: 0.5rem !important;
+}
+
+.fi-modal-icon-bg.fi-color-danger,
+.fi-color-danger .fi-modal-icon-bg,
+.fi-modal-icon-bg:has(.fi-color-danger),
+.fi-modal-icon-bg:has(.text-danger-600),
+.fi-modal-icon-bg:has(.text-danger-500),
+.fi-modal-icon-bg:has([class*="danger"]) {
+    background-color: rgba(239, 68, 68, 0.12) !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    color: #ef4444 !important;
+}
+
+.fi-modal-close-btn {
+    color: #9ca3af !important;
+    border-radius: 9999px !important;
+    padding: 0.5rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.fi-modal-close-btn:hover {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 4. CONTEÚDO E REPEATER DO CARRINHO */
+.fi-modal-slide-over .fi-modal-content {
+    background-color: #0d1a15 !important;
+    padding: 1.5rem !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-content {
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-content:empty {
+    display: none !important;
+}
+
+.fi-fo-repeater {
+    gap: 1rem !important;
+}
+
+.fi-fo-repeater-items {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+}
+
+.fi-fo-repeater-item {
+    background-color: #13241d !important;
+    border: 1px solid #1b3329 !important;
+    border-radius: 1rem !important;
+    padding: 1.25rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.fi-fo-repeater-item:hover {
+    border-color: rgba(16, 185, 129, 0.4) !important;
+    box-shadow:
+        0 12px 32px rgba(16, 185, 129, 0.15),
+        0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.fi-fo-repeater-item-header {
+    border-bottom: 1px solid rgba(27, 51, 41, 0.8) !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.fi-fo-repeater-item-header-label {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    font-family: "Inter", sans-serif !important;
+}
+
+.fi-fo-repeater-item-content {
+    padding: 0 !important;
+    border: none !important;
+}
+
+/* Descrição e Preço dos cursos no carrinho */
+.fi-fo-repeater-item .fi-in-text {
+    color: #9ca3af !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.4 !important;
+}
+
+.fi-fo-repeater-item .fi-numeric {
+    color: #34d399 !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+}
+
+.fi-fo-repeater-item .fi-input-wrp {
+    background-color: #050a08 !important;
+    border: 1px solid #1b3329 !important;
+    border-radius: 0.5rem !important;
+    height: 2.25rem !important;
+}
+
+.fi-fo-repeater-item .fi-input-wrp input {
+    text-align: center !important;
+    color: #9ca3af !important;
+    font-size: 0.875rem !important;
+}
+
+/* Total do carrinho */
+.fi-modal-content .fi-in-entry:has(.text-emerald-600),
+.fi-modal-content .fi-in-entry:has(.text-primary-600),
+.fi-modal-content .fi-in-entry:has(.fi-color-success) {
+    border-top: 1px solid #1b3329 !important;
+    padding-top: 1.25rem !important;
+    margin-top: 1rem !important;
+}
+
+.fi-modal-content .fi-in-entry:has(.text-emerald-600) .fi-in-entry-label,
+.fi-modal-content .fi-in-entry:has(.text-primary-600) .fi-in-entry-label,
+.fi-modal-content .fi-in-entry:has(.fi-color-success) .fi-in-entry-label {
+    color: #9ca3af !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.fi-modal-content .fi-in-entry:has(.text-emerald-600) .fi-in-entry-content,
+.fi-modal-content .fi-in-entry:has(.text-primary-600) .fi-in-entry-content,
+.fi-modal-content .fi-in-entry:has(.fi-color-success) .fi-in-entry-content {
+    color: #34d399 !important;
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Estado vazio do carrinho */
+.fi-modal-content .fi-in-entry:has(.fi-ta-empty-state),
+.fi-modal-content .fi-in-entry:has(.ph-shopping-cart),
+.fi-modal-content .fi-in-text.fi-align-center {
+    color: #9ca3af !important;
+    font-size: 0.95rem !important;
+    padding: 2.5rem 1rem !important;
+    text-align: center !important;
+}
+
+/* 5. RODAPÉ E BOTÕES DE AÇÃO */
+.fi-modal-slide-over .fi-modal-footer {
+    border-top: 1px solid #1b3329 !important;
+    padding: 1.25rem 1.5rem !important;
+    background-color: #0d1a15 !important;
+}
+
+.fi-modal:not(.fi-modal-slide-over) .fi-modal-footer {
+    border-top: none !important;
+    padding: 0.75rem 1.5rem 1.5rem 1.5rem !important;
+    background-color: transparent !important;
+}
+
+.fi-modal-footer-actions {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+}
+
+/* Botão Primário do Slideover (CTA do Design System: pill, bg-brand-cta #047857, hover #065f46, shadow glow) */
+.fi-btn.fi-color-primary,
+button.fi-btn.fi-color-primary,
+.fi-modal-footer button.fi-btn.fi-color-primary,
+.fi-modal-footer .fi-btn.fi-color-primary {
+    background-color: #047857 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    border-radius: 9999px !important;
+    font-family: "Inter", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    padding: 0.875rem 1.5rem !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+}
+
+.fi-btn.fi-color-primary:hover,
+button.fi-btn.fi-color-primary:hover,
+.fi-modal-footer button.fi-btn.fi-color-primary:hover,
+.fi-modal-footer .fi-btn.fi-color-primary:hover {
+    background-color: #065f46 !important;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.55) !important;
+    transform: translateY(-1px) !important;
+}
+
+.fi-btn.fi-color-primary:active,
+button.fi-btn.fi-color-primary:active,
+.fi-modal-footer button.fi-btn.fi-color-primary:active,
+.fi-modal-footer .fi-btn.fi-color-primary:active {
+    transform: scale(0.98) !important;
+}
+
+/* Botão de exclusão (ícone da lixeira no repeater) */
+.fi-icon-btn.fi-color-danger,
+.fi-fo-repeater-item .fi-icon-btn {
+    color: #f87171 !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.fi-icon-btn.fi-color-danger:hover,
+.fi-fo-repeater-item .fi-icon-btn:hover {
+    color: #ef4444 !important;
+    background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+/* Botão de confirmação de exclusão / Ação de perigo (Texto BRANCO garantido) */
+.fi-btn.fi-color-danger,
+button.fi-btn.fi-color-danger,
+.fi-modal-footer button.fi-btn.fi-color-danger,
+.fi-modal-footer .fi-btn.fi-color-danger {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    border-radius: 0.75rem !important;
+    font-family: "Inter", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding: 0.75rem 1.5rem !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.3) !important;
+}
+
+.fi-btn.fi-color-danger *,
+.fi-btn.fi-color-danger .fi-btn-label,
+button.fi-btn.fi-color-danger *,
+button.fi-btn.fi-color-danger .fi-btn-label,
+.fi-modal-footer button.fi-btn.fi-color-danger *,
+.fi-modal-footer button.fi-btn.fi-color-danger .fi-btn-label,
+.fi-modal-footer .fi-btn.fi-color-danger *,
+.fi-modal-footer .fi-btn.fi-color-danger .fi-btn-label {
+    color: #ffffff !important;
+}
+
+.fi-btn.fi-color-danger:hover,
+button.fi-btn.fi-color-danger:hover,
+.fi-modal-footer button.fi-btn.fi-color-danger:hover,
+.fi-modal-footer .fi-btn.fi-color-danger:hover {
+    background-color: #b91c1c !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 25px rgba(220, 38, 38, 0.5) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Botões Secundários / Cancelar / Continuar Comprando */
+.fi-btn.fi-color-gray,
+button.fi-btn.fi-color-gray,
+.fi-modal-footer button.fi-btn.fi-color-gray,
+.fi-modal-footer .fi-btn.fi-color-gray,
+.fi-modal-footer a.fi-btn.fi-color-gray {
+    background-color: transparent !important;
+    color: #9ca3af !important;
+    border: 1px solid #1b3329 !important;
+    border-radius: 9999px !important;
+    font-family: "Inter", sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding: 0.75rem 1.5rem !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    box-shadow: none !important;
+}
+
+.fi-btn.fi-color-gray:hover,
+button.fi-btn.fi-color-gray:hover,
+.fi-modal-footer button.fi-btn.fi-color-gray:hover,
+.fi-modal-footer .fi-btn.fi-color-gray:hover,
+.fi-modal-footer a.fi-btn.fi-color-gray:hover {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* 6. CAMPOS DE ENTRADA (FORMULÁRIOS DO MODAL) */
+.fi-input-wrp {
+    background-color: #050a08 !important;
+    border: 1px solid #1b3329 !important;
+    border-radius: 0.75rem !important;
+    color: #ffffff !important;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+.fi-input-wrp:focus-within {
+    border-color: #10b981 !important;
+    box-shadow:
+        0 0 0 1px #10b981,
+        0 0 15px rgba(16, 185, 129, 0.2) !important;
+}
+
+.fi-input-wrp input {
+    color: #ffffff !important;
+}
+
+.fi-input-wrp input::placeholder {
+    color: #6b7280 !important;
+}
+
+.fi-fo-field-wrp-label label {
+    color: #d1d5db !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+/* Badges */
+.fi-badge.fi-color-primary {
+    background-color: rgba(16, 185, 129, 0.15) !important;
+    color: #10b981 !important;
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    border-radius: 9999px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+}
+
+/* Scrollbars customizadas do Slideover */
+.fi-modal-window::-webkit-scrollbar,
+.fi-modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.fi-modal-window::-webkit-scrollbar-track,
+.fi-modal-content::-webkit-scrollbar-track {
+    background: #0d1a15;
+}
+
+.fi-modal-window::-webkit-scrollbar-thumb,
+.fi-modal-content::-webkit-scrollbar-thumb {
+    background: #1b3329;
+    border-radius: 9999px;
+}
+
+.fi-modal-window::-webkit-scrollbar-thumb:hover,
+.fi-modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.4);
+}
+
+/* ==========================================================================
+   Catálogo de Cursos - Layout e Grid Garantidos (4 cards por linha em desktop)
+   ========================================================================== */
+#lista-cursos {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    #lista-cursos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    #lista-cursos {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.course-card .fi-btn {
+    padding: 0.625rem 1rem !important;
+    font-size: 0.875rem !important;
+    border-radius: 9999px !important;
+}
+
+.course-card .fi-btn .fi-btn-label {
+    font-size: 0.875rem !important;
+}

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Checkout Seguro - EAFS</title>
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            dark: {
+                                DEFAULT: "#050a08",
+                                surface: "#0d1a15",
+                                card: "#13241d",
+                                border: "#1b3329",
+                            },
+                            brand: {
+                                DEFAULT: "#10B981",
+                                hover: "#059669",
+                                light: "#34D399",
+                                muted: "rgba(16, 185, 129, 0.1)",
+                            },
+                        },
+                        fontFamily: {
+                            sans: ["Inter", "sans-serif"],
+                        },
+                    },
+                },
+            };
+        </script>
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Phosphor Icons -->
+        <script src="https://unpkg.com/@phosphor-icons/web"></script>
+        <style>
+            body {
+                font-family: "Inter", sans-serif;
+                background-color: #050a08;
+                color: #f8fafc;
+            }
+
+            .glass-nav {
+                background: rgba(5, 10, 8, 0.85);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(27, 51, 41, 0.5);
+            }
+
+            .glass-effect {
+                background: rgba(13, 26, 21, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(16, 185, 129, 0.15);
+            }
+
+            .text-gradient {
+                background: linear-gradient(to right, #34d399, #10b981);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            /* Select styling */
+            select {
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 1rem center;
+                background-size: 1em;
+            }
+        </style>
+    </head>
+    <body class="antialiased selection:bg-brand selection:text-white">
+        <!-- Minimal Header -->
+        <nav class="w-full z-50 glass-nav py-4">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img
+                        src="./Logo.svg"
+                        alt="EAFS Logo"
+                        class="h-10 w-auto"
+                        onerror="
+                            this.src =
+                                'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMxMEI5ODEiIHJ4PSI4Ii8+PHRleHQgeD0iMjAiIHk9IjI2IiBmb250LWZhbWlseT0iSW50ZXIsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiNmZmZmZmYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkU8L3RleHQ+PC9zdmc+'
+                        "
+                    />
+                </a>
+                <div class="flex items-center gap-2 text-brand text-sm font-semibold">
+                    <i class="ph-fill ph-lock-key text-lg"></i> Ambiente 100% Seguro
+                </div>
+            </div>
+        </nav>
+
+        <main class="py-12 pb-24">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                    <!-- Left Column: Product Summary & Trust -->
+                    <div class="lg:col-span-7 space-y-8">
+                        <div>
+                            <a
+                                href="index.html"
+                                class="inline-flex items-center gap-2 text-gray-400 hover:text-brand text-sm font-medium mb-6 transition-colors"
+                            >
+                                <i class="ph-bold ph-arrow-left"></i> Voltar ao catálogo
+                            </a>
+                            <br />
+                            <span
+                                class="inline-block bg-brand text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide mb-4"
+                                >Formação Completa</span
+                            >
+                            <h1
+                                class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight"
+                            >
+                                Formação em Avaliação Física Avançada
+                            </h1>
+                            <p class="text-lg text-gray-400 max-w-xl">
+                                Domine as ferramentas práticas para realizar testes precisos e
+                                valorize sua hora/aula entregando resultados comprovados
+                                cientificamente.
+                            </p>
+                        </div>
+
+                        <!-- What's included -->
+                        <div
+                            class="bg-dark-surface border border-dark-border p-6 md:p-8 rounded-2xl glass-effect"
+                        >
+                            <h3 class="text-xl font-bold text-white mb-6">
+                                O que você vai receber:
+                            </h3>
+                            <ul class="space-y-4 text-gray-300">
+                                <li class="flex items-start gap-4">
+                                    <i
+                                        class="ph-bold ph-video-camera text-brand text-xl shrink-0 mt-0.5"
+                                    ></i>
+                                    <span
+                                        >Acesso imediato a
+                                        <strong class="text-white">15 módulos em vídeo</strong> em
+                                        alta resolução.</span
+                                    >
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <i
+                                        class="ph-bold ph-certificate text-brand text-xl shrink-0 mt-0.5"
+                                    ></i>
+                                    <span
+                                        >Certificado de
+                                        <strong class="text-white">20 horas aceito pelo MEC</strong>
+                                        para horas complementares.</span
+                                    >
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <i
+                                        class="ph-bold ph-file-text text-brand text-xl shrink-0 mt-0.5"
+                                    ></i>
+                                    <span
+                                        >Planilhas exclusivas prontas de anamnese e acompanhamento
+                                        de alunos.</span
+                                    >
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <i
+                                        class="ph-bold ph-clock text-brand text-xl shrink-0 mt-0.5"
+                                    ></i>
+                                    <span
+                                        >Acesso livre por
+                                        <strong class="text-white">1 ano completo</strong> com todas
+                                        as atualizações.</span
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Teacher / Authority -->
+                        <div
+                            class="flex items-center gap-4 bg-dark-card p-6 rounded-2xl border border-dark-border"
+                        >
+                            <img
+                                src="./Foto.jpeg"
+                                alt="Prof Celso"
+                                class="w-16 h-16 rounded-full object-cover border-2 border-brand"
+                                onerror="
+                                    this.src =
+                                        'https://images.unsplash.com/photo-1594381898411-846e7d193883?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
+                                "
+                            />
+                            <div>
+                                <h4 class="text-white font-bold text-lg">Professor Celso</h4>
+                                <p class="text-sm text-gray-400">
+                                    Mentor do curso • 40 anos de carreira • +8.000 alunos formados
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Guarantee -->
+                        <div
+                            class="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 rounded-2xl border border-dark-border bg-dark-surface"
+                        >
+                            <i class="ph-fill ph-shield-check text-5xl text-brand shrink-0"></i>
+                            <div>
+                                <h4 class="text-white font-bold text-lg mb-1">
+                                    Garantia Incondicional de 7 Dias
+                                </h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    Assista às aulas. Se você não gostar do conteúdo, devolvemos
+                                    100% do seu dinheiro investido. Risco zero para você.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Checkout Form -->
+                    <div class="lg:col-span-5 relative">
+                        <div
+                            class="bg-dark-surface border border-dark-border p-6 md:p-8 rounded-2xl sticky top-28 shadow-2xl glass-effect"
+                        >
+                            <!-- Price Header -->
+                            <div class="mb-8 border-b border-dark-border pb-6">
+                                <div class="text-gray-400 text-sm mb-1 line-through font-medium">
+                                    De R$ 497,00 por:
+                                </div>
+                                <div class="flex items-end gap-2 mb-2">
+                                    <span class="text-4xl md:text-5xl font-extrabold text-white"
+                                        >R$ 297<span class="text-2xl">,00</span></span
+                                    >
+                                    <span class="text-brand font-bold text-sm mb-2">à vista</span>
+                                </div>
+                                <div class="text-gray-400 text-sm">
+                                    ou em até <strong class="text-white">12x de R$ 29,70</strong>
+                                </div>
+                            </div>
+
+                            <!-- Form Steps -->
+                            <form class="space-y-6">
+                                <!-- Personal Info -->
+                                <div>
+                                    <h3
+                                        class="text-lg font-bold text-white mb-4 flex items-center gap-3"
+                                    >
+                                        <span
+                                            class="bg-brand text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
+                                            >1</span
+                                        >
+                                        Dados Pessoais
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium text-gray-400 mb-1"
+                                                >Nome Completo</label
+                                            >
+                                            <input
+                                                type="text"
+                                                placeholder="Como quer ser chamado?"
+                                                class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium text-gray-400 mb-1"
+                                                >E-mail</label
+                                            >
+                                            <input
+                                                type="email"
+                                                placeholder="Onde enviaremos seu acesso"
+                                                class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                            />
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-400 mb-1"
+                                                    >CPF</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    placeholder="000.000.000-00"
+                                                    class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-400 mb-1"
+                                                    >Celular (WhatsApp)</label
+                                                >
+                                                <input
+                                                    type="tel"
+                                                    placeholder="(00) 00000-0000"
+                                                    class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Selection -->
+                                <div class="pt-6 border-t border-dark-border">
+                                    <h3
+                                        class="text-lg font-bold text-white mb-4 flex items-center gap-3"
+                                    >
+                                        <span
+                                            class="bg-brand text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"
+                                            >2</span
+                                        >
+                                        Método de Pagamento
+                                    </h3>
+
+                                    <div class="grid grid-cols-2 gap-3 mb-6" id="payment-tabs">
+                                        <!-- Credit Card Option -->
+                                        <label
+                                            class="relative border border-brand bg-brand-muted rounded-xl p-4 cursor-pointer flex flex-col items-center justify-center gap-2 transition-colors"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="payment_method"
+                                                value="credit_card"
+                                                checked
+                                                class="hidden peer"
+                                            />
+                                            <i
+                                                class="ph-fill ph-credit-card text-2xl text-brand"
+                                            ></i>
+                                            <span class="text-sm font-bold text-white"
+                                                >Cartão de Crédito</span
+                                            >
+                                            <div
+                                                class="absolute top-2 right-2 w-4 h-4 rounded-full border-2 border-brand flex items-center justify-center"
+                                            >
+                                                <div class="w-2 h-2 rounded-full bg-brand"></div>
+                                            </div>
+                                        </label>
+
+                                        <!-- Pix Option -->
+                                        <label
+                                            class="relative border border-dark-border bg-dark rounded-xl p-4 cursor-pointer flex flex-col items-center justify-center gap-2 hover:border-gray-500 transition-colors opacity-70 hover:opacity-100"
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="payment_method"
+                                                value="pix"
+                                                class="hidden peer"
+                                            />
+                                            <i
+                                                class="ph-fill ph-qr-code text-2xl text-gray-400"
+                                            ></i>
+                                            <span class="text-sm font-bold text-gray-400"
+                                                >Pix
+                                            </span>
+                                            <div
+                                                class="absolute top-2 right-2 w-4 h-4 rounded-full border-2 border-dark-border"
+                                            ></div>
+                                        </label>
+                                    </div>
+
+                                    <!-- Card Details -->
+                                    <div class="space-y-4" id="credit-card-form">
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium text-gray-400 mb-1"
+                                                >Número do Cartão</label
+                                            >
+                                            <div class="relative">
+                                                <input
+                                                    type="text"
+                                                    placeholder="0000 0000 0000 0000"
+                                                    class="w-full bg-dark border border-dark-border rounded-lg py-3 pl-4 pr-10 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                                />
+                                                <i
+                                                    class="ph-fill ph-credit-card absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl"
+                                                ></i>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-400 mb-1"
+                                                    >Validade (MM/AA)</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    placeholder="MM/AA"
+                                                    class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-400 mb-1"
+                                                    >CVV</label
+                                                >
+                                                <input
+                                                    type="text"
+                                                    placeholder="123"
+                                                    class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium text-gray-400 mb-1"
+                                                >Nome impresso no cartão</label
+                                            >
+                                            <input
+                                                type="text"
+                                                placeholder="Exatamente como no cartão"
+                                                class="w-full bg-dark border border-dark-border rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-brand focus:ring-1 focus:ring-brand transition-all outline-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label
+                                                class="block text-sm font-medium text-gray-400 mb-1"
+                                                >Opções de Parcelamento</label
+                                            >
+                                            <select
+                                                class="w-full bg-dark border border-dark-border rounded-lg py-3 pl-4 pr-10 text-white focus:border-brand focus:ring-1 focus:ring-brand transition-all appearance-none outline-none"
+                                            >
+                                                <option>1x de R$ 297,00 (Sem Juros)</option>
+                                                <option>2x de R$ 148,50 (Sem Juros)</option>
+                                                <option>3x de R$ 99,00 (Sem Juros)</option>
+                                                <option>12x de R$ 29,70</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Styled Button with exact glow from index.html -->
+                                <button
+                                    type="button"
+                                    class="w-full bg-brand hover:bg-brand-hover text-white font-bold text-lg py-4 rounded-full transition-all flex justify-center items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(16,185,129,0.6)] mt-8"
+                                >
+                                    <i class="ph-bold ph-lock-key text-xl"></i> Finalizar Compra
+                                    Segura
+                                </button>
+
+                                <div class="text-center mt-4">
+                                    <p class="text-xs text-gray-500 font-medium">
+                                        Seus dados estão protegidos por criptografia de ponta a
+                                        ponta.
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            // Simple JS to toggle active states on payment methods (visual only)
+            const labels = document.querySelectorAll("#payment-tabs label");
+            const radios = document.querySelectorAll('#payment-tabs input[type="radio"]');
+
+            radios.forEach((radio) => {
+                radio.addEventListener("change", (e) => {
+                    labels.forEach((l) => {
+                        // Reset all
+                        l.className =
+                            "relative border border-dark-border bg-dark rounded-xl p-4 cursor-pointer flex flex-col items-center justify-center gap-2 hover:border-gray-500 transition-colors opacity-70 hover:opacity-100";
+                        l.querySelector(".absolute").className =
+                            "absolute top-2 right-2 w-4 h-4 rounded-full border-2 border-dark-border";
+                        l.querySelector(".absolute").innerHTML = "";
+                        l.querySelector("i").classList.replace("text-brand", "text-gray-400");
+                        l.querySelector("span").classList.replace("text-white", "text-gray-400");
+                    });
+
+                    // Set active
+                    const parent = e.target.parentElement;
+                    parent.className =
+                        "relative border border-brand bg-brand-muted rounded-xl p-4 cursor-pointer flex flex-col items-center justify-center gap-2 transition-colors";
+                    parent.querySelector(".absolute").className =
+                        "absolute top-2 right-2 w-4 h-4 rounded-full border-2 border-brand flex items-center justify-center";
+                    parent.querySelector(".absolute").innerHTML =
+                        "<div class='w-2 h-2 rounded-full bg-brand'></div>";
+                    parent.querySelector("i").classList.replace("text-gray-400", "text-brand");
+                    parent.querySelector("span").classList.replace("text-gray-400", "text-white");
+                });
+            });
+        </script>
+    </body>
+</html>

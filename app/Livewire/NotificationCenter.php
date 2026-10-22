@@ -1,0 +1,331 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Livewire;
+
+use App\Filament\Resources\Changelog\ChangelogResource;
+use App\Models\Changelog;
+use App\Models\User;
+use App\Support\NotificationCenter\NotificationCategory;
+use App\Support\NotificationCenter\NotificationCenterManager;
+use App\Support\NotificationCenter\NotificationTab;
+use Filament\Actions\Action as NotificationAction;
+use Filament\Facades\Filament;
+use Filament\Livewire\DatabaseNotifications;
+use Filament\Notifications\Notification;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
+use Livewire\Attributes\Computed;
+use Override;
+
+/**
+ * @property-read Collection<int, NotificationTab> $categoryTabs
+ */
+class NotificationCenter extends DatabaseNotifications
+{
+    public string $activeCategory = 'all';
+
+    protected ?int $unreadCountCache = null;
+
+    protected ?bool $hasAnyNotificationsCache = null;
+
+    protected DatabaseNotificationCollection|Paginator|null $notificationsCache = null;
+
+    protected bool $changelogSyncedThisRequest = false;
+
+    public function setActiveCategory(string $categoryId): void
+    {
+        $this->activeCategory = $categoryId;
+        $this->clearNotificationCaches();
+
+        $this->resetPage('database-notifications-page');
+    }
+
+    #[Override]
+    public function getTrigger(): ?View
+    {
+        return view('panels.livewire.notification-trigger');
+    }
+
+    #[Override]
+    public function getNotifications(): DatabaseNotificationCollection|Paginator
+    {
+        $this->syncUnreadChangelogNotifications();
+
+        return $this->notificationsCache ??= parent::getNotifications();
+    }
+
+    #[Override]
+    public function markAllNotificationsAsRead(): void
+    {
+        $this->clearNotificationCaches();
+        parent::markAllNotificationsAsRead();
+
+        $user = filament()->auth()->user() ?? Filament::auth()->user();
+        if ($user instanceof User) {
+            $user->markChangelogAsRead();
+        }
+    }
+
+    #[Override]
+    public function clearNotifications(): void
+    {
+        $this->clearNotificationCaches();
+        parent::clearNotifications();
+    }
+
+    protected function clearNotificationCaches(): void
+    {
+        $this->notificationsCache = null;
+        $this->hasAnyNotificationsCache = null;
+        $this->unreadCountCache = null;
+    }
+
+    #[Override]
+    public function getUnreadNotificationsCount(): int
+    {
+        $this->syncUnreadChangelogNotifications();
+
+        return $this->unreadCountCache ??= $this->getBaseNotificationsQuery()->whereNull('read_at')->count();
+    }
+
+    #[Override]
+    public function getNotificationsQuery(): Builder|Relation
+    {
+        $query = $this->getBaseNotificationsQuery();
+
+        if ($this->activeCategory === 'all') {
+            return $query;
+        }
+
+        return $this->scopeQueryToCategory($query, $this->activeCategory);
+    }
+
+    /**
+     * @return Collection<int, NotificationTab>
+     */
+    #[Computed]
+    public function categoryTabs(): Collection
+    {
+        $panelId = filament()->getId();
+        $categories = NotificationCenterManager::getCategoriesForPanel($panelId)->values();
+        $defaultCategoryId = NotificationCenterManager::getDefaultCategory();
+
+        if (! NotificationCenterManager::getCategoriesForPanel($panelId)->has($defaultCategoryId)) {
+            $categories->push(NotificationCategory::make($defaultCategoryId)->label('Geral'));
+        }
+
+        $totalUnread = $this->getUnreadNotificationsCount();
+
+        $tabs = collect([
+            new NotificationTab(
+                id: 'all',
+                label: 'Todas',
+                icon: null,
+                color: null,
+                count: $totalUnread,
+            ),
+        ]);
+
+        foreach ($categories as $category) {
+            $count = 0;
+
+            if ($totalUnread > 0) {
+                $count = $this->scopeQueryToCategory($this->getBaseNotificationsQuery(), $category->getId())
+                    ->whereNull('read_at')
+                    ->count();
+            }
+
+            $tabs->push(new NotificationTab(
+                id: $category->getId(),
+                label: $category->getLabel(),
+                icon: $category->getIcon(),
+                color: $category->getColor(),
+                count: $count,
+            ));
+        }
+
+        return $tabs;
+    }
+
+    protected function getBaseNotificationsQuery(): Builder|Relation
+    {
+        return parent::getNotificationsQuery();
+    }
+
+    #[Override]
+    public function markAllNotificationsAsReadAction(): NotificationAction
+    {
+        return NotificationAction::make('markAllNotificationsAsRead')
+            ->button()
+            ->color('success')
+            ->size('sm')
+            ->label(__('filament-notifications::database.modal.actions.mark_all_as_read.label'))
+            ->action('markAllNotificationsAsRead');
+    }
+
+    #[Override]
+    public function clearNotificationsAction(): NotificationAction
+    {
+        return NotificationAction::make('clearNotifications')
+            ->button()
+            ->color('danger')
+            ->size('sm')
+            ->label(__('filament-notifications::database.modal.actions.clear.label'))
+            ->action('clearNotifications')
+            ->close();
+    }
+
+    #[Override]
+    public function getNotification(DatabaseNotification $notification): Notification
+    {
+        $notif = parent::getNotification($notification);
+
+        $category = $notification->data['viewData']['category'] ?? $notification->data['category'] ?? null;
+        $notif = NotificationCenterManager::categorizeNotification($notif, is_string($category) ? $category : null);
+        if ($category === 'system' || isset($notification->data['viewData']['changelog_version'])) {
+            $notif->color('info');
+            $notif->iconColor('info');
+
+            foreach ($notif->getActions() as $action) {
+                if ($action instanceof NotificationAction) {
+                    $action->color('info');
+                }
+            }
+        }
+
+        return $notif;
+    }
+
+    public function getNotificationCategory(DatabaseNotification $notification): ?NotificationCategory
+    {
+        $rawCategory = $notification->data['viewData']['category'] ?? $notification->data['category'] ?? null;
+        $catId = NotificationCenterManager::resolveCategoryId($rawCategory);
+        $panelId = Filament::getId();
+        $cat = NotificationCenterManager::getCategory($panelId, $catId);
+
+        if (! $cat && $catId === NotificationCenterManager::getDefaultCategory()) {
+            return NotificationCategory::make($catId)->label('Geral');
+        }
+
+        return $cat;
+    }
+
+    protected function scopeQueryToCategory(Builder|Relation $query, string $categoryId): Builder|Relation
+    {
+        if ($categoryId === NotificationCenterManager::getDefaultCategory()) {
+            return $query->where(function (\Illuminate\Contracts\Database\Query\Builder $query) use ($categoryId): void {
+                $query->whereNull('data->viewData->category')
+                    ->orWhere('data->viewData->category', $categoryId);
+            });
+        }
+
+        return $query->where('data->viewData->category', $categoryId);
+    }
+
+    public function hasAnyNotifications(): bool
+    {
+        $this->syncUnreadChangelogNotifications();
+
+        if ($this->notificationsCache !== null && $this->notificationsCache->isNotEmpty() && $this->activeCategory === 'all') {
+            return true;
+        }
+
+        if ($this->getNotifications()->isNotEmpty() && $this->activeCategory === 'all') {
+            return true;
+        }
+
+        return $this->hasAnyNotificationsCache ??= $this->getBaseNotificationsQuery()->exists();
+    }
+
+    /**
+     * @return array{heading: string, description: string}
+     */
+    public function getCategoryEmptyState(string $categoryId): array
+    {
+        return NotificationCenterManager::getEmptyState($categoryId);
+    }
+
+    public function render(): View
+    {
+        return view('filament-notifications::database-notifications');
+    }
+
+    protected function syncUnreadChangelogNotifications(): void
+    {
+        if ($this->changelogSyncedThisRequest) {
+            return;
+        }
+        $this->changelogSyncedThisRequest = true;
+
+        $user = filament()->auth()->user() ?? Filament::auth()->user();
+        if (! $user instanceof User || ! $user->hasUnreadChangelog()) {
+            return;
+        }
+
+        $latestEntry = $this->latestChangelog();
+
+        if (! $latestEntry instanceof Changelog) {
+            try {
+                Artisan::call('changelog:sync-git');
+                $latestEntry = $this->latestChangelog();
+            } catch (\Throwable) {
+                // Ignora erros de sincronização se estiver sem internet
+            }
+        }
+
+        if (! $latestEntry instanceof Changelog) {
+            return;
+        }
+
+        $alreadyNotified = $user->notifications()
+            ->where(function (\Illuminate\Contracts\Database\Query\Builder $query) use ($latestEntry): void {
+                $query->where('data->viewData->changelog_version', $latestEntry->version)
+                    ->orWhere('data->title', 'like', '%'.$latestEntry->version.'%');
+            })
+            ->exists();
+
+        if (! $alreadyNotified) {
+            $url = '/';
+            try {
+                $url = ChangelogResource::getUrl();
+            } catch (\Throwable) {
+                // Fallback se não houver painel do filament no contexto
+            }
+
+            $notification = Notification::make()
+                ->title('Nova atualização disponível: v'.$latestEntry->version)
+                ->body('Uma nova versão do sistema foi publicada no dia '.($latestEntry->released_at ? $latestEntry->released_at->format('d/m/Y') : now()->format('d/m/Y')).'. Confira as melhorias e novidades!')
+                ->icon('heroicon-o-document-text')
+                ->color('info')
+                ->actions([
+                    NotificationAction::make('view')
+                        ->label('Ver Atualizações')
+                        ->url($url)
+                        ->color('info')
+                        ->markAsRead(),
+                ])
+                ->viewData(['changelog_version' => $latestEntry->version, 'category' => 'system']);
+
+            $user->notifyNow($notification->toDatabase());
+
+            $this->clearNotificationCaches();
+        }
+    }
+
+    protected function latestChangelog(): ?Changelog
+    {
+        return Changelog::query()
+            ->whereNotNull('released_at')
+            ->latest('released_at')
+            ->first()
+            ?? Changelog::query()->latest('id')->first();
+    }
+}

@@ -1,0 +1,85 @@
+# robots.txt — EAFS (Escola de Avaliação Física e Saúde)
+# Última atualização: 2026-08-19
+# Taxonomia de AI Crawlers 2026
+
+# ===== SEARCH / RAG ENGINES — SEMPRE PERMITIR (citam você em respostas) =====
+
+User-agent: Googlebot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+Disallow: /__compat-login
+
+# Microsoft Copilot também rastreia como bingbot/BingPreview —
+# não existe user-agent dedicado; a regra abaixo já o cobre.
+User-agent: Bingbot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+Disallow: /__compat-login
+
+# ChatGPT Search / SearchGPT
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# Claude com Web Search
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# Perplexity Search
+User-agent: PerplexityBot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# Apple Siri / Spotlight
+User-agent: Applebot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# Google AI Overviews / Gemini grounding (usa Googlebot, mas explicitado)
+User-agent: Google-CloudVertexBot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+
+# ===== TRAINING BOTS — Decisão: PERMITIR (conteúdo não é IP crítico) =====
+# Para bloquear pré-treinamento, descomente as linhas abaixo:
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: ClaudeBot
+# Disallow: /
+# User-agent: Google-Extended
+# Disallow: /
+
+# ===== DEFAULT — todo o resto =====
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /admin
+Disallow: /filament
+Disallow: /__compat-login
+Disallow: /storage/
+
+# ===== SITEMAPS =====
+# Sitemap gerado dinamicamente por App\Http\Controllers\SitemapController
+Sitemap: https://cursos.eafs.com.br/sitemap.xml

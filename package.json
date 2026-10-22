@@ -1,0 +1,29 @@
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vp build",
+        "dev": "vp dev",
+        "prepare": "vp config"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.1.11",
+        "axios": "^1.18.0",
+        "concurrently": "^3.5.1",
+        "laravel-vite-plugin": "^3.1.0",
+        "playwright": "^1.57.0",
+        "tailwindcss": "^4.1.11",
+        "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0",
+        "vite-plus": "0.3.0"
+    },
+    "overrides": {
+        "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0"
+    },
+    "devEngines": {
+        "packageManager": {
+            "name": "npm",
+            "version": ">=11.0.0"
+        }
+    }
+}

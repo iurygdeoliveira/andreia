@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Required by all components */
+@import "../../vendor/filament/support/resources/css/index.css";
+
+/* Required by actions and tables */
+@import "../../vendor/filament/actions/resources/css/index.css";
+
+/* Required by actions, forms and tables */
+@import "../../vendor/filament/forms/resources/css/index.css";
+
+/* Required by actions and infolists */
+@import "../../vendor/filament/infolists/resources/css/index.css";
+
+/* Required by notifications */
+@import "../../vendor/filament/notifications/resources/css/index.css";
+
+/* Required by actions, infolists, forms, schemas and tables */
+@import "../../vendor/filament/schemas/resources/css/index.css";
+
+@variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../vendor/filament/**/*.blade.php';
+
+@theme {
+    --font-sans:
+        "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-heading:
+        "Outfit", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-navy: #010d26;
+    --color-brand-deep: #021f3b;
+    --color-brand-medium: #023059;
+    --color-brand-light: #F0F4F8;
+    --color-brand-soft: #9cbcd9;
+    --color-brand: #023059;
+
+    --color-accent-gold: #D4A843;
+    --color-accent-goldhover: #b58e33;
+    --color-base-white: #ffffff;
+    --color-base-off: #F0F4F8;
+}

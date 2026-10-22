@@ -1,0 +1,86 @@
+/*
+ * Estilos para o cabeçalho e abas do Notification Center nativo no eafs.
+ */
+
+.fi-notification-center-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.fi-notification-center-tabs-outer {
+    border-radius: 0.75rem;
+    box-shadow:
+        0 0 0 1px rgba(3, 7, 18, 0.05),
+        0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .fi-notification-center-tabs-outer {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.fi-notification-center-tabs-inner {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+/* Overrides para forçar a cor da borda lateral de notificações não lidas para a cor info (azul) */
+.fi-no-database .fi-no-notification-unread-ctn::before {
+    background-color: var(--info-500, #0284c7) !important;
+}
+
+.dark .fi-no-database .fi-no-notification-unread-ctn::before {
+    background-color: var(--info-400, #38bdf8) !important;
+}
+
+/* Encaixe exato do conteúdo na largura do slide-over sem cortes ou rolagens */
+.fi-no-database .fi-modal-window {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+
+.fi-no-database .fi-modal-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.fi-no-database .fi-no-notifications {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.fi-no-database .fi-no-notification {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+}
+
+.fi-no-database .fi-modal-content::-webkit-scrollbar {
+    width: 4px;
+    height: 0px;
+}
+
+.fi-no-database .fi-modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.fi-no-database .fi-modal-content::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 9999px;
+}
