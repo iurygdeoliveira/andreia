@@ -261,14 +261,6 @@
                             Quero minha transformação
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </a>
-                        <div class="flex items-center gap-3 text-sm text-brand-light font-medium">
-                            <div class="flex -space-x-2">
-                                <div class="w-8 h-8 rounded-full bg-brand-deep border border-brand-navy flex items-center justify-center text-[10px]">A</div>
-                                <div class="w-8 h-8 rounded-full bg-brand-medium border border-brand-navy flex items-center justify-center text-[10px]">M</div>
-                                <div class="w-8 h-8 rounded-full bg-brand-light text-brand-navy border border-brand-navy flex items-center justify-center text-[10px]">+</div>
-                            </div>
-                            <span>Junte-se a dezenas de mulheres</span>
-                        </div>
                     </div>
                 </div>
                 
@@ -322,57 +314,6 @@
                         <span class="text-accent-gold font-bold tracking-widest uppercase mb-4 block">04 / Emocional</span>
                         <h3 id="erro-suporte" class="text-3xl sm:text-4xl font-black text-white mb-6 uppercase tracking-tight font-heading">Você Tenta Tudo Sozinha</h3>
                         <p class="text-brand-light text-xl leading-relaxed font-light">O estresse e as oscilações da idade aumentam o cortisol, travando o emagrecimento. Sem um método integrado e um suporte que entenda a realidade da mulher madura, a desistência é quase inevitável.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof (Trust Before Persuasion) -->
-    <section id="depoimentos" class="py-32 relative overflow-hidden" aria-labelledby="depoimentos-titulo">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold via-brand-medium to-transparent"></div>
-        
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-24 reveal">
-                <h2 id="depoimentos-titulo" class="font-heading text-[3.5rem] md:text-[5rem] font-black text-white mb-6 uppercase tracking-tighter leading-[0.9]">Elas achavam<br>que a idade<br><span class="text-accent-gold">era o limite.</span></h2>
-            </div>
-            
-            <div class="grid lg:grid-cols-12 gap-16 items-start">
-                <!-- Featured Testimonial -->
-                <div class="lg:col-span-7 reveal relative">
-                    <svg class="absolute -top-10 -left-10 w-32 h-32 text-white/5" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h4V8h-4zm18 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h4V8h-4z"></path></svg>
-                    <p class="text-white text-[1.8rem] sm:text-[2rem] leading-[1.2] font-heading font-bold mb-10 relative z-10">
-                        "Já perdi mais um quilo em dois dias, começamos com 69 kg e hoje estou com 61 kg. Nem eu acredito que perdi 8 kg em 40 dias 🙏 e olha que nem tô passando fome."
-                    </p>
-                    <div class="flex items-center gap-6 pt-8 border-t-4 border-brand-medium/30">
-                        <img src="{{ asset('images/andreia360/andreia-resultado.jpg') }}" alt="Resultado aluna" class="w-16 h-16 rounded-full object-cover border-2 border-accent-gold">
-                        <div>
-                            <p class="font-bold text-white text-xl">Aluna Método 360</p>
-                            <p class="text-sm text-accent-gold font-bold uppercase tracking-widest mt-1">-8kg em 40 dias</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Secondary Testimonials -->
-                <div class="lg:col-span-5 space-y-12">
-                    <div class="reveal glass-card p-8 rounded-2xl border-white/5">
-                        <p class="text-brand-light text-lg leading-relaxed italic mb-6">
-                            "Andréia, achei que depois dos 40 seria impossível emagrecer... já tinha tentado de tudo. Em 6 semanas perdi 5kg e minha barriga diminuiu muito. Voltei a usar roupas que estavam esquecidas no armário."
-                        </p>
-                        <div class="flex items-center gap-4 pt-4 border-t border-white/10">
-                            <img src="{{ asset('images/andreia360/andreia-depoimento1.jpg') }}" alt="Aluna 40+" class="w-10 h-10 rounded-full object-cover border border-accent-gold">
-                            <p class="font-bold text-white uppercase tracking-wider text-sm">Aluna 40+ <span class="text-accent-gold ml-2">-5kg em 6 semanas</span></p>
-                        </div>
-                    </div>
-
-                    <div class="reveal glass-card p-8 rounded-2xl border-white/5">
-                        <p class="text-brand-light text-lg leading-relaxed italic mb-6">
-                            "Esse foi um desafio que pra mim foi além do que simplesmente perder medidas... Consegui perder 6kg e o que mudou não foi só o corpo, minha relação com a família e comigo mesma."
-                        </p>
-                        <div class="flex items-center gap-4 pt-4 border-t border-white/10">
-                            <img src="{{ asset('images/andreia360/andreia-depoimento2.jpg') }}" alt="Mãe do Enzo" class="w-10 h-10 rounded-full object-cover border border-accent-gold">
-                            <p class="font-bold text-white uppercase tracking-wider text-sm">Mãe do Enzo <span class="text-accent-gold ml-2">Transformação Total</span></p>
-                        </div>
                     </div>
                 </div>
             </div>
