@@ -264,14 +264,34 @@
                     </div>
                 </div>
                 
-                <!-- Hero Visual com Imagem Real da Andreia -->
-                <div class="lg:col-span-5 relative mt-10 lg:mt-0 animate-float">
-                    <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card group border border-brand-medium/40 shadow-2xl">
-                        <img src="{{ asset('images/andreia360/andreia-hero.jpg') }}" 
-                             alt="Andreia Castro - Personal Trainer Método 360" 
-                             class="w-full h-full object-cover object-top filter brightness-105 group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-70"></div>
-                        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-brand-navy/80 backdrop-blur-md border border-white/10">
+                <!-- Hero Visual (Placeholder para Foto Oficial de Andreia Castro) -->
+                <div class="lg:col-span-5 relative mt-10 lg:mt-0">
+                    <div class="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden glass-card border border-brand-medium/40 shadow-2xl flex flex-col items-center justify-center p-6 text-center group"
+                         role="img" aria-label="Espaço reservado para a fotografia oficial de Andreia Castro">
+                        <!-- Fundo em gradiente com atmosfera e profundidade do Design System -->
+                        <div class="absolute inset-0 bg-gradient-to-b from-brand-deep/90 via-brand-navy to-brand-deep/95"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 rounded-full bg-brand-medium/20 blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+                        <!-- Moldura interna sutil delimitando o enquadramento -->
+                        <div class="absolute inset-4 sm:inset-6 rounded-[1.5rem] border border-dashed border-brand-soft/20 pointer-events-none" aria-hidden="true"></div>
+
+                        <!-- Conteúdo central do Placeholder -->
+                        <div class="relative z-10 flex flex-col items-center px-4 -mt-10">
+                            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-brand-navy/90 border border-accent-gold/30 shadow-[0_0_25px_rgba(212,168,67,0.12)] flex items-center justify-center text-accent-gold mb-5">
+                                <svg class="w-10 h-10 sm:w-12 sm:h-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                </svg>
+                            </div>
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/25 text-accent-gold text-xs font-semibold tracking-wider uppercase mb-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-accent-gold"></span>
+                                Foto oficial em breve
+                            </span>
+                            <p class="font-heading font-black text-white text-lg sm:text-xl uppercase tracking-tight">Espaço Reservado</p>
+                            <p class="text-xs text-brand-soft mt-1 max-w-[220px]">Fotografia de Andreia Castro será inserida aqui</p>
+                        </div>
+
+                        <!-- Badge inferior de identificação da mentora -->
+                        <div class="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-brand-navy/85 backdrop-blur-md border border-white/10 text-left">
                             <p class="font-heading font-black text-white text-base uppercase tracking-tight">Andreia Castro</p>
                             <p class="text-xs text-accent-gold font-medium">Especialista em transformação feminina 40+</p>
                         </div>
