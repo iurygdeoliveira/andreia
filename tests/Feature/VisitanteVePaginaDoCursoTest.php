@@ -247,7 +247,7 @@ describe('página de obrigado depois do contato', function (): void {
         $this->get(route('curso.obrigado', $course))
             ->assertSuccessful()
             ->assertViewIs('public.pages.obrigado')
-            ->assertSee('Parabéns pela decisão, Ana!', false)
+            ->assertSee('Parabéns pela decisão de priorizar você, Ana.', false)
             ->assertSee('Fisiologia do Exercício')
             ->assertSee('name="robots" content="noindex, nofollow"', false);
     });

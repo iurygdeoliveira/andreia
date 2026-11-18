@@ -56,9 +56,9 @@ class CoursePurchase extends Component implements HasActions, HasSchemas
             ->icon(Heroicon::OutlinedShoppingCart)
             ->size(Size::ExtraLarge)
             ->extraAttributes([
-                'class' => 'w-full py-4 rounded-full text-lg font-bold shadow-lg shadow-brand/20 transition-all',
+                'class' => 'w-full py-3.5 rounded-xl font-bold transition-all',
             ])
-            ->color('primary')
+            ->color('gray')
             ->action(function (CartService $cart): void {
                 $course = $this->ensurePublishedCourse();
                 $cart->add($course, 1, $this->plan);
@@ -181,11 +181,12 @@ class CoursePurchase extends Component implements HasActions, HasSchemas
             ->icon(Heroicon::OutlinedQrCode)
             ->size(Size::ExtraLarge)
             ->extraAttributes([
-                'class' => 'w-full py-4 rounded-full text-lg font-bold shadow-lg shadow-brand/20 transition-all',
+                'class' => 'w-full py-4 rounded-2xl font-heading text-lg font-black uppercase tracking-wider transition-all',
             ])
             ->color('primary')
             ->action(function (CartService $cart): void {
                 $course = $this->ensurePublishedCourse();
+                $cart->clear();
                 $cart->add($course, 1, $this->plan);
                 $this->redirect(Checkout::getUrl(panel: 'checkout'));
             });

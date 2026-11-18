@@ -180,13 +180,13 @@ describe('adicionar cursos ao carrinho no site público', function (): void {
 
         expect(fn () => Livewire::test(CoursesCatalog::class)
             ->callAction(TestAction::make('addToCart')->arguments(['course' => $draftCourse->id]))
-        )->toThrow(\Throwable::class);
+        )->toThrow(\Exception::class);
 
         expect($cartService->isEmpty())->toBeTrue();
 
         expect(fn () => Livewire::test(CoursesCatalog::class)
             ->callAction(TestAction::make('addToCart')->arguments(['course' => ['id' => $draftCourse->id]]))
-        )->toThrow(\Throwable::class);
+        )->toThrow(\Exception::class);
 
         expect($cartService->isEmpty())->toBeTrue();
     });

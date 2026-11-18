@@ -93,6 +93,9 @@
 .ph-fill.ph-graduation-cap:before {
     content: "\e62c";
 }
+.ph-fill.ph-heart:before {
+    content: "\e2a8";
+}
 .ph-fill.ph-identification-card:before {
     content: "\e2c8";
 }
@@ -183,27 +186,62 @@
 }
 
 @theme {
+    --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
     --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 
-    --color-dark: #050a08;
-    --color-dark-surface: #0d1a15;
-    --color-dark-card: #13241d;
-    --color-dark-border: #1b3329;
+    /* Tokens oficiais do Design System Método Andreia 360 */
+    --color-brand-navy: #010d26;
+    --color-brand-deep: #021f3b;
+    --color-brand-medium: #023059;
+    --color-brand-light: #f0f4f8;
+    --color-brand-soft: #9cbcd9;
+    --color-accent-gold: #d4a843;
+    --color-accent-goldhover: #b58e33;
+    --color-base-off: #f0f4f8;
 
-    --color-brand: #10b981;
-    --color-brand-hover: #059669;
-    --color-brand-light: #34d399;
-    --color-brand-muted: rgba(16, 185, 129, 0.1);
+    /* Aliases de compatibilidade mapeados para a paleta Andreia 360 */
+    --color-dark: #010d26;
+    --color-dark-surface: #021f3b;
+    --color-dark-card: #023059;
+    --color-dark-border: rgba(156, 188, 217, 0.15);
 
-    /* Fundo de botão sólido com texto branco.
-       #10B981 + branco = 2.54:1 (reprova WCAG AA);
-       #047857 + branco = 5.42:1 (aprova AA).
-       O verde claro segue em ícones, badges, gradientes e bordas. */
-    --color-brand-cta: #047857;
-    --color-brand-cta-hover: #065f46;
+    --color-brand: #d4a843;
+    --color-brand-hover: #b58e33;
+    --color-brand-muted: rgba(212, 168, 67, 0.1);
+    --color-brand-cta: #d4a843;
+    --color-brand-cta-hover: #b58e33;
 
+    --animate-blob: blob 7s infinite;
+    --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    --animate-float: float 6s ease-in-out infinite;
     --animate-float-slow: float 6s ease-in-out infinite;
     --animate-spin-slow: spin 60s linear infinite;
+}
+
+@keyframes blob {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes float {
@@ -212,21 +250,107 @@
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-15px);
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes pulse-slow {
+    0%,
+    100% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 1;
     }
 }
 
 body {
     font-family: "Inter", sans-serif;
-    background-color: #050a08;
-    color: #f8fafc;
+    background-color: #010d26;
+    background-image: radial-gradient(circle at 50% 0%, rgba(2, 48, 89, 0.4) 0%, rgba(1, 13, 38, 1) 50%);
+    color: #f0f4f8;
+    overflow-x: hidden;
+}
+
+.glass-panel {
+    background: #010d26;
+    border-bottom: 1px solid rgba(156, 188, 217, 0.1);
 }
 
 .glass-nav {
-    background: rgba(5, 10, 8, 0.85);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(27, 51, 41, 0.5);
+    background: rgba(1, 13, 38, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(156, 188, 217, 0.1);
+}
+
+.glass-card {
+    background: #023059;
+    border: 1px solid rgba(156, 188, 217, 0.15);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.glass-card.border-accent-gold\/30 {
+    border-color: rgba(212, 168, 67, 0.3);
+}
+
+.btn-primary {
+    position: relative;
+    background: linear-gradient(135deg, #d4a843 0%, #b58e33 100%);
+    color: #010d26;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -10px rgba(212, 168, 67, 0.5);
+}
+
+.pricing-premium {
+    position: relative;
+}
+
+.pricing-premium::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 2rem;
+    background: linear-gradient(135deg, #d4a843, #5881a6, #d4a843);
+    z-index: -1;
+    opacity: 0.8;
+    animation: pulse-slow 4s infinite;
+}
+
+.noise-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
 .course-card {
@@ -235,12 +359,12 @@ body {
 
 .course-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(16, 185, 129, 0.15);
-    border-color: rgba(16, 185, 129, 0.4);
+    box-shadow: 0 12px 32px rgba(212, 168, 67, 0.15);
+    border-color: rgba(212, 168, 67, 0.4);
 }
 
 .text-gradient {
-    background: linear-gradient(to right, #34d399, #10b981);
+    background: linear-gradient(to right, #d4a843, #ecd18a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -249,7 +373,7 @@ body {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(5, 10, 8, 0) 70%);
+    background: radial-gradient(circle, rgba(212, 168, 67, 0.12) 0%, rgba(1, 13, 38, 0) 70%);
     top: -200px;
     right: -100px;
     z-index: -1;
@@ -257,10 +381,10 @@ body {
 }
 
 .glass-effect {
-    background: rgba(13, 26, 21, 0.7);
+    background: rgba(2, 31, 59, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(156, 188, 217, 0.15);
 }
 
 /* Hide scrollbar for carousel */
@@ -282,11 +406,11 @@ body {
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(156, 188, 217, 0.2);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(212, 168, 67, 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -301,37 +425,36 @@ body {
 }
 
 /* ==========================================================================
-   Filament Design System & Public Modal/Slide-over Theme
+   Filament Design System & Public Modal/Slide-over Theme — Método Andreia 360
    Garante sobreposição completa sobre o Header fixo (z-50) e todo contexto.
-   Segue estritamente as especificações de resources/html/design-system.html
    ========================================================================== */
 
 :root,
 .dark {
-    /* Paleta primária do Filament mapeada para o verde marca EAFS */
-    --primary-50: 18, 36, 33;
-    --primary-100: 15, 74, 49;
-    --primary-200: 12, 111, 65;
-    --primary-300: 10, 148, 81;
-    --primary-400: 7, 185, 97;
-    --primary-500: 16, 185, 129;
-    --primary-600: 5, 150, 105;
-    --primary-700: 4, 120, 87;
-    --primary-800: 6, 95, 70;
-    --primary-900: 6, 78, 59;
-    --primary-950: 2, 44, 34;
+    /* Paleta primária do Filament mapeada para o Dourado / Navy Andreia 360 */
+    --primary-50: 254, 253, 248;
+    --primary-100: 251, 245, 223;
+    --primary-200: 244, 227, 181;
+    --primary-300: 236, 209, 138;
+    --primary-400: 224, 188, 96;
+    --primary-500: 212, 168, 67;
+    --primary-600: 181, 142, 51;
+    --primary-700: 143, 113, 39;
+    --primary-800: 102, 80, 28;
+    --primary-900: 66, 51, 18;
+    --primary-950: 41, 32, 11;
 
-    --color-primary-50: #122421;
-    --color-primary-100: #0f4a31;
-    --color-primary-200: #0c6f41;
-    --color-primary-300: #0a9451;
-    --color-primary-400: #07b961;
-    --color-primary-500: #10b981;
-    --color-primary-600: #059669;
-    --color-primary-700: #047857;
-    --color-primary-800: #065f46;
-    --color-primary-900: #064e3b;
-    --color-primary-950: #022c22;
+    --color-primary-50: #fefdf8;
+    --color-primary-100: #fbf5df;
+    --color-primary-200: #f4e3b5;
+    --color-primary-300: #ecd18a;
+    --color-primary-400: #e0bc60;
+    --color-primary-500: #d4a843;
+    --color-primary-600: #b58e33;
+    --color-primary-700: #8f7127;
+    --color-primary-800: #66501c;
+    --color-primary-900: #423312;
+    --color-primary-950: #29200b;
 }
 
 /* 1. Z-INDEX: Sobreposição absoluta sobre o header fixo (z-50) e todo contexto */
@@ -356,7 +479,7 @@ body {
     position: fixed !important;
     inset: 0 !important;
     z-index: 99990 !important;
-    background-color: rgba(5, 10, 8, 0.85) !important;
+    background-color: rgba(1, 13, 38, 0.85) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     pointer-events: auto !important;
@@ -379,33 +502,33 @@ body {
     z-index: 100010 !important;
 }
 
-/* 2. JANELA DO SLIDEOVER & MODAL: Design System Dark EAFS */
+/* 2. JANELA DO SLIDEOVER & MODAL: Design System Dark Andreia 360 */
 .fi-modal-slide-over > .fi-modal-window-ctn > .fi-modal-window {
-    background-color: #0d1a15 !important;
-    border-left: 1px solid #1b3329 !important;
+    background-color: #010d26 !important;
+    border-left: 1px solid rgba(156, 188, 217, 0.15) !important;
     border-right: none !important;
     border-top: none !important;
     border-bottom: none !important;
     border-radius: 0 !important;
-    color: #f8fafc !important;
+    color: #f0f4f8 !important;
     max-width: 32rem !important;
     width: 100% !important;
     box-shadow:
         -20px 0 50px rgba(0, 0, 0, 0.8),
-        -1px 0 20px rgba(16, 185, 129, 0.08) !important;
+        -1px 0 25px rgba(212, 168, 67, 0.08) !important;
 }
 
 .fi-modal:not(.fi-modal-slide-over) .fi-modal-window,
 .fi-modal:not(.fi-modal-slide-over) > .fi-modal-window-ctn > .fi-modal-window {
-    background-color: #0d1a15 !important;
-    border: 1px solid #1b3329 !important;
-    border-radius: 1rem !important;
+    background-color: #021f3b !important;
+    border: 1px solid rgba(212, 168, 67, 0.35) !important;
+    border-radius: 1.5rem !important;
     overflow: hidden !important;
-    color: #f8fafc !important;
+    color: #f0f4f8 !important;
     outline: none !important;
     box-shadow:
         0 25px 50px -12px rgba(0, 0, 0, 0.9),
-        0 0 25px rgba(16, 185, 129, 0.08) !important;
+        0 0 30px rgba(212, 168, 67, 0.12) !important;
 }
 
 .fi-modal:not(.fi-modal-slide-over) .fi-modal-window,
@@ -417,8 +540,8 @@ body {
 
 /* 3. CABEÇALHO DO MODAL */
 .fi-modal-slide-over .fi-modal-header {
-    background-color: #0d1a15 !important;
-    border-bottom: 1px solid #1b3329 !important;
+    background-color: #010d26 !important;
+    border-bottom: 1px solid rgba(156, 188, 217, 0.15) !important;
     padding: 1.5rem !important;
 }
 
@@ -430,22 +553,23 @@ body {
 
 .fi-modal-heading {
     color: #ffffff !important;
-    font-family: "Inter", sans-serif !important;
-    font-size: 1.25rem !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.01em !important;
+    font-family: "Outfit", sans-serif !important;
+    font-size: 1.35rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: -0.02em !important;
 }
 
 .fi-modal-description {
-    color: #9ca3af !important;
+    color: #9cbcd9 !important;
     font-size: 0.875rem !important;
     margin-top: 0.25rem !important;
 }
 
 .fi-modal-icon-bg {
-    background-color: rgba(16, 185, 129, 0.1) !important;
-    color: #10b981 !important;
-    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    background-color: rgba(212, 168, 67, 0.1) !important;
+    color: #d4a843 !important;
+    border: 1px solid rgba(212, 168, 67, 0.3) !important;
     border-radius: 9999px !important;
     padding: 0.5rem !important;
 }
@@ -462,7 +586,7 @@ body {
 }
 
 .fi-modal-close-btn {
-    color: #9ca3af !important;
+    color: #9cbcd9 !important;
     border-radius: 9999px !important;
     padding: 0.5rem !important;
     transition: all 0.2s ease !important;
@@ -475,7 +599,7 @@ body {
 
 /* 4. CONTEÚDO E REPEATER DO CARRINHO */
 .fi-modal-slide-over .fi-modal-content {
-    background-color: #0d1a15 !important;
+    background-color: #010d26 !important;
     padding: 1.5rem !important;
 }
 
@@ -499,24 +623,24 @@ body {
 }
 
 .fi-fo-repeater-item {
-    background-color: #13241d !important;
-    border: 1px solid #1b3329 !important;
-    border-radius: 1rem !important;
+    background-color: #023059 !important;
+    border: 1px solid rgba(156, 188, 217, 0.15) !important;
+    border-radius: 1.5rem !important;
     padding: 1.25rem !important;
     transition: all 0.3s ease !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
 .fi-fo-repeater-item:hover {
-    border-color: rgba(16, 185, 129, 0.4) !important;
+    border-color: rgba(212, 168, 67, 0.4) !important;
     box-shadow:
-        0 12px 32px rgba(16, 185, 129, 0.15),
+        0 12px 32px rgba(212, 168, 67, 0.15),
         0 4px 20px rgba(0, 0, 0, 0.4) !important;
     transform: translateY(-2px) !important;
 }
 
 .fi-fo-repeater-item-header {
-    border-bottom: 1px solid rgba(27, 51, 41, 0.8) !important;
+    border-bottom: 1px solid rgba(156, 188, 217, 0.12) !important;
     padding-bottom: 0.75rem !important;
     margin-bottom: 0.75rem !important;
 }
@@ -524,8 +648,8 @@ body {
 .fi-fo-repeater-item-header-label {
     color: #ffffff !important;
     font-size: 1rem !important;
-    font-weight: 700 !important;
-    font-family: "Inter", sans-serif !important;
+    font-weight: 800 !important;
+    font-family: "Outfit", sans-serif !important;
 }
 
 .fi-fo-repeater-item-content {
@@ -535,27 +659,28 @@ body {
 
 /* Descrição e Preço dos cursos no carrinho */
 .fi-fo-repeater-item .fi-in-text {
-    color: #9ca3af !important;
+    color: #f0f4f8 !important;
     font-size: 0.8125rem !important;
     line-height: 1.4 !important;
 }
 
 .fi-fo-repeater-item .fi-numeric {
-    color: #34d399 !important;
-    font-weight: 700 !important;
-    font-size: 1.125rem !important;
+    color: #d4a843 !important;
+    font-family: "Outfit", sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 1.25rem !important;
 }
 
 .fi-fo-repeater-item .fi-input-wrp {
-    background-color: #050a08 !important;
-    border: 1px solid #1b3329 !important;
+    background-color: #010d26 !important;
+    border: 1px solid rgba(156, 188, 217, 0.2) !important;
     border-radius: 0.5rem !important;
     height: 2.25rem !important;
 }
 
 .fi-fo-repeater-item .fi-input-wrp input {
     text-align: center !important;
-    color: #9ca3af !important;
+    color: #f0f4f8 !important;
     font-size: 0.875rem !important;
 }
 
@@ -563,7 +688,7 @@ body {
 .fi-modal-content .fi-in-entry:has(.text-emerald-600),
 .fi-modal-content .fi-in-entry:has(.text-primary-600),
 .fi-modal-content .fi-in-entry:has(.fi-color-success) {
-    border-top: 1px solid #1b3329 !important;
+    border-top: 1px solid rgba(156, 188, 217, 0.15) !important;
     padding-top: 1.25rem !important;
     margin-top: 1rem !important;
 }
@@ -571,27 +696,28 @@ body {
 .fi-modal-content .fi-in-entry:has(.text-emerald-600) .fi-in-entry-label,
 .fi-modal-content .fi-in-entry:has(.text-primary-600) .fi-in-entry-label,
 .fi-modal-content .fi-in-entry:has(.fi-color-success) .fi-in-entry-label {
-    color: #9ca3af !important;
+    color: #9cbcd9 !important;
     font-size: 0.875rem !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
+    letter-spacing: 0.08em !important;
 }
 
 .fi-modal-content .fi-in-entry:has(.text-emerald-600) .fi-in-entry-content,
 .fi-modal-content .fi-in-entry:has(.text-primary-600) .fi-in-entry-content,
 .fi-modal-content .fi-in-entry:has(.fi-color-success) .fi-in-entry-content {
-    color: #34d399 !important;
-    font-size: 1.75rem !important;
-    font-weight: 800 !important;
-    text-shadow: 0 0 15px rgba(16, 185, 129, 0.2) !important;
+    color: #d4a843 !important;
+    font-family: "Outfit", sans-serif !important;
+    font-size: 1.875rem !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 15px rgba(212, 168, 67, 0.2) !important;
 }
 
 /* Estado vazio do carrinho */
 .fi-modal-content .fi-in-entry:has(.fi-ta-empty-state),
 .fi-modal-content .fi-in-entry:has(.ph-shopping-cart),
 .fi-modal-content .fi-in-text.fi-align-center {
-    color: #9ca3af !important;
+    color: #9cbcd9 !important;
     font-size: 0.95rem !important;
     padding: 2.5rem 1rem !important;
     text-align: center !important;
@@ -599,9 +725,9 @@ body {
 
 /* 5. RODAPÉ E BOTÕES DE AÇÃO */
 .fi-modal-slide-over .fi-modal-footer {
-    border-top: 1px solid #1b3329 !important;
+    border-top: 1px solid rgba(156, 188, 217, 0.15) !important;
     padding: 1.25rem 1.5rem !important;
-    background-color: #0d1a15 !important;
+    background-color: #010d26 !important;
 }
 
 .fi-modal:not(.fi-modal-slide-over) .fi-modal-footer {
@@ -617,21 +743,23 @@ body {
     gap: 0.75rem !important;
 }
 
-/* Botão Primário do Slideover (CTA do Design System: pill, bg-brand-cta #047857, hover #065f46, shadow glow) */
+/* Botão Primário (Dourado Design System: #D4A843 -> #b58e33, texto #010d26, Outfit 900) */
 .fi-btn.fi-color-primary,
 button.fi-btn.fi-color-primary,
 .fi-modal-footer button.fi-btn.fi-color-primary,
 .fi-modal-footer .fi-btn.fi-color-primary {
-    background-color: #047857 !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(16, 185, 129, 0.3) !important;
-    border-radius: 9999px !important;
-    font-family: "Inter", sans-serif !important;
-    font-weight: 600 !important;
+    background: linear-gradient(135deg, #d4a843 0%, #b58e33 100%) !important;
+    color: #010d26 !important;
+    border: 1px solid rgba(212, 168, 67, 0.4) !important;
+    border-radius: 1rem !important;
+    font-family: "Outfit", sans-serif !important;
+    font-weight: 900 !important;
     font-size: 1rem !important;
-    padding: 0.875rem 1.5rem !important;
-    transition: all 0.25s ease !important;
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 1rem 1.5rem !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 10px 25px -5px rgba(212, 168, 67, 0.35) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -639,13 +767,19 @@ button.fi-btn.fi-color-primary,
     width: 100% !important;
 }
 
+.fi-btn.fi-color-primary *,
+button.fi-btn.fi-color-primary *,
+.fi-btn.fi-color-primary svg {
+    color: #010d26 !important;
+}
+
 .fi-btn.fi-color-primary:hover,
 button.fi-btn.fi-color-primary:hover,
 .fi-modal-footer button.fi-btn.fi-color-primary:hover,
 .fi-modal-footer .fi-btn.fi-color-primary:hover {
-    background-color: #065f46 !important;
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.55) !important;
-    transform: translateY(-1px) !important;
+    background: linear-gradient(135deg, #e0bc60 0%, #d4a843 100%) !important;
+    box-shadow: 0 12px 30px -5px rgba(212, 168, 67, 0.55) !important;
+    transform: translateY(-2px) !important;
 }
 
 .fi-btn.fi-color-primary:active,
@@ -712,21 +846,21 @@ button.fi-btn.fi-color-danger:hover,
     transform: translateY(-1px) !important;
 }
 
-/* Botões Secundários / Cancelar / Continuar Comprando */
+/* Botões Secundários / Cancelar / Continuar Comprando (Design System: bg-brand-deep #021f3b) */
 .fi-btn.fi-color-gray,
 button.fi-btn.fi-color-gray,
 .fi-modal-footer button.fi-btn.fi-color-gray,
 .fi-modal-footer .fi-btn.fi-color-gray,
 .fi-modal-footer a.fi-btn.fi-color-gray {
-    background-color: transparent !important;
-    color: #9ca3af !important;
-    border: 1px solid #1b3329 !important;
-    border-radius: 9999px !important;
+    background-color: #021f3b !important;
+    color: #f0f4f8 !important;
+    border: 1px solid rgba(2, 48, 89, 0.7) !important;
+    border-radius: 0.75rem !important;
     font-family: "Inter", sans-serif !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     font-size: 0.95rem !important;
-    padding: 0.75rem 1.5rem !important;
-    transition: all 0.2s ease !important;
+    padding: 0.875rem 1.5rem !important;
+    transition: all 0.25s ease !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -741,15 +875,15 @@ button.fi-btn.fi-color-gray:hover,
 .fi-modal-footer .fi-btn.fi-color-gray:hover,
 .fi-modal-footer a.fi-btn.fi-color-gray:hover {
     color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.25) !important;
-    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: #023059 !important;
+    background-color: #023059 !important;
     transform: translateY(-1px) !important;
 }
 
 /* 6. CAMPOS DE ENTRADA (FORMULÁRIOS DO MODAL) */
 .fi-input-wrp {
-    background-color: #050a08 !important;
-    border: 1px solid #1b3329 !important;
+    background-color: #010d26 !important;
+    border: 1px solid rgba(156, 188, 217, 0.2) !important;
     border-radius: 0.75rem !important;
     color: #ffffff !important;
     transition:
@@ -758,10 +892,10 @@ button.fi-btn.fi-color-gray:hover,
 }
 
 .fi-input-wrp:focus-within {
-    border-color: #10b981 !important;
+    border-color: #d4a843 !important;
     box-shadow:
-        0 0 0 1px #10b981,
-        0 0 15px rgba(16, 185, 129, 0.2) !important;
+        0 0 0 1px #d4a843,
+        0 0 15px rgba(212, 168, 67, 0.2) !important;
 }
 
 .fi-input-wrp input {
@@ -769,20 +903,21 @@ button.fi-btn.fi-color-gray:hover,
 }
 
 .fi-input-wrp input::placeholder {
-    color: #6b7280 !important;
+    color: #9cbcd9 !important;
+    opacity: 0.55 !important;
 }
 
 .fi-fo-field-wrp-label label {
-    color: #d1d5db !important;
+    color: #f0f4f8 !important;
     font-weight: 600 !important;
     font-size: 0.875rem !important;
 }
 
 /* Badges */
 .fi-badge.fi-color-primary {
-    background-color: rgba(16, 185, 129, 0.15) !important;
-    color: #10b981 !important;
-    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    background-color: rgba(212, 168, 67, 0.12) !important;
+    color: #d4a843 !important;
+    border: 1px solid rgba(212, 168, 67, 0.3) !important;
     border-radius: 9999px !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
@@ -796,18 +931,18 @@ button.fi-btn.fi-color-gray:hover,
 
 .fi-modal-window::-webkit-scrollbar-track,
 .fi-modal-content::-webkit-scrollbar-track {
-    background: #0d1a15;
+    background: #010d26;
 }
 
 .fi-modal-window::-webkit-scrollbar-thumb,
 .fi-modal-content::-webkit-scrollbar-thumb {
-    background: #1b3329;
+    background: #023059;
     border-radius: 9999px;
 }
 
 .fi-modal-window::-webkit-scrollbar-thumb:hover,
 .fi-modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(16, 185, 129, 0.4);
+    background: rgba(212, 168, 67, 0.45);
 }
 
 /* ==========================================================================

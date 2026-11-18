@@ -84,13 +84,13 @@ class Checkout extends Page
         return $schema
             ->components([
                 Section::make('Seus dados para matrícula')
-                    ->description('Informe seus dados para emissão do certificado MEC e liberação de acesso.')
+                    ->description('Informe seus dados para liberação imediata do seu acesso ao Método Andreia 360.')
                     ->icon(Heroicon::OutlinedUser)
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
                             ->label('Nome completo')
-                            ->placeholder('Como deve constar no seu certificado')
+                            ->placeholder('Seu nome completo')
                             ->required()
                             ->maxLength(255),
 
