@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Public;
 
 use App\Enums\CourseStatus;
+use App\Enums\PurchaseType;
 use App\Filament\Checkout\Pages\Checkout;
 use App\Models\Course;
 use App\Services\CartService;
@@ -32,9 +33,12 @@ class CoursePurchase extends Component implements HasActions, HasSchemas
 
     public Course $course;
 
-    public function mount(Course $course): void
+    public ?PurchaseType $plan = null;
+
+    public function mount(Course $course, ?PurchaseType $plan = null): void
     {
         $this->course = $this->ensurePublishedCourse($course);
+        $this->plan = $plan;
     }
 
     #[On('open-cart')]
@@ -57,7 +61,7 @@ class CoursePurchase extends Component implements HasActions, HasSchemas
             ->color('primary')
             ->action(function (CartService $cart): void {
                 $course = $this->ensurePublishedCourse();
-                $cart->add($course);
+                $cart->add($course, 1, $this->plan);
 
                 $this->dispatch('cart-updated', count: $cart->count());
 
@@ -182,7 +186,7 @@ class CoursePurchase extends Component implements HasActions, HasSchemas
             ->color('primary')
             ->action(function (CartService $cart): void {
                 $course = $this->ensurePublishedCourse();
-                $cart->add($course);
+                $cart->add($course, 1, $this->plan);
                 $this->redirect(Checkout::getUrl(panel: 'checkout'));
             });
     }

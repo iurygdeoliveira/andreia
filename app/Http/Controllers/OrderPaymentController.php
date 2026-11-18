@@ -37,6 +37,10 @@ final class OrderPaymentController
 
         $course = $order->items->first()?->course;
 
+        if ($order->grantsAccess()) {
+            session()->flash('lead_name', $order->buyer_name);
+        }
+
         return response()->json([
             'status' => $order->payment_status->value,
             'pago' => $order->grantsAccess(),

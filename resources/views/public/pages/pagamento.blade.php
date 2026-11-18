@@ -23,6 +23,11 @@
                     Enviamos para <strong class="text-white">{{ $order->buyer_email }}</strong> as instruções
                     de acesso à plataforma.
                 </p>
+                <a href="{{ url('/login') }}"
+                    class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white font-bold px-8 py-3.5 rounded-full transition-all">
+                    Acessar Área da Aluna
+                    <i class="ph-bold ph-arrow-right" aria-hidden="true"></i>
+                </a>
 
             @elseif (! $order->payment_qr_code_payload)
                 {{-- A cobrança pode existir mesmo quando o QR Code está indisponível. --}}

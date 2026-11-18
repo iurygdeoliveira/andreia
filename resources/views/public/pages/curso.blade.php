@@ -107,7 +107,7 @@
                          formulario de lead abaixo continua para quem prefere
                          falar antes de comprar (DEC-01). --}}
                     <div class="mb-4">
-                        <livewire:public.course-purchase :course="$course" :key="$activePlan->value" />
+                        <livewire:public.course-purchase :course="$course" :plan="$activePlan" :key="$activePlan->value" />
                     </div>
 
                     <p class="text-center text-xs text-gray-500 mb-8">

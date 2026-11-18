@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Checkout\Pages;
 
 use App\DTOs\Asaas\BuyerData;
+use App\Enums\PurchaseType;
 use App\Exceptions\CourseAlreadyActiveException;
 use App\Models\Course;
 use App\Models\Order;
@@ -146,7 +147,15 @@ class Checkout extends Page
             return;
         }
 
-        $totalAmount = (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
+        /** @var Course|null $firstCourse */
+        $firstCourse = $courses->first();
+        $selectedPlan = ($courses->count() === 1 && $firstCourse instanceof Course)
+            ? $cart->getPurchaseTypeForCourse($firstCourse)
+            : null;
+
+        $totalAmount = $selectedPlan instanceof PurchaseType
+            ? $selectedPlan->price()
+            : (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
         if ($totalAmount < 5.00) {
             Notification::make()
                 ->title('Valor mínimo não atingido')
@@ -182,6 +191,7 @@ class Checkout extends Page
                 $buyerData,
                 ownedOrderIds: is_array($ownedOrderIds) ? $ownedOrderIds : [],
                 onOrderCreated: $onOrderCreated,
+                purchaseType: $selectedPlan,
             );
         } catch (CourseAlreadyActiveException $e) {
             $user = auth()->user();

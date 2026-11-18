@@ -52,6 +52,7 @@ class CheckoutService
         ?string $idempotencyKey = null,
         array $ownedOrderIds = [],
         ?callable $onOrderCreated = null,
+        ?PurchaseType $purchaseType = null,
     ): ?Order {
         if ($courses->isEmpty()) {
             return null;
@@ -117,14 +118,19 @@ class CheckoutService
         ));
 
         // SEC-02: Idempotência por conjunto canônico ordenado de cursos e comprador (ADR-0005, RF-08)
-        $fingerprint = $idempotencyKey ?: $this->buildFingerprint($courses, $buyer);
+        $fingerprint = $idempotencyKey ?: $this->buildFingerprint($courses, $buyer, $purchaseType);
         $cacheKey = "checkout:idempotency:{$fingerprint}";
 
         if (! empty($normalizedOwnedIds)) {
             $cachedOrderId = Cache::get($cacheKey);
             if ($cachedOrderId && in_array((int) $cachedOrderId, $normalizedOwnedIds, true)) {
                 $cachedOrder = Order::query()->with(['items.course'])->find($cachedOrderId);
-                if ($cachedOrder instanceof Order && $cachedOrder->payment_status === OrderStatus::Pending && $cachedOrder->payment_id !== null) {
+                if (
+                    $cachedOrder instanceof Order
+                    && $cachedOrder->payment_status === OrderStatus::Pending
+                    && $cachedOrder->payment_id !== null
+                    && ($purchaseType === null || $cachedOrder->purchase_type === $purchaseType)
+                ) {
                     return $cachedOrder;
                 }
             }
@@ -137,6 +143,7 @@ class CheckoutService
                 ->where('buyer_email', $buyer->email)
                 ->where('buyer_document', $buyer->document)
                 ->where('payment_status', OrderStatus::Pending)
+                ->when($purchaseType instanceof PurchaseType, fn ($q) => $q->where('purchase_type', $purchaseType))
                 ->where(function ($q): void {
                     $q->where(function ($q2): void {
                         $q2->whereNotNull('payment_id')
@@ -173,7 +180,7 @@ class CheckoutService
         $lockKey = "checkout:lock:{$fingerprint}";
 
         try {
-            $order = Cache::lock($lockKey, 75)->block(5, function () use ($courses, $buyer, $normalizedOwnedIds, $onOrderCreated): ?Order {
+            $order = Cache::lock($lockKey, 75)->block(5, function () use ($courses, $buyer, $normalizedOwnedIds, $onOrderCreated, $purchaseType): ?Order {
                 $candidateOrder = null;
                 if (! empty($normalizedOwnedIds)) {
                     $sortedCourseIds = $courses->modelKeys();
@@ -184,6 +191,7 @@ class CheckoutService
                         ->where('buyer_email', $buyer->email)
                         ->where('buyer_document', $buyer->document)
                         ->where('payment_status', OrderStatus::Pending)
+                        ->when($purchaseType instanceof PurchaseType, fn ($q) => $q->where('purchase_type', $purchaseType))
                         ->where(function ($q): void {
                             $q->where(function ($q2): void {
                                 $q2->whereNotNull('payment_id')
@@ -270,18 +278,30 @@ class CheckoutService
                     }
 
                     // Zero cobranças no Asaas: aproveita o mesmo pedido órfão para emitir a cobrança
-                    $currentTotal = (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
-                    if ($candidateOrder->total_amount != $currentTotal) {
-                        $candidateOrder->update(['total_amount' => $currentTotal]);
+                    $currentTotal = ($purchaseType instanceof PurchaseType && $courses->count() === 1)
+                        ? $purchaseType->price()
+                        : (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
+
+                    if ($candidateOrder->total_amount != $currentTotal || ($purchaseType instanceof PurchaseType && $candidateOrder->purchase_type !== $purchaseType)) {
+                        $updates = ['total_amount' => $currentTotal];
+                        if ($purchaseType instanceof PurchaseType) {
+                            $updates['purchase_type'] = $purchaseType;
+                        }
+                        $candidateOrder->update($updates);
+
                         foreach ($courses as $course) {
+                            $unitPrice = ($purchaseType instanceof PurchaseType && $courses->count() === 1)
+                                ? $purchaseType->price()
+                                : $course->price_in_cents;
+
                             $candidateOrder->items()->where('course_id', $course->getKey())->update([
-                                'unit_price' => $course->price_in_cents,
+                                'unit_price' => $unitPrice,
                             ]);
                         }
                     }
                     $order = $candidateOrder;
                 } else {
-                    $order = $this->createPendingOrder($courses, $buyer);
+                    $order = $this->createPendingOrder($courses, $buyer, $purchaseType);
 
                     if ($onOrderCreated !== null) {
                         $onOrderCreated($order);
@@ -296,7 +316,7 @@ class CheckoutService
                         // Preço total dos cursos no banco, nunca do request (DEC-05, CA-03).
                         value: $order->total_amount,
                         dueDate: now()->addDay()->format('Y-m-d'),
-                        description: $this->buildChargeDescription($courses),
+                        description: $this->buildChargeDescription($courses, $purchaseType),
                         externalReference: $order->order_number,
                     ));
                 } catch (RequestException|ConnectionException $e) {
@@ -376,14 +396,15 @@ class CheckoutService
      *
      * @param  Collection<int, Course>  $courses
      */
-    private function buildFingerprint(Collection $courses, BuyerData $buyer): string
+    private function buildFingerprint(Collection $courses, BuyerData $buyer, ?PurchaseType $purchaseType = null): string
     {
         $courseIds = $courses->modelKeys();
         sort($courseIds, SORT_NUMERIC);
 
         $cleanDoc = (string) preg_replace('/\D/', '', (string) $buyer->document);
+        $planSuffix = $purchaseType instanceof PurchaseType ? "|plan:{$purchaseType->value}" : '';
 
-        return hash('sha256', 'courses:'.implode(',', $courseIds)."|buyer:{$buyer->email}|doc:{$cleanDoc}");
+        return hash('sha256', 'courses:'.implode(',', $courseIds)."|buyer:{$buyer->email}|doc:{$cleanDoc}{$planSuffix}");
     }
 
     /**
@@ -391,11 +412,16 @@ class CheckoutService
      *
      * @param  Collection<int, Course>  $courses
      */
-    private function buildChargeDescription(Collection $courses): string
+    private function buildChargeDescription(Collection $courses, ?PurchaseType $purchaseType = null): string
     {
-        $description = $courses->count() === 1
-            ? (string) $courses->first()?->title
-            : $courses->count().' cursos: '.$courses->pluck('title')->implode(', ');
+        if ($courses->count() === 1) {
+            $title = (string) $courses->first()?->title;
+            $description = $purchaseType instanceof PurchaseType
+                ? "{$title} - {$purchaseType->getLabel()}"
+                : $title;
+        } else {
+            $description = $courses->count().' cursos: '.$courses->pluck('title')->implode(', ');
+        }
 
         return mb_substr($description, 0, 255);
     }
@@ -405,9 +431,9 @@ class CheckoutService
      *
      * @param  Collection<int, Course>  $courses
      */
-    private function createPendingOrder(Collection $courses, BuyerData $buyer): Order
+    private function createPendingOrder(Collection $courses, BuyerData $buyer, ?PurchaseType $purchaseType = null): Order
     {
-        return DB::transaction(function () use ($courses, $buyer): Order {
+        return DB::transaction(function () use ($courses, $buyer, $purchaseType): Order {
             // AD-004: um Lead por curso preserva o funil de quem se inscreveu em cada curso.
             $leads = $courses->map(fn (Course $course) => Lead::updateOrCreate(
                 ['course_id' => $course->getKey(), 'email' => $buyer->email],
@@ -422,7 +448,17 @@ class CheckoutService
             $firstCourse = $courses->first();
 
             // DEC-05: total_amount é a soma dos preços no banco (MoneyCast expõe reais)
-            $totalAmount = (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
+            if ($purchaseType instanceof PurchaseType && $courses->count() === 1) {
+                $totalAmount = $purchaseType->price();
+                $resolvedPurchaseType = $purchaseType;
+            } else {
+                $totalAmount = (float) $courses->sum(fn (Course $course): float => (float) $course->price_in_cents);
+                $resolvedPurchaseType = $purchaseType ?? match (true) {
+                    abs($totalAmount - 149.90) < 0.01 => PurchaseType::Essencial,
+                    abs($totalAmount - 499.90) < 0.01 => PurchaseType::Vip,
+                    default => PurchaseType::Premium,
+                };
+            }
 
             $orderData = [
                 'organization_id' => $firstCourse->organization_id,
@@ -432,11 +468,7 @@ class CheckoutService
                 'buyer_phone' => $buyer->phone,
                 'buyer_document' => $buyer->document,
                 'total_amount' => $totalAmount,
-                'purchase_type' => match (true) {
-                    abs($totalAmount - 149.90) < 0.01 => PurchaseType::Essencial,
-                    abs($totalAmount - 499.90) < 0.01 => PurchaseType::Vip,
-                    default => PurchaseType::Premium,
-                },
+                'purchase_type' => $resolvedPurchaseType,
                 'payment_method' => OrderPaymentMethod::Pix,
                 'payment_status' => OrderStatus::Pending,
             ];
@@ -448,9 +480,13 @@ class CheckoutService
             $order = Order::create($orderData);
 
             foreach ($courses as $course) {
+                $unitPrice = ($purchaseType instanceof PurchaseType && $courses->count() === 1)
+                    ? $purchaseType->price()
+                    : $course->price_in_cents;
+
                 $order->items()->create([
                     'course_id' => $course->getKey(),
-                    'unit_price' => $course->price_in_cents,
+                    'unit_price' => $unitPrice,
                 ]);
             }
 

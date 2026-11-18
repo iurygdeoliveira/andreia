@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Enums\CourseStatus;
+use App\Enums\OrderStatus;
 use App\Enums\PurchaseType;
 use App\Models\Course;
 use App\Models\Lead;
+use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -57,9 +59,25 @@ final class CourseLandingController
     public function obrigado(Course $cursoPublicado): View
     {
         // Peak-End: quem chega aqui sem ter acabado de enviar o formulario
-        // (refresh, link colado) volta para a pagina do curso.
+        // ou concluido um pagamento PIX nesta sessao volta para a pagina do curso.
         if (! session()->has('lead_name')) {
-            return view('public.pages.curso', ['course' => $cursoPublicado]);
+            $ownedOrderIds = session('checkout.order_ids', []);
+            $paidOrder = null;
+
+            if (is_array($ownedOrderIds) && ! empty($ownedOrderIds)) {
+                $paidOrder = Order::query()
+                    ->whereKey($ownedOrderIds)
+                    ->whereIn('payment_status', OrderStatus::accessGranting())
+                    ->whereHas('items', fn ($q) => $q->where('course_id', $cursoPublicado->getKey()))
+                    ->latest()
+                    ->first();
+            }
+
+            if (! $paidOrder instanceof Order) {
+                return view('public.pages.curso', ['course' => $cursoPublicado]);
+            }
+
+            session()->now('lead_name', $paidOrder->buyer_name);
         }
 
         return view('public.pages.obrigado', ['course' => $cursoPublicado]);

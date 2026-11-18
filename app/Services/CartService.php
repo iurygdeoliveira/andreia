@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Enums\CourseStatus;
+use App\Enums\PurchaseType;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Collection;
 use LukePOLO\LaraCart\CartItem;
@@ -26,6 +27,7 @@ class CartService
      *     qty: int,
      *     cover_url: string|null,
      *     checkout_code: string|null,
+     *     purchase_type: string|null,
      * }>
      */
     public function getItems(): array
@@ -43,6 +45,9 @@ class CartService
                 'qty' => (int) ($item->options['qty'] ?? 1),
                 'cover_url' => $item->options['cover_url'] ?? null,
                 'checkout_code' => $item->options['checkout_code'] ?? null,
+                'purchase_type' => isset($item->options['purchase_type']) && is_string($item->options['purchase_type'])
+                    ? $item->options['purchase_type']
+                    : null,
             ];
         }
 
@@ -80,28 +85,63 @@ class CartService
         return new Collection($ordered->all());
     }
 
-    public function add(Course $course, int $qty = 1): void
+    public function add(Course $course, int $qty = 1, ?PurchaseType $purchaseType = null): void
     {
         $courseId = (int) $course->getKey();
 
         if ($this->has($courseId)) {
-            return;
+            if (! $purchaseType instanceof PurchaseType) {
+                return;
+            }
+
+            $existingPurchaseType = $this->getPurchaseTypeForCourse($courseId);
+            if ($existingPurchaseType === $purchaseType) {
+                return;
+            }
+
+            $this->remove($courseId);
         }
+
+        $price = $purchaseType instanceof PurchaseType
+            ? $purchaseType->price()
+            : (float) $course->price_in_cents;
+
+        $title = $purchaseType instanceof PurchaseType
+            ? "{$course->title} — {$purchaseType->getShortLabel()}"
+            : (string) $course->title;
+
+        $description = $purchaseType instanceof PurchaseType
+            ? $purchaseType->description()
+            : (string) ($course->description ?: 'Capacitação completa com certificado aceito pelo MEC.');
 
         $this->laraCart->add(
             $courseId,
             /** @phpstan-ignore argument.type */
-            $course->title,
+            $title,
             $qty,
-            (string) $course->price_in_cents,
+            (string) $price,
             [
                 'id' => $courseId,
-                'title' => $course->title,
-                'description' => (string) ($course->description ?: 'Capacitação completa com certificado aceito pelo MEC.'),
+                'title' => $title,
+                'description' => $description,
                 'cover_url' => $course->cover_url,
                 'checkout_code' => $course->checkout_code,
+                'purchase_type' => $purchaseType?->value,
             ]
         );
+    }
+
+    public function getPurchaseTypeForCourse(Course|int $course): ?PurchaseType
+    {
+        $targetId = $course instanceof Course ? (int) $course->getKey() : (int) $course;
+
+        foreach ($this->getItems() as $item) {
+            if ($item['id'] === $targetId && is_string($item['purchase_type'])) {
+                return PurchaseType::tryFrom($item['purchase_type']);
+            }
+        }
+
+        return null;
     }
 
     public function updateQty(string|int $idOrHash, int $qty): void
